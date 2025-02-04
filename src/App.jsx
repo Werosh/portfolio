@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
-      {/* <Preloader /> */}
+      <Preloader />
       <motion.div
         className="fixed top-0 left-0 z-50 w-full h-1 bg-blue-500"
         style={{ scaleX: smoothScroll, transformOrigin: "0%" }}
