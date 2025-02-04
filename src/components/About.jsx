@@ -37,7 +37,7 @@ const ModernAbout = () => {
       <div className="container relative z-20 px-6 mx-auto">
         {/* Section Title */}
         <div className="mt-2 mb-16 text-center">
-          <div className="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium border rounded-full bg-white/5 border-white/10 backdrop-blur-sm">
+          <div className="inline-flex items-center px-4 py-2 mt-10 mb-8 font-medium border rounded-full mt-15text-sm bg-white/5 border-white/10 backdrop-blur-sm">
             <span className="text-gray-300">About Me</span>
           </div>
           <h2 className="text-4xl font-medium md:text-5xl lg:text-6xl">

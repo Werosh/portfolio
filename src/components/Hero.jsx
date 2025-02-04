@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ChevronDown, ExternalLink, Github } from "lucide-react";
+import { ChevronDown, Github } from "lucide-react";
 import { CiCircleChevDown } from "react-icons/ci";
 
-
 const ModernHero = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const textToType = [
+  const titles = [
     { text: "Werosh Kriyanjala", color: "from-violet-500 to-indigo-500" },
     { text: "Software Engineer", color: "from-cyan-500 to-blue-500" },
     { text: "Frontend Developer", color: "from-fuchsia-500 to-pink-500" },
@@ -16,27 +14,16 @@ const ModernHero = () => {
   ];
 
   useEffect(() => {
-    let timeout;
-    const currentTextObj = textToType[currentTextIndex];
-    const currentText = currentTextObj.text;
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % titles.length);
+        setIsAnimating(false);
+      }, 500);
+    }, 3000);
 
-    if (!isDeleting && displayedText.length < currentText.length) {
-      timeout = setTimeout(() => {
-        setDisplayedText(currentText.substring(0, displayedText.length + 1));
-      }, 100);
-    } else if (!isDeleting && displayedText.length === currentText.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
-    } else if (isDeleting && displayedText.length > 0) {
-      timeout = setTimeout(() => {
-        setDisplayedText(displayedText.substring(0, displayedText.length - 1));
-      }, 50);
-    } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false);
-      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % textToType.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayedText, currentTextIndex, isDeleting]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div id="home" className="relative w-full min-h-screen overflow-hidden">
@@ -65,11 +52,16 @@ const ModernHero = () => {
           {/* Main Title */}
           <h1 className="text-4xl font-medium leading-tight md:text-7xl lg:text-8xl">
             Hi, I'm{" "}
-            <span className="relative">
-              <span className={`bg-gradient-to-r ${textToType[currentTextIndex].color} bg-clip-text text-transparent font-bold`}>
-                {displayedText}
+            <span className="relative inline-block min-w-[8ch] text-left">
+              <span 
+                className={`inline-block w-full transform transition-all duration-500 ${
+                  isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
+                }`}
+              >
+                <span className={`bg-gradient-to-r ${titles[currentIndex].color} bg-clip-text text-transparent font-bold`}>
+                  {titles[currentIndex].text}
+                </span>
               </span>
-              {/* <span className="absolute -right-[2px] top-[0.15em] h-[0.9em] w-[2px] bg-current animate-pulse" /> */}
             </span>
           </h1>
 
@@ -86,9 +78,10 @@ const ModernHero = () => {
               className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium text-white transition-all rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:shadow-lg hover:shadow-violet-500/25 hover:scale-105"
             >
               View Projects
-              <CiCircleChevDown  size={16} />
+              <CiCircleChevDown size={16} />
             </a>
-            <a target="_blank"
+            <a
+              target="_blank"
               href="https://github.com/Werosh"
               className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium transition-all border rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-sm border-white/10 hover:scale-105"
             >
@@ -99,7 +92,7 @@ const ModernHero = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 animate-bounce">
+        <div className="absolute bottom-8 animate-bounce ">
           <ChevronDown className="w-6 h-6 text-gray-400" />
         </div>
       </div>
