@@ -1,73 +1,97 @@
-import React from 'react';
-import { ExternalLink, Code, Globe } from 'lucide-react';
+import React from "react";
+import { ExternalLink, Code, Globe } from "lucide-react";
+import AlphaIMg from "../assets/images/projects/alpha.png";
+import bluhIMg from "../assets/images/projects/bluhdev.png";
+import sentryIMg from "../assets/images/projects/sentry.png";
+import libryIMg from "../assets/images/projects/libry.png";
+import herbIMg from "../assets/images/projects/herb.png";
+import salonIMg from "../assets/images/projects/ims.png";
+import oldIMg from "../assets/images/projects/oldp.png";
+import mpIMg from "../assets/images/projects/mp.png";
 
 const ProjectSection = () => {
   const projects = [
     {
       title: "The Alphawizards Portfolio",
-      description: "Personal portfolio platform with advanced UI/UX implementations",
+      description:
+        "Personal portfolio platform with advanced UI/UX implementations",
       icon: <Globe />,
       tech: ["React", "Node.js", "MongoDB"],
       link: "https://thealphawizards.netlify.app/",
-      gradient: "from-violet-500 to-indigo-500"
+      gradient: "from-violet-500 to-indigo-500",
+      image: AlphaIMg,
     },
     {
       title: "Serenity Hotel",
-      description: "Hotel booking platform offering seamless reservations and availability checking",
+      description:
+        "Hotel booking platform offering seamless reservations and availability checking",
       icon: <Code />,
       tech: ["React", "Node.js"],
       link: "https://hotelsentry.netlify.app/",
-      gradient: "from-cyan-500 to-blue-500"
+      gradient: "from-cyan-500 to-blue-500",
+      image: sentryIMg,
     },
     {
       title: "Buy Book Anywhere",
-      description: "Advanced library search engine with intelligent recommendations",
+      description:
+        "Advanced library search engine with intelligent recommendations",
       icon: <Code />,
       tech: ["Python", "TensorFlow", "AWS"],
       link: "https://demolibry.netlify.app/",
-      gradient: "from-amber-500 to-orange-500"
+      gradient: "from-amber-500 to-orange-500",
+      image: libryIMg,
     },
     {
       title: "Group Portfolio",
-      description: "Personal portfolio platform with advanced UI/UX implementations",
+      description:
+        "Personal portfolio platform with advanced UI/UX implementations",
       icon: <Globe />,
       tech: ["React", "Node.js", "MongoDB"],
       link: "https://bluhbluhdev.netlify.app/",
-      gradient: "from-green-500 to-teal-500"
+      gradient: "from-green-500 to-teal-500",
+      image: bluhIMg,
     },
     {
       title: "Herbal Haven",
-      description: "A website offering a selection of herbal products and remedies designed to enhance well-being.",
+      description:
+        "A website offering a selection of herbal products and remedies designed to enhance well-being.",
       icon: <Globe />,
       tech: ["Vue.js", "Firebase"],
       link: "https://hebalhaven.netlify.app/",
-      gradient: "from-lime-500 to-green-500"
+      gradient: "from-lime-500 to-green-500",
+      image: herbIMg,
     },
     {
       title: "Early Portfolio",
-      description: "The personal portfolio of Werosh Kriyanjala, showcasing web development and software engineering projects.",
+      description:
+        "The personal portfolio of Werosh Kriyanjala, showcasing web development and software engineering projects.",
       icon: <Globe />,
       tech: ["HTML", "CSS", "JavaScript"],
       link: "https://weroshport.netlify.app/",
-      gradient: "from-gray-500 to-slate-500"
+      gradient: "from-gray-500 to-slate-500",
+      image: oldIMg,
     },
     {
       title: "Salon IMS",
-      description: "Salon Inventory Management System simplifies and optimizes inventory management for salon operations.",
+      description:
+        "Salon Inventory Management System simplifies and optimizes inventory management for salon operations.",
       icon: <Code />,
       tech: ["C#", "MySQL"],
-      gradient: "from-rose-500 to-red-500"
+      link: "https://github.com/Werosh/Salon-Inventory-System-Uni-Assinment.git",
+      gradient: "from-rose-500 to-red-500",
+      image: salonIMg,
     },
     {
       title: "Movie Picker",
-      description: "A platform for browsing and discovering movies across various genres with IMDb ratings and detailed info.",
+      description:
+        "A platform for browsing and discovering movies across various genres with IMDb ratings and detailed info.",
       icon: <Globe />,
       tech: ["React", "Node.js", "MongoDB"],
       link: "https://movypikker.netlify.app/",
-      gradient: "from-purple-500 to-pink-500"
-    }
+      gradient: "from-purple-500 to-pink-500",
+      image: mpIMg,
+    },
   ];
-  
 
   return (
     <div id="projects" className="relative w-full min-h-screen overflow-hidden">
@@ -78,8 +102,10 @@ const ProjectSection = () => {
       </div>
 
       {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
-        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
+        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]"
+      />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center w-full min-h-screen px-6 py-20">
@@ -90,7 +116,7 @@ const ProjectSection = () => {
               <span className="text-gray-300">Featured Work</span>
             </div>
             <h2 className="text-4xl font-medium md:text-6xl">
-              Recent 
+              Recent
               <span className="ml-2 font-bold text-transparent bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text">
                 Projects
               </span>
@@ -100,14 +126,32 @@ const ProjectSection = () => {
           {/* Projects Grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
-              <div key={index} 
-                className="relative overflow-hidden transition-all duration-300 border group rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm hover:scale-105 hover:shadow-lg">
+              <div
+                key={index}
+                className="relative overflow-hidden transition-all duration-300 border group rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm hover:scale-105 hover:shadow-lg"
+              >
                 {/* Card Content Container */}
                 <div className="relative z-10 flex flex-col h-full p-6">
+                  {/* image Area */}
+
+                  <div className="relative w-full h-48 overflow-hidden rounded-2xl mb-5">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                    />
+                    {/* <div
+                      className={`absolute inset-0 opacity-20 bg-gradient-to-r ${project.gradient}`}
+                    /> */}
+                  </div>
                   {/* Project Icon & Title */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-2 rounded-lg bg-gradient-to-r ${project.gradient} bg-opacity-10`}>
-                      {React.cloneElement(project.icon, { className: "w-6 h-6" })}
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-r ${project.gradient} bg-opacity-10`}
+                    >
+                      {React.cloneElement(project.icon, {
+                        className: "w-6 h-6",
+                      })}
                     </div>
                     <h3 className="text-xl font-medium">{project.title}</h3>
                   </div>
@@ -120,7 +164,10 @@ const ProjectSection = () => {
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 text-xs font-medium border rounded-full bg-white/5 border-white/10">
+                      <span
+                        key={i}
+                        className="px-3 py-1 text-xs font-medium border rounded-full bg-white/5 border-white/10"
+                      >
                         {tech}
                       </span>
                     ))}
