@@ -189,6 +189,7 @@ const ProjectSection = () => {
                   </div>
                 </div>
 
+{/* Test comment */}
                 {/* Hover Gradient Effect - Now with lower z-index */}
                 <div className="absolute inset-0 z-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 group-hover:opacity-10" />
               </div>
