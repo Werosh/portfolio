@@ -1,5 +1,7 @@
 import React from "react";
 import { ExternalLink, Code, Globe } from "lucide-react";
+import { IoCodeWorkingOutline } from "react-icons/io5";
+
 import AlphaIMg from "../assets/images/projects/alpha.png";
 import bluhIMg from "../assets/images/projects/bluhdev.png";
 import sentryIMg from "../assets/images/projects/sentry.png";
@@ -8,9 +10,21 @@ import herbIMg from "../assets/images/projects/herb.png";
 import salonIMg from "../assets/images/projects/ims.png";
 import oldIMg from "../assets/images/projects/oldp.png";
 import mpIMg from "../assets/images/projects/mp.png";
+import Ongoing1 from "../assets/images/projects/ongoing-project.webp"
+import OngoingWeb from "../assets/images/projects/ongoing-web.webp"
 
 const ProjectSection = () => {
   const projects = [
+    {
+      title: "LassanaMoments",
+      description:
+        "Full-Stack On-going group Project --------> As a Head Front-End Developer ",
+      icon: <IoCodeWorkingOutline />,
+      tech: ["React", "Node.js", "Fire Base"],
+      link: "https://lassanamomentz.netlify.app/",
+      gradient: "from-[#AA076B] to-[#61045F]",
+      image: OngoingWeb,
+    },
     {
       title: "The Alphawizards Portfolio",
       description:
@@ -189,7 +203,7 @@ const ProjectSection = () => {
                   </div>
                 </div>
 
-{/* Test comment */}
+                {/* Test comment */}
                 {/* Hover Gradient Effect - Now with lower z-index */}
                 <div className="absolute inset-0 z-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 group-hover:opacity-10" />
               </div>
