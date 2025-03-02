@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 @import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 
@@ -11,23 +9,49 @@ html {
 
 @layer utilities {
   @keyframes floating-title {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.02); }
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.02);
+    }
   }
-  
+
   .animate-floating-title {
     animation: floating-title 2s ease-in-out infinite;
   }
 }
 
-
 /* sdf */
 @keyframes particle {
-  0% { transform: translateY(0) scale(1); opacity: 0.5; }
-  50% { transform: translateY(-100vh) scale(1.5); opacity: 1; }
-  100% { transform: translateY(-200vh) scale(2); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200vh) scale(2);
+    opacity: 0;
+  }
 }
 
 .animate-particle {
   animation: particle 10s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.group-hover\\:animate-shine:hover {
+  animation: shine 2s infinite;
 }

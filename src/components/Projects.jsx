@@ -1,6 +1,7 @@
-import React from "react";
-import { ExternalLink, Code, Globe } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Code, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { IoCodeWorkingOutline } from "react-icons/io5";
+import { motion, AnimatePresence } from "framer-motion";
 
 import AlphaIMg from "../assets/images/projects/alpha.png";
 import bluhIMg from "../assets/images/projects/bluhdev.png";
@@ -10,11 +11,24 @@ import herbIMg from "../assets/images/projects/herb.png";
 import salonIMg from "../assets/images/projects/ims.png";
 import oldIMg from "../assets/images/projects/oldp.png";
 import mpIMg from "../assets/images/projects/mp.png";
-import Ongoing1 from "../assets/images/projects/ongoing-project.webp"
-import OngoingWeb from "../assets/images/projects/ongoing-web.webp"
+import aquaImg from "../assets/images/projects/aqua.png";
+import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
 
 const ProjectSection = () => {
+  // State to track if showing all projects or just featured ones
+  const [showAll, setShowAll] = useState(false);
+
   const projects = [
+    {
+      title: "Sandaru Aqua (Pvt) Ltd",
+      description:
+        "Sandaru Aqua (PVT) Ltd provides advanced water purification solutions, ensuring clean and safe water through innovative design, installation, and maintenance services.",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "Fire Base"],
+      link: "https://sandaruaqua.netlify.app/",
+      gradient: "from-[#00B4DB] to-[#0083B0]",
+      image: aquaImg,
+    },
     {
       title: "LassanaMoments",
       description:
@@ -107,6 +121,14 @@ const ProjectSection = () => {
     },
   ];
 
+  // Get only the first 3 projects to show initially
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
+
+  // Toggle function to show/hide projects
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
   return (
     <div id="projects" className="relative w-full min-h-screen overflow-hidden">
       {/* Animated Background */}
@@ -139,76 +161,127 @@ const ProjectSection = () => {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="relative overflow-hidden transition-all duration-300 border group rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm hover:scale-105 hover:shadow-lg"
-              >
-                {/* Card Content Container */}
-                <div className="relative z-10 flex flex-col h-full p-6">
-                  {/* image Area */}
-
-                  <div className="relative w-full h-48 overflow-hidden rounded-2xl mb-5">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                    />
-                    {/* <div
-                      className={`absolute inset-0 opacity-20 bg-gradient-to-r ${project.gradient}`}
-                    /> */}
-                  </div>
-                  {/* Project Icon & Title */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div
-                      className={`p-2 rounded-lg bg-gradient-to-r ${project.gradient} bg-opacity-10`}
-                    >
-                      {React.cloneElement(project.icon, {
-                        className: "w-6 h-6",
-                      })}
+            <AnimatePresence>
+              {displayedProjects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="relative overflow-hidden transition-all duration-300 border group rounded-2xl border-white/10 bg-white/5 backdrop-blur-sm hover:scale-105 hover:shadow-lg"
+                >
+                  {/* Card Content Container */}
+                  <div className="relative z-10 flex flex-col h-full p-6">
+                    {/* image Area */}
+                    <div className="relative w-full h-48 overflow-hidden rounded-2xl mb-5">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                      />
                     </div>
-                    <h3 className="text-xl font-medium">{project.title}</h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="flex-grow mb-6 text-gray-300/80">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 text-xs font-medium border rounded-full bg-white/5 border-white/10"
+                    {/* Project Icon & Title */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <div
+                        className={`p-2 rounded-lg bg-gradient-to-r ${project.gradient} bg-opacity-10`}
                       >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                        {React.cloneElement(project.icon, {
+                          className: "w-6 h-6",
+                        })}
+                      </div>
+                      <h3 className="text-xl font-medium">{project.title}</h3>
+                    </div>
 
-                  {/* Project Link - Now with proper z-index and pointer events */}
-                  <div className="relative z-20">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white rounded-full 
+                    {/* Description */}
+                    <p className="flex-grow mb-6 text-gray-300/80">
+                      {project.description}
+                    </p>
+
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 text-xs font-medium border rounded-full bg-white/5 border-white/10"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Project Link */}
+                    <div className="relative z-20">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white rounded-full 
                         bg-gradient-to-r ${project.gradient} transition-all duration-300 
                         hover:shadow-lg hover:shadow-violet-500/25 hover:scale-105 cursor-pointer`}
-                    >
-                      View Project
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                      >
+                        View Project
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
-                </div>
 
-                {/* Test comment */}
-                {/* Hover Gradient Effect - Now with lower z-index */}
-                <div className="absolute inset-0 z-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 group-hover:opacity-10" />
-              </div>
-            ))}
+                  {/* Hover Gradient Effect */}
+                  <div className="absolute inset-0 z-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 group-hover:opacity-10" />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
+
+          {/* Animated "Show More" Button */}
+          <motion.div
+            className="flex justify-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <motion.button
+              onClick={toggleShowAll}
+              className="relative overflow-hidden px-8 py-4 text-white font-medium rounded-full 
+               bg-gradient-to-r from-violet-500 to-indigo-500 group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Background pulse effect */}
+              <motion.div
+                className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-30"
+                initial={{ scale: 0 }}
+                animate={showAll ? { scale: 10, opacity: 0 } : {}}
+                transition={{ duration: 0.5 }}
+              />
+              
+              {/* Button text and icon */}
+              <div className="relative z-10 flex items-center gap-2">
+                <span>{showAll ? "Show Less" : "Show More Projects"}</span>
+                {showAll ? (
+                  <ChevronUp className="w-5 h-5" />
+                ) : (
+                  <ChevronDown className="w-5 h-5" />
+                )}
+              </div>
+              
+              {/* Shining effect */}
+              <motion.div
+                className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"
+                animate={{ x: ["0%", "200%"] }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 1.5,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.button>
+          </motion.div>
+
+
+
+          
         </div>
       </div>
     </div>
