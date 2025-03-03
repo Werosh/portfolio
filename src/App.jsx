@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "./components/ThemeContext";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Link, Element } from "react-scroll";
 import Navbar from "./components/Navbar";
@@ -7,6 +6,7 @@ import Preloader from "./components/Preloader";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import Service from "./components/Service";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -17,7 +17,6 @@ const sectionVariants = {
 };
 
 const App = () => {
-  const { theme } = useContext(ThemeContext);
   const { scrollYProgress } = useScroll();
   const smoothScroll = useSpring(scrollYProgress, {
     stiffness: 50,
@@ -26,7 +25,7 @@ const App = () => {
   });
 
   return (
-    <div className={theme === "dark" ? "dark" : ""}>
+    <div>
       <Preloader />
       <motion.div
         className="fixed top-0 left-0 z-50 w-full h-1 bg-blue-500"
@@ -39,11 +38,18 @@ const App = () => {
             <Hero />
           </motion.div>
         </Element>
+
         <Element name="about">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
             <About />
           </motion.div>
         </Element>
+        <Element name="services">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+            <Service />
+          </motion.div>
+        </Element>
+
         <Element name="projects">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
             <Projects />

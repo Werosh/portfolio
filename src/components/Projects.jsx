@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ExternalLink, Code, Globe, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  ExternalLink,
+  Code,
+  Globe,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import { IoCodeWorkingOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -254,7 +260,7 @@ const ProjectSection = () => {
                 animate={showAll ? { scale: 10, opacity: 0 } : {}}
                 transition={{ duration: 0.5 }}
               />
-              
+
               {/* Button text and icon */}
               <div className="relative z-10 flex items-center gap-2">
                 <span>{showAll ? "Show Less" : "Show More Projects"}</span>
@@ -264,7 +270,7 @@ const ProjectSection = () => {
                   <ChevronDown className="w-5 h-5" />
                 )}
               </div>
-              
+
               {/* Shining effect */}
               <motion.div
                 className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"
@@ -278,10 +284,6 @@ const ProjectSection = () => {
               />
             </motion.button>
           </motion.div>
-
-
-
-          
         </div>
       </div>
     </div>
