@@ -18,6 +18,8 @@ import salonIMg from "../assets/images/projects/ims.png";
 import oldIMg from "../assets/images/projects/oldp.png";
 import mpIMg from "../assets/images/projects/mp.png";
 import aquaImg from "../assets/images/projects/aqua.png";
+import jobportal from "../assets/images/projects/jobportal.png";
+
 import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
 
 const ProjectSection = () => {
@@ -25,6 +27,15 @@ const ProjectSection = () => {
   const [showAll, setShowAll] = useState(false);
 
   const projects = [
+    {
+      title: "Job Portal Design",
+      description:"A job portal design with advanced UI/UX implementations",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "MongoDB" ,"Express"],
+      link: "https://jobportaltest.netlify.app/",
+      gradient: "from-[#00B400] to-[#008300]",
+      image: jobportal,
+    },
     {
       title: "Sandaru Aqua (Pvt) Ltd",
       description:
