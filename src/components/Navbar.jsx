@@ -7,12 +7,12 @@ const Navbar = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const navLinks = [
-    { href: "#home", icon: <Home size={18} />, label: "Home" },
-    { href: "#about", icon: <User size={18} />, label: "About" },
-    { href: "#services", icon: <MdOutlineMedicalServices size={18} />, label: "Services" },
-    { href: "#projects", icon: <Briefcase size={18} />, label: "Projects" },
-    { href: "#skills", icon: <Box size={18} />, label: "Skills" },
-    { href: "#contact", icon: <Mail size={18} />, label: "Contact" },
+    { href: "/#home", icon: <Home size={18} />, label: "Home" },
+    { href: "/#about", icon: <User size={18} />, label: "About" },
+    { href: "/#services", icon: <MdOutlineMedicalServices size={18} />, label: "Services" },
+    { href: "/projects", icon: <Briefcase size={18} />, label: "Projects" },
+    { href: "/#skills", icon: <Box size={18} />, label: "Skills" },
+    { href: "/#contact", icon: <Mail size={18} />, label: "Contact" },
   ];
 
   return (

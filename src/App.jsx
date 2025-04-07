@@ -65,6 +65,8 @@ const App = () => {
             <Contact />
           </motion.div>
         </Element>
+
+        
         <Footer />
       </main>
     </div>
