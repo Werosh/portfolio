@@ -25,6 +25,7 @@ import oldIMg from "../assets/images/projects/oldp.png";
 import mpIMg from "../assets/images/projects/mp.png";
 import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
+import NextGImg from "../assets/images/projects/nextg.png"
 
 // Client Images
 
@@ -46,7 +47,17 @@ const ServiceSection = () => {
       link: "https://www.sparklingcarcare.com.au/",
       gradient: "from-blue-500 to-teal-500",
       image: SPCImg,
+    },
+    {
+      title: "NextGen Websites",
+      description: "Affordable and professional web development services for businesses worldwide",
+      icon: <Globe />,
+      tech: ["ReactJS", "Tailwind"],
+      link: "https://www.nextgenwebsites.info/",
+      gradient: "from-purple-500 to-indigo-500",
+      image: NextGImg,
     }
+    
     
  
   ];
