@@ -6,14 +6,13 @@ import {
   ChevronDown,
   ChevronUp,
   Globe,
-  Code
+  Code,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
 
-
-// Template images 
+// Template images
 import { IoCodeWorkingOutline } from "react-icons/io5";
 import AlphaIMg from "../assets/images/projects/alpha.png";
 import bluhIMg from "../assets/images/projects/bluhdev.png";
@@ -25,7 +24,7 @@ import oldIMg from "../assets/images/projects/oldp.png";
 import mpIMg from "../assets/images/projects/mp.png";
 import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
-import NextGImg from "../assets/images/projects/nextg.png"
+import NextGImg from "../assets/images/projects/nextg.png";
 
 // Client Images
 
@@ -40,143 +39,144 @@ const ServiceSection = () => {
 
   const clients = [
     {
+      title: "NextGen Websites",
+      description:
+        "Affordable and professional web development services for businesses worldwide",
+      icon: <Globe />,
+      tech: ["ReactJS", "Tailwind"],
+      link: "https://www.nextgenwebsites.info/",
+      gradient: "from-purple-500 to-indigo-500",
+      image: NextGImg,
+    },
+    {
       title: "Sparkling Car Care",
-      description: "Professional car cleaning and detailing services in Artarmon, NSW",
+      description:
+        "Professional car cleaning and detailing services in Artarmon, NSW",
       icon: <Globe />,
       tech: ["ReactJS", "Tailwind"],
       link: "https://www.sparklingcarcare.com.au/",
       gradient: "from-blue-500 to-teal-500",
       image: SPCImg,
     },
-    {
-      title: "NextGen Websites",
-      description: "Affordable and professional web development services for businesses worldwide",
-      icon: <Globe />,
-      tech: ["ReactJS", "Tailwind"],
-      link: "https://www.nextgenwebsites.info/",
-      gradient: "from-purple-500 to-indigo-500",
-      image: NextGImg,
-    }
-    
-    
- 
   ];
 
   const templates = [
-     {
-         title: "Job Portal Design",
-         description:"A job portal design with advanced UI/UX implementations",
-         icon: <Globe />,
-         tech: ["React", "Node.js", "MongoDB" ,"Express"],
-         link: "https://jobportaltest.netlify.app/",
-         gradient: "from-[#00B400] to-[#008300]",
-         image: jobportal,
-       },
-       {
-         title: "Sandaru Aqua (Pvt) Ltd",
-         description:
-           "Sandaru Aqua (PVT) Ltd provides advanced water purification solutions, ensuring clean and safe water through innovative design, installation, and maintenance services.",
-         icon: <Globe />,
-         tech: ["React", "Node.js", "Fire Base"],
-         link: "https://sandaruaqua.netlify.app/",
-         gradient: "from-[#00B4DB] to-[#0083B0]",
-         image: aquaImg,
-       },
-       {
-         title: "LassanaMoments",
-         description:
-           "Full-Stack On-going group Project --------> As a Head Front-End Developer ",
-         icon: <IoCodeWorkingOutline />,
-         tech: ["React", "Node.js", "Fire Base"],
-         link: "https://lassanamomentz.netlify.app/",
-         gradient: "from-[#AA076B] to-[#61045F]",
-         image: OngoingWeb,
-       },
-       {
-         title: "The Alphawizards Portfolio",
-         description:
-           "Personal portfolio platform with advanced UI/UX implementations",
-         icon: <Globe />,
-         tech: ["React", "Node.js", "MongoDB"],
-         link: "https://thealphawizards.netlify.app/",
-         gradient: "from-violet-500 to-indigo-500",
-         image: AlphaIMg,
-       },
-       {
-         title: "Serenity Hotel",
-         description:
-           "Hotel booking platform offering seamless reservations and availability checking",
-         icon: <Code />,
-         tech: ["React", "Node.js"],
-         link: "https://hotelsentry.netlify.app/",
-         gradient: "from-cyan-500 to-blue-500",
-         image: sentryIMg,
-       },
-       {
-         title: "Buy Book Anywhere",
-         description:
-           "Advanced library search engine with intelligent recommendations",
-         icon: <Code />,
-         tech: ["Python", "TensorFlow", "AWS"],
-         link: "https://demolibry.netlify.app/",
-         gradient: "from-amber-500 to-orange-500",
-         image: libryIMg,
-       },
-       {
-         title: "Group Portfolio",
-         description:
-           "Personal portfolio platform with advanced UI/UX implementations",
-         icon: <Globe />,
-         tech: ["React", "Node.js", "MongoDB"],
-         link: "https://bluhbluhdev.netlify.app/",
-         gradient: "from-green-500 to-teal-500",
-         image: bluhIMg,
-       },
-       {
-         title: "Herbal Haven",
-         description:
-           "A website offering a selection of herbal products and remedies designed to enhance well-being.",
-         icon: <Globe />,
-         tech: ["Vue.js", "Firebase"],
-         link: "https://hebalhaven.netlify.app/",
-         gradient: "from-lime-500 to-green-500",
-         image: herbIMg,
-       },
-       {
-         title: "Early Portfolio",
-         description:
-           "The personal portfolio of Werosh Kriyanjala, showcasing web development and software engineering projects.",
-         icon: <Globe />,
-         tech: ["HTML", "CSS", "JavaScript"],
-         link: "https://weroshport.netlify.app/",
-         gradient: "from-gray-500 to-slate-500",
-         image: oldIMg,
-       },
-       {
-         title: "Salon IMS",
-         description:
-           "Salon Inventory Management System simplifies and optimizes inventory management for salon operations.",
-         icon: <Code />,
-         tech: ["C#", "MySQL"],
-         link: "https://github.com/Werosh/Salon-Inventory-System-Uni-Assinment.git",
-         gradient: "from-rose-500 to-red-500",
-         image: salonIMg,
-       },
-       {
-         title: "Movie Picker",
-         description:
-           "A platform for browsing and discovering movies across various genres with IMDb ratings and detailed info.",
-         icon: <Globe />,
-         tech: ["React", "Node.js", "MongoDB"],
-         link: "https://movypikker.netlify.app/",
-         gradient: "from-purple-500 to-pink-500",
-         image: mpIMg,
-       },
+    {
+      title: "Job Portal Design",
+      description: "A job portal design with advanced UI/UX implementations",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "MongoDB", "Express"],
+      link: "https://jobportaltest.netlify.app/",
+      gradient: "from-[#00B400] to-[#008300]",
+      image: jobportal,
+    },
+    {
+      title: "Sandaru Aqua (Pvt) Ltd",
+      description:
+        "Sandaru Aqua (PVT) Ltd provides advanced water purification solutions, ensuring clean and safe water through innovative design, installation, and maintenance services.",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "Fire Base"],
+      link: "https://sandaruaqua.netlify.app/",
+      gradient: "from-[#00B4DB] to-[#0083B0]",
+      image: aquaImg,
+    },
+    {
+      title: "LassanaMoments",
+      description:
+        "Full-Stack On-going group Project --------> As a Head Front-End Developer ",
+      icon: <IoCodeWorkingOutline />,
+      tech: ["React", "Node.js", "Fire Base"],
+      link: "https://lassanamomentz.netlify.app/",
+      gradient: "from-[#AA076B] to-[#61045F]",
+      image: OngoingWeb,
+    },
+    {
+      title: "The Alphawizards Portfolio",
+      description:
+        "Personal portfolio platform with advanced UI/UX implementations",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "MongoDB"],
+      link: "https://thealphawizards.netlify.app/",
+      gradient: "from-violet-500 to-indigo-500",
+      image: AlphaIMg,
+    },
+    {
+      title: "Serenity Hotel",
+      description:
+        "Hotel booking platform offering seamless reservations and availability checking",
+      icon: <Code />,
+      tech: ["React", "Node.js"],
+      link: "https://hotelsentry.netlify.app/",
+      gradient: "from-cyan-500 to-blue-500",
+      image: sentryIMg,
+    },
+    {
+      title: "Buy Book Anywhere",
+      description:
+        "Advanced library search engine with intelligent recommendations",
+      icon: <Code />,
+      tech: ["Python", "TensorFlow", "AWS"],
+      link: "https://demolibry.netlify.app/",
+      gradient: "from-amber-500 to-orange-500",
+      image: libryIMg,
+    },
+    {
+      title: "Group Portfolio",
+      description:
+        "Personal portfolio platform with advanced UI/UX implementations",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "MongoDB"],
+      link: "https://bluhbluhdev.netlify.app/",
+      gradient: "from-green-500 to-teal-500",
+      image: bluhIMg,
+    },
+    {
+      title: "Herbal Haven",
+      description:
+        "A website offering a selection of herbal products and remedies designed to enhance well-being.",
+      icon: <Globe />,
+      tech: ["Vue.js", "Firebase"],
+      link: "https://hebalhaven.netlify.app/",
+      gradient: "from-lime-500 to-green-500",
+      image: herbIMg,
+    },
+    {
+      title: "Early Portfolio",
+      description:
+        "The personal portfolio of Werosh Kriyanjala, showcasing web development and software engineering projects.",
+      icon: <Globe />,
+      tech: ["HTML", "CSS", "JavaScript"],
+      link: "https://weroshport.netlify.app/",
+      gradient: "from-gray-500 to-slate-500",
+      image: oldIMg,
+    },
+    {
+      title: "Salon IMS",
+      description:
+        "Salon Inventory Management System simplifies and optimizes inventory management for salon operations.",
+      icon: <Code />,
+      tech: ["C#", "MySQL"],
+      link: "https://github.com/Werosh/Salon-Inventory-System-Uni-Assinment.git",
+      gradient: "from-rose-500 to-red-500",
+      image: salonIMg,
+    },
+    {
+      title: "Movie Picker",
+      description:
+        "A platform for browsing and discovering movies across various genres with IMDb ratings and detailed info.",
+      icon: <Globe />,
+      tech: ["React", "Node.js", "MongoDB"],
+      link: "https://movypikker.netlify.app/",
+      gradient: "from-purple-500 to-pink-500",
+      image: mpIMg,
+    },
   ];
 
   // Get only the first 3 items to show initially
   const displayedClients = showAllClients ? clients : clients.slice(0, 3);
-  const displayedTemplates = showAllTemplates ? templates : templates.slice(0, 3);
+  const displayedTemplates = showAllTemplates
+    ? templates
+    : templates.slice(0, 3);
 
   // Toggle functions to show/hide items
   const toggleShowAllClients = () => {
@@ -188,20 +188,33 @@ const ServiceSection = () => {
   };
 
   return (
-    <div id="services" className="relative w-full min-h-screen overflow-hidden bg-gray-900">
+    <div
+      id="services"
+      className="relative w-full min-h-screen overflow-hidden bg-gray-900"
+    >
       {/* Animated Background */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-3xl 
-          animate-pulse top-[-100px] left-[-100px]" />
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl 
-          animate-pulse bottom-[-100px] right-[-100px]" style={{ animationDelay: '1s' }} />
-        <div className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl 
-          animate-pulse top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: '2s' }} />
+        <div
+          className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-3xl 
+          animate-pulse top-[-100px] left-[-100px]"
+        />
+        <div
+          className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl 
+          animate-pulse bottom-[-100px] right-[-100px]"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl 
+          animate-pulse top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ animationDelay: "2s" }}
+        />
       </div>
 
       {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
-        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
+        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]"
+      />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center w-full min-h-screen px-6 py-20">
@@ -235,7 +248,7 @@ const ServiceSection = () => {
                   <Users className="w-5 h-5" />
                   <span>Clients</span>
                 </div>
-                
+
                 {/* Shining effect for active button */}
                 {activeSection === "clients" && (
                   <motion.div
@@ -250,7 +263,7 @@ const ServiceSection = () => {
                   />
                 )}
               </motion.button>
-              
+
               <motion.button
                 onClick={() => setActiveSection("templates")}
                 className={`relative overflow-hidden px-8 py-4 text-white font-medium rounded-full 
@@ -266,7 +279,7 @@ const ServiceSection = () => {
                   <LayoutTemplate className="w-5 h-5" />
                   <span>Templates</span>
                 </div>
-                
+
                 {/* Shining effect for active button */}
                 {activeSection === "templates" && (
                   <motion.div
@@ -324,7 +337,9 @@ const ServiceSection = () => {
                                 className: "w-6 h-6 text-white",
                               })}
                             </div>
-                            <h3 className="text-xl font-medium text-white">{client.title}</h3>
+                            <h3 className="text-xl font-medium text-white">
+                              {client.title}
+                            </h3>
                           </div>
 
                           {/* Description */}
@@ -391,7 +406,9 @@ const ServiceSection = () => {
 
                     {/* Button text and icon */}
                     <div className="relative z-10 flex items-center gap-2">
-                      <span>{showAllClients ? "Show Less" : "Show More Clients"}</span>
+                      <span>
+                        {showAllClients ? "Show Less" : "Show More Clients"}
+                      </span>
                       {showAllClients ? (
                         <ChevronUp className="w-5 h-5" />
                       ) : (
@@ -454,7 +471,9 @@ const ServiceSection = () => {
                                 className: "w-6 h-6 text-white",
                               })}
                             </div>
-                            <h3 className="text-xl font-medium text-white">{template.title}</h3>
+                            <h3 className="text-xl font-medium text-white">
+                              {template.title}
+                            </h3>
                           </div>
 
                           {/* Description */}
@@ -515,13 +534,17 @@ const ServiceSection = () => {
                     <motion.div
                       className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-30"
                       initial={{ scale: 0 }}
-                      animate={showAllTemplates ? { scale: 10, opacity: 0 } : {}}
+                      animate={
+                        showAllTemplates ? { scale: 10, opacity: 0 } : {}
+                      }
                       transition={{ duration: 0.5 }}
                     />
 
                     {/* Button text and icon */}
                     <div className="relative z-10 flex items-center gap-2">
-                      <span>{showAllTemplates ? "Show Less" : "Show More Templates"}</span>
+                      <span>
+                        {showAllTemplates ? "Show Less" : "Show More Templates"}
+                      </span>
                       {showAllTemplates ? (
                         <ChevronUp className="w-5 h-5" />
                       ) : (

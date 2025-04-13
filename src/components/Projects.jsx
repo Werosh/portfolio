@@ -6,23 +6,13 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { IoCodeWorkingOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 
-import AlphaIMg from "../assets/images/projects/alpha.png";
-import bluhIMg from "../assets/images/projects/bluhdev.png";
-import sentryIMg from "../assets/images/projects/sentry.png";
-import libryIMg from "../assets/images/projects/libry.png";
-import herbIMg from "../assets/images/projects/herb.png";
-import salonIMg from "../assets/images/projects/ims.png";
-import oldIMg from "../assets/images/projects/oldp.png";
-import mpIMg from "../assets/images/projects/mp.png";
 import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
 
 import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
-
-
+import NextGImg from "../assets/images/projects/nextg.png";
 
 import SPCImg from "../assets/images/projects/spc.png";
 const ProjectSection = () => {
@@ -30,6 +20,16 @@ const ProjectSection = () => {
   const [showAll, setShowAll] = useState(false);
 
   const projects = [
+    {
+      title: "NextGen Websites",
+      description:
+        "Affordable and professional web development services for businesses worldwide",
+      icon: <Globe />,
+      tech: ["ReactJS", "Tailwind"],
+      link: "https://www.nextgenwebsites.info/",
+      gradient: "from-purple-500 to-indigo-500",
+      image: NextGImg,
+    },
     {
       title: "Sparkling Car Care",
       description:
@@ -48,16 +48,6 @@ const ProjectSection = () => {
       link: "https://jobportaltest.netlify.app/",
       gradient: "from-[#00B400] to-[#008300]",
       image: jobportal,
-    },
-    {
-      title: "Sandaru Aqua (Pvt) Ltd",
-      description:
-        "Sandaru Aqua (PVT) Ltd provides advanced water purification solutions, ensuring clean and safe water through innovative design, installation, and maintenance services.",
-      icon: <Globe />,
-      tech: ["React", "Node.js", "Fire Base"],
-      link: "https://sandaruaqua.netlify.app/",
-      gradient: "from-[#00B4DB] to-[#0083B0]",
-      image: aquaImg,
     },
   ];
 
