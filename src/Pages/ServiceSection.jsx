@@ -7,6 +7,7 @@ import {
   ChevronUp,
   Globe,
   Code,
+  Brain
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,6 +26,7 @@ import mpIMg from "../assets/images/projects/mp.png";
 import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
 import NextGImg from "../assets/images/projects/nextg.png";
+import AIWriteCheckerImg from "../assets/images/projects/aiwrite.png";
 
 // Client Images
 
@@ -38,6 +40,17 @@ const ServiceSection = () => {
   const [activeSection, setActiveSection] = useState("clients");
 
   const clients = [
+    {
+      title: "AI Write Checker",
+      description:
+        "Free and reliable AI content detection tool to verify authenticity of written text (Fiverr)",
+      icon: <Brain />,
+      tech: ["ReactJS", "Tailwind", "AI API"],
+      link: "https://aiwritechecker.netlify.app/",
+      gradient: "from-green-400 to-blue-500",
+      image: AIWriteCheckerImg,
+    },
+    
     {
       title: "NextGen Websites",
       description:
