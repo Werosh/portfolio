@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import {
   ExternalLink,
-  Code,
   Globe,
   ChevronDown,
   ChevronUp,
+  Brain
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
-
-import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
-import NextGImg from "../assets/images/projects/nextg.png";
+import AIWriteCheckerImg from "../assets/images/projects/aiwrite.png";
 
 import SPCImg from "../assets/images/projects/spc.png";
 const ProjectSection = () => {
@@ -21,14 +18,14 @@ const ProjectSection = () => {
 
   const projects = [
     {
-      title: "NextGen Websites",
+      title: "AI Write Checker",
       description:
-        "Affordable and professional web development services for businesses worldwide",
-      icon: <Globe />,
-      tech: ["ReactJS", "Tailwind"],
-      link: "https://www.nextgenwebsites.info/",
-      gradient: "from-purple-500 to-indigo-500",
-      image: NextGImg,
+        "Free and reliable AI content detection tool to verify authenticity of written text (Fiverr)",
+      icon: <Brain />,
+      tech: ["ReactJS", "Fire Base", "AI API"],
+      link: "https://aiwritechecker.netlify.app/",
+      gradient: "from-purple-900 to-blue-800",
+      image: AIWriteCheckerImg,
     },
     {
       title: "Sparkling Car Care",

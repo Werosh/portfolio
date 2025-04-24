@@ -36,86 +36,90 @@ const ProfessionalSkills = () => {
 
   const skillsData = [
     {
-        name: "JavaScript",
-        level: 90,
-        category: "Frontend",
-        tech: ["ES6+", "TypeScript", "Performance Optimization"],
+      name: "JavaScript",
+      level: 90,
+      category: "Frontend",
+      tech: ["ES6+", "TypeScript", "Performance Optimization"],
     },
     {
-        name: "React",
-        level: 85,
-        category: "Frameworks",
-        tech: ["Advanced Hooks", "State Management", "Performance"],
+      name: "React",
+      level: 85,
+      category: "Frameworks",
+      tech: ["Advanced Hooks", "State Management", "Performance"],
     },
     {
-        name: "Python",
-        level: 70,
-        category: "Backend",
-        tech: ["Django", "RESTful APIs", "Microservices"],
+      name: "Firebase",
+      level: 78,
+      category: "Backend",
+      tech: ["Firestore", "Authentication", "Hosting", "Cloud Functions"],
     },
     {
-        name: "Java",
-        level: 60,
-        category: "Systems",
-        tech: ["Enterprise Java", "Spring Boot", "Microservices"],
+      name: "Python",
+      level: 70,
+      category: "Backend",
+      tech: ["Django", "RESTful APIs", "Microservices"],
     },
     {
-        name: "Database Design",
-        level: 55,
-        category: "Backend",
-        tech: ["SQL", "NoSQL", "Data Modeling"],
+      name: "Java",
+      level: 60,
+      category: "Systems",
+      tech: ["Enterprise Java", "Spring Boot", "Microservices"],
     },
     {
-        name: "Frontend Architecture",
-        level: 95,
-        category: "Frontend",
-        tech: ["Responsive Design", "Performance", "Accessibility"],
+      name: "Database Design",
+      level: 55,
+      category: "Backend",
+      tech: ["SQL", "NoSQL", "Data Modeling"],
     },
     {
-        name: "Enterprise Frameworks",
-        level: 80,
-        category: "Frameworks",
-        tech: [".NET Core", "Spring", "Node.js"],
+      name: "Frontend Architecture",
+      level: 95,
+      category: "Frontend",
+      tech: ["Responsive Design", "Performance", "Accessibility"],
     },
     {
-        name: "Systems Design",
-        level: 70,
-        category: "Systems",
-        tech: ["Architecture", "Scalability", "Security"],
+      name: "Enterprise Frameworks",
+      level: 80,
+      category: "Frameworks",
+      tech: [".NET Core", "Spring", "Node.js"],
     },
     {
-        name: "Node.js",
-        level: 75,
-        category: "Backend",
-        tech: ["Express.js", "REST APIs", "GraphQL"],
+      name: "Systems Design",
+      level: 70,
+      category: "Systems",
+      tech: ["Architecture", "Scalability", "Security"],
     },
     {
-        name: "Tailwind CSS",
-        level: 85,
-        category: "Frontend",
-        tech: ["Utility-First", "Responsive Design", "Dark Mode"],
+      name: "Node.js",
+      level: 75,
+      category: "Backend",
+      tech: ["Express.js", "REST APIs", "GraphQL"],
     },
     {
-        name: "Framer Motion",
-        level: 80,
-        category: "Frontend",
-        tech: ["Animations", "Gesture Handling", "Variants"],
+      name: "Tailwind CSS",
+      level: 85,
+      category: "Frontend",
+      tech: ["Utility-First", "Responsive Design", "Dark Mode"],
     },
     {
-        name: "C#",
-        level: 80,
-        category: "Systems",
-        tech: [".NET Core", "ASP.NET", "Entity Framework"],
+      name: "Framer Motion",
+      level: 80,
+      category: "Frontend",
+      tech: ["Animations", "Gesture Handling", "Variants"],
     },
     {
-        name: "PHP",
-        level: 65,
-        category: "Backend",
-        tech: ["Laravel", "WordPress", "REST APIs"],
+      name: "C#",
+      level: 80,
+      category: "Systems",
+      tech: [".NET Core", "ASP.NET", "Entity Framework"],
     },
-];
-
-    
+    {
+      name: "PHP",
+      level: 65,
+      category: "Backend",
+      tech: ["Laravel", "WordPress", "REST APIs"],
+    },
+  ];
 
   const filteredSkills =
     selectedCategory === "All"
@@ -130,27 +134,28 @@ const ProfessionalSkills = () => {
         <div className="absolute bottom-0 right-0 rounded-full w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl animate-pulse" />
       </div>
 
-      
       {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
-        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]" />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
+        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]"
+      />
 
       <div className="container relative z-10 px-4 mx-auto">
         {/* Section Header */}
         {/* Section Header */}
         <div className="mb-16 text-center">
-            <div className="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium border rounded-full mt-[70px] bg-white/5 border-white/10 backdrop-blur-sm">
-              <span className="text-gray-300">Proficiency </span>
-            </div>
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
-            Professional Expertise
-          </h2>
-          <p className="max-w-2xl mx-auto text-slate-400">
-            Comprehensive overview of technical proficiencies and specialized
-            domains
-          </p>
-        </div>
+          <div className="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium border rounded-full mt-[70px] bg-white/5 border-white/10 backdrop-blur-sm">
+            <span className="text-gray-300">Proficiency </span>
+          </div>
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
+              Professional Expertise
+            </h2>
+            <p className="max-w-2xl mx-auto text-slate-400">
+              Comprehensive overview of technical proficiencies and specialized
+              domains
+            </p>
+          </div>
         </div>
 
         {/* Category Selection */}

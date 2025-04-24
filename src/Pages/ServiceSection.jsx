@@ -45,9 +45,9 @@ const ServiceSection = () => {
       description:
         "Free and reliable AI content detection tool to verify authenticity of written text (Fiverr)",
       icon: <Brain />,
-      tech: ["ReactJS", "Tailwind", "AI API"],
+      tech: ["ReactJS", "Fire Base", "AI API"],
       link: "https://aiwritechecker.netlify.app/",
-      gradient: "from-green-400 to-blue-500",
+      gradient: "from-purple-900 to-blue-800",
       image: AIWriteCheckerImg,
     },
     
