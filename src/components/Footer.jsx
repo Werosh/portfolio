@@ -177,14 +177,26 @@ const ModernFooter = () => {
             <p className="text-gray-400">
               © {currentYear} Werosh Kriyanjala. All rights reserved.
             </p>
-            <div className="flex gap-4 text-gray-400">
-              <a href="/privacy" className="transition-colors hover:text-white">
-                Privacy Policy
+            <p className="text-gray-400">
+              Built with{" "}
+              <a
+                href="https://reactjs.org/"
+                className="text-violet-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                React
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://tailwindcss.com/"
+                className="text-violet-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tailwind CSS
               </a>
-              <a href="/terms" className="transition-colors hover:text-white">
-                Terms of Service
-              </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
