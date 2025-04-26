@@ -92,6 +92,7 @@ const Preloader = ({ onLoadingComplete }) => {
           </div>
         </div>
 
+{/* test comment */}
         {/* Main Content */}
         <div className="relative flex flex-col items-center">
           {/* Logo/Name Section */}
