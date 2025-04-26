@@ -19,6 +19,18 @@ const Preloader = ({ onLoadingComplete }) => {
   ];
 
   useEffect(() => {
+    // Check if preloader has been shown before
+    const hasShownPreloader = localStorage.getItem('hasShownPreloader');
+    
+    // If preloader has been shown before, skip it
+    if (hasShownPreloader === 'true') {
+      setLoading(false);
+      if (onLoadingComplete) {
+        onLoadingComplete();
+      }
+      return;
+    }
+
     const taskInterval = setInterval(() => {
       const taskIndex = Math.floor((progress / 100) * tasks.length);
       setCurrentTask(tasks[taskIndex] || tasks[tasks.length - 1]);
@@ -40,6 +52,8 @@ const Preloader = ({ onLoadingComplete }) => {
 
     const completeTimer = setTimeout(() => {
       setLoading(false);
+      // Set flag in localStorage to indicate preloader has been shown
+      localStorage.setItem('hasShownPreloader', 'true');
       if (onLoadingComplete) {
         onLoadingComplete();
       }
