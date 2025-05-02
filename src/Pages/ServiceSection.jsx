@@ -7,9 +7,10 @@ import {
   ChevronUp,
   Globe,
   Code,
-  Brain
+  Brain,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaBus } from "react-icons/fa6";
 
 import OngoingWeb from "../assets/images/projects/ongoing-web.webp";
 
@@ -27,6 +28,7 @@ import aquaImg from "../assets/images/projects/aqua.png";
 import jobportal from "../assets/images/projects/jobportal.png";
 import NextGImg from "../assets/images/projects/nextg.png";
 import AIWriteCheckerImg from "../assets/images/projects/aiwrite.png";
+import BusMateImg from "../assets/images/projects/busmate.png";
 
 // Client Images
 
@@ -41,6 +43,22 @@ const ServiceSection = () => {
 
   const clients = [
     {
+      title: "BusMate LK",
+      description:
+        "A real-time web application helping Sri Lankan commuters plan efficient bus routes, track bus availability, and simplify public travel (Fiverr)",
+      icon: <FaBus />,
+      tech: [
+        "ReactJS",
+        "Firebase",
+        "Framer Motion",
+        "Tailwind CSS",
+        "React Icons",
+      ],
+      link: "https://busmatelk.netlify.app/",
+      gradient: "from-yellow-500 to-black",
+      image: BusMateImg,
+    },
+    {
       title: "AI Write Checker",
       description:
         "Free and reliable AI content detection tool to verify authenticity of written text (Fiverr)",
@@ -50,7 +68,7 @@ const ServiceSection = () => {
       gradient: "from-purple-900 to-blue-800",
       image: AIWriteCheckerImg,
     },
-    
+
     {
       title: "NextGen Websites",
       description:
