@@ -13,7 +13,11 @@ import Footer from "./components/Footer";
 
 const sectionVariants = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 };
 
 const App = () => {
@@ -34,39 +38,68 @@ const App = () => {
       <Navbar />
       <main className="text-black transition-colors duration-500 bg-white dark:bg-gray-900 dark:text-white">
         <Element name="hero">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
             <Hero />
           </motion.div>
         </Element>
 
         <Element name="about">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
             <About />
           </motion.div>
         </Element>
+        <Element name="projects">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
+            <Projects />
+          </motion.div>
+        </Element>
         <Element name="services">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
             <Service />
           </motion.div>
         </Element>
 
-        <Element name="projects">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
-            <Projects />
-          </motion.div>
-        </Element>
         <Element name="skills">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
             <Skills />
           </motion.div>
         </Element>
         <Element name="contact">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={sectionVariants}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
             <Contact />
           </motion.div>
         </Element>
 
-        
         <Footer />
       </main>
     </div>

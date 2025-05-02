@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Github } from "lucide-react";
-import { CiCircleChevDown } from "react-icons/ci";
 
 const ProfessionalHero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
