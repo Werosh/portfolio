@@ -253,12 +253,12 @@ const ServiceSection = () => {
           {/* Section Header */}
           <div className="mb-16 text-center">
             <div className="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium border rounded-full bg-white/5 border-white/10 backdrop-blur-sm mt-10">
-              <span className="text-gray-300">Services</span>
+              <span className="text-gray-300">Projects</span>
             </div>
             <h2 className="text-4xl font-medium text-white md:text-6xl">
-              Our
+              My
               <span className="ml-2 font-bold text-transparent bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text">
-                Services
+                Projects
               </span>
             </h2>
 

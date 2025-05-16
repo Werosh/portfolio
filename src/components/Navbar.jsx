@@ -9,8 +9,12 @@ const Navbar = () => {
   const navLinks = [
     { href: "/#home", icon: <Home size={18} />, label: "Home" },
     { href: "/#about", icon: <User size={18} />, label: "About" },
-    { href: "/#services", icon: <MdOutlineMedicalServices size={18} />, label: "Services" },
-    { href: "/projects", icon: <Briefcase size={18} />, label: "Projects" },
+    {
+      href: "/#services",
+      icon: <MdOutlineMedicalServices size={18} />,
+      label: "Services",
+    },
+    { href: "/projects", icon: <Briefcase size={18} />, label: "Portfolio" },
     { href: "/#skills", icon: <Box size={18} />, label: "Skills" },
     { href: "/#contact", icon: <Mail size={18} />, label: "Contact" },
   ];
@@ -63,14 +67,18 @@ const Navbar = () => {
               <div className="relative">
                 {/* Animated icon that transforms between menu and close */}
                 <div className="relative">
-                  <Menu 
+                  <Menu
                     className={`w-6 h-6 text-violet-300 transition-all duration-300 transform ${
-                      isOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
+                      isOpen
+                        ? "opacity-0 rotate-90 scale-0"
+                        : "opacity-100 rotate-0 scale-100"
                     }`}
                   />
-                  <X 
+                  <X
                     className={`w-6 h-6 text-violet-300 absolute top-0 left-0 transition-all duration-300 transform ${
-                      isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                      isOpen
+                        ? "opacity-100 rotate-0 scale-100"
+                        : "opacity-0 rotate-90 scale-0"
                     }`}
                   />
                 </div>
@@ -81,7 +89,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div 
+        <div
           className={`md:hidden overflow-hidden transition-all duration-500 px-4 ${
             isOpen ? "max-h-[400px] pb-4 opacity-100" : "max-h-0 opacity-0"
           }`}
