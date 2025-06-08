@@ -206,7 +206,7 @@ const BlackWhiteHero = () => {
 
               <div className="absolute top-1/2 -right-4 transform -translate-y-1/2 bg-white text-black px-4 py-2 rounded-lg font-black text-sm border-2 border-white shadow-xl">
                 <div className="text-center">
-                  <div className="text-xl">10+</div>
+                  <div className="text-xl">20+</div>
                   <div className="text-xs">PROJECTS</div>
                 </div>
               </div>
@@ -233,7 +233,7 @@ const BlackWhiteHero = () => {
                   </div>
                   <h3 className="font-black text-lg text-white">DEVELOPER</h3>
                   <p className="text-sm text-gray-300 font-medium">
-                    SINCE 2021
+                    SINCE 2023
                   </p>
                 </div>
               </div>
