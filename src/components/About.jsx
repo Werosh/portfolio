@@ -188,8 +188,21 @@ const BlackWhiteAbout = () => {
                 {
                   icon: Zap,
                   title: "INNOVATION FOCUSED",
-                  content:
-                    "Always pushing boundaries and exploring cutting-edge technologies to deliver exceptional user experiences and robust backend systems.",
+                  content: (
+                    <>
+                      Head Web Developer at Australia’s{" "}
+                      <a
+                        href="https://www.nextgenwebsites.info/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline hover:text-blue-700"
+                      >
+                        NextGen Websites
+                      </a>
+                      , crafting fast, scalable digital experiences with
+                      precision, performance, and excellence as the baseline.
+                    </>
+                  ),
                 },
                 {
                   icon: Trophy,
