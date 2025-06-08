@@ -1,118 +1,282 @@
-import React, { useState } from "react";
-import { Code, Home, User, Box, Briefcase, Mail, Menu, X } from "lucide-react";
-import { MdOutlineMedicalServices } from "react-icons/md";
+import React, { useState, useEffect } from "react";
+import {
+  Code,
+  Home,
+  User,
+  Box,
+  Briefcase,
+  Mail,
+  Command,
+  FolderKanban,
+} from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [hoverIndex, setHoverIndex] = useState(null);
+const FloatingCommandNav = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showHint, setShowHint] = useState(true);
 
-  const navLinks = [
-    { href: "/#home", icon: <Home size={18} />, label: "Home" },
-    { href: "/#about", icon: <User size={18} />, label: "About" },
+  const navItems = [
+    { icon: Home, label: "HOME", href: "#home", accent: "bg-white text-black" },
     {
-      href: "/#services",
-      icon: <MdOutlineMedicalServices size={18} />,
-      label: "Services",
+      icon: User,
+      label: "ABOUT",
+      href: "#about",
+      accent: "bg-black text-white border-2 border-white",
     },
-    { href: "/projects", icon: <Briefcase size={18} />, label: "Portfolio" },
-    { href: "/#skills", icon: <Box size={18} />, label: "Skills" },
-    { href: "/#contact", icon: <Mail size={18} />, label: "Contact" },
+    {
+      icon: Briefcase,
+      label: "WORK",
+      href: "#projects",
+      accent: "bg-white text-black ",
+    },
+    {
+      icon: FolderKanban,
+      label: "SERVICES",
+      href: "#services",
+      accent: "bg-black text-white  border-2 border-white",
+    },
+    {
+      icon: Box,
+      label: "SKILLS",
+      href: "#skills",
+      accent: "bg-white text-black ",
+    },
+
+    {
+      icon: Mail,
+      label: "CONTACT",
+      href: "#contact",
+      accent: "bg-black text-white border-2 border-white",
+    },
   ];
 
-  return (
-    <nav className="fixed top-0 z-50 w-full bg-white/[0.02] backdrop-blur-md border-b border-white/[0.05]">
-      <div className="mx-auto max-w-7xl">
-        <div className="relative flex items-center justify-between h-20 px-6">
-          {/* Logo */}
-          <div className="relative flex items-center gap-3 group">
-            <div className="flex items-center justify-center w-10 h-10 shadow-lg rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500">
-              <Code className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight">
-              <span className="text-transparent bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text">
-                Werosh
-              </span>
-              <span className="text-gray-400">.dev</span>
-            </span>
-          </div>
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center gap-2">
-              {navLinks.map((link, index) => (
-                <a
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Hide hint after first interaction or after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHint(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded);
+    setShowHint(false); // Hide hint after first click
+  };
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50">
+      {/* Command Center - Bottom Right */}
+      <div className="absolute bottom-8 right-8 pointer-events-auto">
+        <div className="relative">
+          {/* Click Me Hint */}
+          {showHint && !isExpanded && (
+            <div className="absolute bottom-20 right-20 animate-bounce">
+              <div className="relative">
+                <div className="bg-white text-black px-3 py-2 text-xs font-black border-2 border-black shadow-xl transform -skew-x-12 whitespace-nowrap animate-pulse">
+                  CLICK ME!
+                </div>
+                {/* Arrow pointing to button */}
+                <div className="absolute -bottom-1 -right-2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white transform rotate-45" />
+              </div>
+            </div>
+          )}
+
+          {/* Touch Me Hint for Mobile */}
+          {showHint && !isExpanded && (
+            <div className="absolute bottom-16 right-20 md:hidden animate-pulse">
+              <div className="bg-black text-white px-2 py-1 text-xs font-black border border-white shadow-xl transform -skew-x-6">
+                TAP
+              </div>
+            </div>
+          )}
+
+          {/* Floating Navigation Items */}
+          <div
+            className={`absolute bottom-16 right-0 transition-all duration-700 ease-in-out ${
+              isExpanded
+                ? "opacity-100 translate-y-0 scale-100"
+                : "opacity-0 translate-y-8 scale-75 pointer-events-none"
+            }`}
+          >
+            <div className="flex flex-col gap-3">
+              {navItems.map((item, index) => (
+                <div
                   key={index}
-                  href={link.href}
-                  onMouseEnter={() => setHoverIndex(index)}
-                  onMouseLeave={() => setHoverIndex(null)}
-                  className="relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-300 transition-all duration-300 rounded-lg hover:text-white"
+                  className="relative group"
+                  style={{
+                    animationDelay: isExpanded ? `${index * 0.1}s` : "0s",
+                  }}
                 >
-                  <span className="relative z-10 transition-all duration-300 text-violet-500 hover:scale-110">
-                    {link.icon}
-                  </span>
-                  <span className="relative z-10">{link.label}</span>
-                </a>
+                  {/* Label */}
+                  <div className="absolute right-16 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
+                    <div className="bg-black text-white px-3 py-1 text-xs font-black border-2 border-white shadow-xl transform -skew-x-12 whitespace-nowrap">
+                      {item.label}
+                    </div>
+                  </div>
+
+                  {/* Navigation Button */}
+                  <a
+                    href={item.href}
+                    className={`
+                      flex items-center justify-center w-12 h-12 
+                      ${item.accent}
+                      transform hover:scale-110 active:scale-95 
+                      transition-all duration-300 shadow-xl
+                      hover:shadow-2xl hover:-translate-y-1
+                      font-black text-sm
+                      group-hover:animate-pulse
+                    `}
+                    style={{
+                      clipPath:
+                        "polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)",
+                    }}
+                    onMouseEnter={() => setActiveIndex(index)}
+                  >
+                    <item.icon size={18} />
+                  </a>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Enhanced Mobile Menu Button */}
+          {/* Main Command Button */}
           <button
-            className="relative md:hidden flex items-center justify-center w-12 h-12 rounded-full overflow-hidden group"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            onClick={handleExpand}
+            className={`
+              relative w-16 h-16 
+              ${
+                isExpanded
+                  ? "bg-white text-black"
+                  : "bg-black text-white border-2 border-white"
+              }
+              transform hover:scale-110 active:scale-95 
+              transition-all duration-500 shadow-2xl
+              font-black group overflow-hidden
+              ${showHint && !isExpanded ? "animate-pulse" : ""}
+            `}
+            style={{
+              clipPath:
+                "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
+            }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-indigo-500 opacity-20 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10 flex items-center justify-center w-full h-full">
-              <div className="relative">
-                {/* Animated icon that transforms between menu and close */}
-                <div className="relative">
-                  <Menu
-                    className={`w-6 h-6 text-violet-300 transition-all duration-300 transform ${
-                      isOpen
-                        ? "opacity-0 rotate-90 scale-0"
-                        : "opacity-100 rotate-0 scale-100"
-                    }`}
-                  />
-                  <X
-                    className={`w-6 h-6 text-violet-300 absolute top-0 left-0 transition-all duration-300 transform ${
-                      isOpen
-                        ? "opacity-100 rotate-0 scale-100"
-                        : "opacity-0 rotate-90 scale-0"
-                    }`}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="absolute inset-0 rounded-full border border-violet-500/30 group-hover:border-violet-500/80 transition-colors duration-300"></div>
-          </button>
-        </div>
+            {/* Background animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-500 px-4 ${
-            isOpen ? "max-h-[400px] pb-4 opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="space-y-1 bg-white/[0.02] backdrop-blur-md rounded-xl p-1 border border-white/[0.05] shadow-lg">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-300 rounded-lg hover:bg-white/[0.05] hover:text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="relative z-10 transition-all duration-300 text-violet-500 group-hover:scale-110">
-                  {link.icon}
-                </span>
-                <span className="relative z-10">{link.label}</span>
-              </a>
-            ))}
+            {/* Icon */}
+            <div className="relative z-10 flex items-center justify-center w-full h-full">
+              <Command
+                size={24}
+                className={`transform transition-all duration-500 ${
+                  isExpanded ? "rotate-45" : "rotate-0"
+                }`}
+              />
+            </div>
+
+            {/* Enhanced pulse effect when hint is showing */}
+            <div
+              className={`absolute inset-0 border-2 border-white ${
+                showHint && !isExpanded ? "animate-ping" : ""
+              } opacity-20`}
+              style={{
+                clipPath:
+                  "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
+              }}
+            />
+          </button>
+
+          {/* Status Indicator */}
+          <div className="absolute -top-2 -left-2">
+            <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
+              <div className="w-2 h-2 bg-black rounded-full animate-pulse" />
+            </div>
           </div>
         </div>
       </div>
-    </nav>
+
+      {/* Floating Brand - Top Left */}
+      <div className="absolute top-8 left-8 pointer-events-auto">
+        <div className="relative group">
+          <a href="/" className="block">
+            <div className="bg-black text-white px-6 py-3 transform -skew-x-12 border-2 border-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center">
+                  <Code size={16} />
+                </div>
+                <div>
+                  <div className="font-black text-lg leading-none">WEROSH</div>
+                  <div className="text-xs font-medium opacity-80">
+                    KRIYANJALA
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Sticker corner */}
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-gray-200 transform rotate-45" />
+        </div>
+      </div>
+
+      {/* Quick Actions - Left Side */}
+      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+        <div className="flex flex-col gap-4">
+          {/* Quick Contact */}
+          <a
+            href="https://wa.link/8yrqoc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="group relative">
+              <button className="w-12 h-12 bg-white text-black flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 transform rotate-45 hover:rotate-0">
+                <FaWhatsapp
+                  size={16}
+                  className="transform -rotate-45 group-hover:rotate-0 transition-transform duration-300"
+                />
+              </button>
+
+              <div className="absolute left-16 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
+                <div className="bg-white text-black px-3 py-1 text-xs font-black shadow-xl whitespace-nowrap">
+                  QUICK CONTACT
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Status Indicator */}
+          <div className="w-12 h-12 bg-black border-2 border-white flex items-center justify-center shadow-xl">
+            <div className="flex flex-col items-center">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse mb-1" />
+              <div className="text-white text-xs font-black">LIVE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid Pattern Overlay */}
+      <div
+        className="absolute inset-0 opacity-5 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      />
+    </div>
   );
 };
 
-export default Navbar;
+export default FloatingCommandNav;

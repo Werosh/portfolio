@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Link, Element } from "react-scroll";
 import Navbar from "./components/Navbar";
-import Preloader from "./components/Preloader";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -22,21 +21,11 @@ const sectionVariants = {
 
 const App = () => {
   const { scrollYProgress } = useScroll();
-  const smoothScroll = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 20,
-    restDelta: 0.001,
-  });
 
   return (
     <div>
-      <Preloader />
-      <motion.div
-        className="fixed top-0 left-0 z-50 w-full h-1 bg-blue-500"
-        style={{ scaleX: smoothScroll, transformOrigin: "0%" }}
-      />
       <Navbar />
-      <main className="text-black transition-colors duration-500 bg-white dark:bg-gray-900 dark:text-white">
+      <main className="bg-black">
         <Element name="hero">
           <motion.div
             initial="hidden"

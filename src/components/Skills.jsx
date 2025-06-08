@@ -1,250 +1,255 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Cpu, Database, Globe } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Code, Database, Globe, Cpu, Zap, Star } from "lucide-react";
 
-const ProfessionalSkills = () => {
-  const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+const BlackWhiteSkills = () => {
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [animatedBars, setAnimatedBars] = useState({});
 
-  const skillCategories = [
+  const categories = [
     {
-      name: "All",
-      gradient: "from-slate-600 to-slate-800",
-      icon: <Globe className="w-5 h-5" />,
+      title: "FRONTEND",
+      icon: Code,
+      skills: [
+        { name: "REACT", level: 95, years: "3+" },
+        { name: "JAVASCRIPT", level: 80, years: "3+" },
+        { name: "TYPESCRIPT", level: 85, years: "2+" },
+        { name: "TAILWIND CSS", level: 92, years: "3+" },
+        { name: "FRAMER MOTION", level: 90, years: "3+" },
+        { name: "NEXT.JS", level: 88, years: "2+" },
+      ],
     },
     {
-      name: "Frontend",
-      gradient: "from-blue-600 to-indigo-700",
-      icon: <Code2 className="w-5 h-5" />,
+      title: "BACKEND",
+      icon: Database,
+      skills: [
+        { name: "NODE.JS", level: 65, years: "3+" },
+        { name: "PYTHON", level: 75, years: "2+" },
+        { name: "FIREBASE", level: 88, years: "3+" },
+        { name: "PHP", level: 70, years: "3+" },
+        { name: "MYSQL", level: 80, years: "3+" },
+      ],
     },
     {
-      name: "Backend",
-      gradient: "from-emerald-600 to-teal-700",
-      icon: <Database className="w-5 h-5" />,
+      title: "SYSTEMS",
+      icon: Cpu,
+      skills: [
+        { name: "C#", level: 62, years: "2+" },
+        { name: "JAVA", level: 80, years: "3+" },
+        { name: "MICROSERVICES", level: 75, years: "1+" },
+        { name: "SYSTEM DESIGN", level: 80, years: "3+" },
+      ],
     },
     {
-      name: "Frameworks",
-      gradient: "from-violet-600 to-purple-700",
-      icon: <Globe className="w-5 h-5" />,
-    },
-    {
-      name: "Systems",
-      gradient: "from-amber-600 via-yellow-500 to-orange-400",
-      icon: <Cpu className="w-5 h-5" />,
+      title: "TOOLS",
+      icon: Zap,
+      skills: [
+        { name: "GIT", level: 90, years: "4+" },
+        { name: "FIGMA", level: 85, years: "3+" },
+        { name: "VS CODE", level: 95, years: "4+" },
+        { name: "POSTMAN", level: 88, years: "3+" },
+      ],
     },
   ];
 
-  const skillsData = [
-    {
-      name: "JavaScript",
-      level: 90,
-      category: "Frontend",
-      tech: ["ES6+", "TypeScript", "Performance Optimization"],
-    },
-    {
-      name: "React",
-      level: 85,
-      category: "Frameworks",
-      tech: ["Advanced Hooks", "State Management", "Performance"],
-    },
-    {
-      name: "Firebase",
-      level: 78,
-      category: "Backend",
-      tech: ["Firestore", "Authentication", "Hosting", "Cloud Functions"],
-    },
-    {
-      name: "Python",
-      level: 70,
-      category: "Backend",
-      tech: ["Django", "RESTful APIs", "Microservices"],
-    },
-    {
-      name: "Java",
-      level: 60,
-      category: "Systems",
-      tech: ["Enterprise Java", "Spring Boot", "Microservices"],
-    },
-    {
-      name: "Database Design",
-      level: 55,
-      category: "Backend",
-      tech: ["SQL", "NoSQL", "Data Modeling"],
-    },
-    {
-      name: "Frontend Architecture",
-      level: 95,
-      category: "Frontend",
-      tech: ["Responsive Design", "Performance", "Accessibility"],
-    },
-    {
-      name: "Enterprise Frameworks",
-      level: 80,
-      category: "Frameworks",
-      tech: [".NET Core", "Spring", "Node.js"],
-    },
-    {
-      name: "Systems Design",
-      level: 70,
-      category: "Systems",
-      tech: ["Architecture", "Scalability", "Security"],
-    },
-    {
-      name: "Node.js",
-      level: 75,
-      category: "Backend",
-      tech: ["Express.js", "REST APIs", "GraphQL"],
-    },
-    {
-      name: "Tailwind CSS",
-      level: 85,
-      category: "Frontend",
-      tech: ["Utility-First", "Responsive Design", "Dark Mode"],
-    },
-    {
-      name: "Framer Motion",
-      level: 80,
-      category: "Frontend",
-      tech: ["Animations", "Gesture Handling", "Variants"],
-    },
-    {
-      name: "C#",
-      level: 80,
-      category: "Systems",
-      tech: [".NET Core", "ASP.NET", "Entity Framework"],
-    },
-    {
-      name: "PHP",
-      level: 65,
-      category: "Backend",
-      tech: ["Laravel", "WordPress", "REST APIs"],
-    },
-  ];
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const newAnimatedBars = {};
+      categories[activeCategory].skills.forEach((skill, index) => {
+        setTimeout(() => {
+          setAnimatedBars((prev) => ({
+            ...prev,
+            [skill.name]: true,
+          }));
+        }, index * 100);
+      });
+    }, 300);
 
-  const filteredSkills =
-    selectedCategory === "All"
-      ? skillsData
-      : skillsData.filter((skill) => skill.category === selectedCategory);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
+
+  const currentCategory = categories[activeCategory];
 
   return (
-    <section id="skills" className="relative min-h-screen py-16 ">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-0 left-0 rounded-full w-96 h-96 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 rounded-full w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl animate-pulse" />
-      </div>
-
-      {/* Grid Pattern */}
+    <section
+      id="skills"
+      className="relative w-full min-h-screen bg-black overflow-hidden"
+    >
+      {/* Grid Background */}
       <div
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] 
-        bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black,transparent)]"
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
       />
 
-      <div className="container relative z-10 px-4 mx-auto">
-        {/* Section Header */}
-        {/* Section Header */}
-        <div className="mb-16 text-center">
-          <div className="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium border rounded-full mt-[70px] bg-white/5 border-white/10 backdrop-blur-sm">
-            <span className="text-gray-300">Proficiency </span>
+      {/* Geometric Background Elements */}
+      <div className="absolute top-10 right-10 w-24 h-24 border-4 border-white/20 rotate-45" />
+      <div className="absolute bottom-20 left-10 w-16 h-16 bg-white/10 rounded-full" />
+      <div className="absolute top-1/3 left-5 w-8 h-8 bg-white rotate-45" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 lg:py-24">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-6 py-3 text-sm font-black rounded-full bg-white text-black mb-8 shadow-xl border-4 border-white">
+            <Star className="w-4 h-4 mr-2" />
+            <span>TECHNICAL EXPERTISE</span>
           </div>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
-              Professional Expertise
-            </h2>
-            <p className="max-w-2xl mx-auto text-slate-400">
-              Comprehensive overview of technical proficiencies and specialized
-              domains
-            </p>
-          </div>
+
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-6 tracking-tight">
+            SKILLS &
+          </h2>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-black mb-8 tracking-tight">
+            <span className="bg-white text-black px-6 py-2 transform -skew-x-12 inline-block shadow-xl">
+              TECHNOLOGIES
+            </span>
+          </h2>
+
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-medium">
+            Mastering the tools and technologies that drive modern web
+            development
+          </p>
         </div>
 
-        {/* Category Selection */}
-        <div className="grid grid-cols-2 gap-3 mb-10 md:grid-cols-5">
-          {skillCategories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => setSelectedCategory(category.name)}
-              className={`px-4 py-3 rounded-lg transition-all ${
-                selectedCategory === category.name
-                  ? `bg-gradient-to-r ${category.gradient} shadow-lg`
-                  : "bg-slate-800/50 hover:bg-slate-800"
-              }`}
-            >
-              <div className="flex items-center justify-center gap-2">
-                {category.icon}
-                <span className="text-sm font-medium">{category.name}</span>
-              </div>
-            </button>
-          ))}
+        {/* Category Navigation */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {categories.map((category, index) => {
+            const IconComponent = category.icon;
+            return (
+              <button
+                key={category.title}
+                onClick={() => setActiveCategory(index)}
+                className={`relative p-6 border-4 transition-all duration-300 transform hover:scale-105 ${
+                  activeCategory === index
+                    ? "bg-white text-black border-white shadow-2xl"
+                    : "bg-transparent text-white border-white hover:bg-white/10"
+                }`}
+              >
+                <div className="text-center">
+                  <IconComponent className="w-8 h-8 mx-auto mb-3" />
+                  <span className="text-sm font-black tracking-wider">
+                    {category.title}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="wait">
-            {filteredSkills.map((skill, index) => {
-              const category = skillCategories.find(
-                (c) => c.name === skill.category
-              );
+        {/* Skills Display */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Skills List */}
+          <div className="space-y-6">
+            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 flex items-center">
+              <currentCategory.icon className="w-8 h-8 mr-4" />
+              {currentCategory.title} SKILLS
+            </h3>
 
-              return (
-                <motion.div
+            <div className="space-y-6">
+              {currentCategory.skills.map((skill, index) => (
+                <div
                   key={skill.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="relative p-6 transition-all bg-slate-800/50 rounded-xl hover:bg-slate-800/70"
-                  onMouseEnter={() => setHoveredSkill(skill.name)}
-                  onMouseLeave={() => setHoveredSkill(null)}
+                  className="bg-white/5 border-2 border-white/20 p-6"
                 >
-                  <div className="space-y-4">
-                    {/* Skill Header */}
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium text-slate-200">
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="flex items-center">
+                      <span className="text-lg md:text-xl font-black text-white mr-4">
                         {skill.name}
-                      </h3>
-                      <span
-                        className={`px-2 py-1 text-xs font-medium rounded-md bg-gradient-to-r ${category?.gradient}`}
-                      >
-                        {skill.level}%
+                      </span>
+                      <span className="text-xs font-black bg-white text-black px-2 py-1">
+                        {skill.years}
                       </span>
                     </div>
-
-                    {/* Progress Bar */}
-                    <div className="h-1.5 rounded-full bg-slate-700/50">
-                      <motion.div
-                        className={`h-full rounded-full bg-gradient-to-r ${category?.gradient}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                      />
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2">
-                      {skill.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 text-xs font-medium rounded-md bg-slate-700/50 text-slate-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    <span className="text-2xl font-black text-white">
+                      {skill.level}%
+                    </span>
                   </div>
 
-                  {/* Subtle Hover Effect */}
-                  {hoveredSkill === skill.name && (
-                    <div className="absolute inset-0 transition-opacity bg-gradient-to-r from-transparent via-slate-400/5 to-transparent rounded-xl" />
-                  )}
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                  {/* Progress Bar */}
+                  <div className="relative h-4 bg-black border-2 border-white">
+                    <div
+                      className={`h-full bg-white transition-all duration-1000 ease-out ${
+                        animatedBars[skill.name] ? "" : "w-0"
+                      }`}
+                      style={{
+                        width: animatedBars[skill.name]
+                          ? `${skill.level}%`
+                          : "0%",
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stats Visualization */}
+          <div className="relative">
+            <div className="bg-white text-black p-8 border-4 border-white shadow-2xl">
+              <h4 className="text-2xl font-black mb-8 text-center">
+                {currentCategory.title} STATS
+              </h4>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center p-4 bg-black text-white border-2 border-black">
+                  <div className="text-3xl font-black">
+                    {currentCategory.skills.length}
+                  </div>
+                  <div className="text-xs font-black">TECHNOLOGIES</div>
+                </div>
+
+                <div className="text-center p-4 bg-black text-white border-2 border-black">
+                  <div className="text-3xl font-black">
+                    {Math.round(
+                      currentCategory.skills.reduce(
+                        (acc, skill) => acc + skill.level,
+                        0
+                      ) / currentCategory.skills.length
+                    )}
+                    %
+                  </div>
+                  <div className="text-xs font-black">AVG PROFICIENCY</div>
+                </div>
+
+                <div className="text-center p-4 bg-black text-white border-2 border-black">
+                  <div className="text-3xl font-black">
+                    {Math.max(...currentCategory.skills.map((s) => s.level))}%
+                  </div>
+                  <div className="text-xs font-black">HIGHEST SKILL</div>
+                </div>
+
+                <div className="text-center p-4 bg-black text-white border-2 border-black">
+                  <div className="text-3xl font-black">
+                    {currentCategory.skills.filter((s) => s.level >= 85).length}
+                  </div>
+                  <div className="text-xs font-black">EXPERT LEVEL</div>
+                </div>
+              </div>
+
+              {/* Featured Skill */}
+              <div className="mt-8 p-4 bg-black text-white text-center border-2 border-black">
+                <div className="text-xs font-black mb-2">TOP SKILL</div>
+                <div className="text-xl font-black">
+                  {
+                    currentCategory.skills.reduce((prev, current) =>
+                      prev.level > current.level ? prev : current
+                    ).name
+                  }
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-white transform rotate-45" />
+            <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-white rounded-full" />
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default ProfessionalSkills;
+export default BlackWhiteSkills;

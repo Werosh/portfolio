@@ -3,8 +3,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 
+@font-face {
+  font-family: "Apestron";
+  src: url("/src/assets/fonts/mokoto.regular.ttf") format("truetype");
+}
+
+a {
+  font-family: "Apestron", sans-serif;
+  font-weight: normal;
+  font-size: large;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+button {
+  cursor: pointer;
 }
 
 @layer utilities {
