@@ -217,6 +217,7 @@ const BlackWhiteHero = () => {
                   <div className="text-xs">CLIENTS</div>
                 </div>
               </div>
+              {/* test cmnt */}
 
               <div className="absolute top-1/2 -left-4 transform -translate-y-1/2 bg-white text-black px-4 py-2 rounded-lg font-black text-sm border-2 border-white shadow-xl">
                 <div className="text-center">
