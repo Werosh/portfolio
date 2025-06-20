@@ -93,14 +93,14 @@ const FloatingCommandNav = () => {
             </div>
           )}
 
-          {/* Touch Me Hint for Mobile */}
+          {/* Touch Me Hint for Mobile
           {showHint && !isExpanded && (
             <div className="absolute bottom-16 right-20 md:hidden animate-pulse">
               <div className="bg-black text-white px-2 py-1 text-xs font-black border border-white shadow-xl transform -skew-x-6">
                 TAP
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Floating Navigation Items */}
           <div
@@ -216,9 +216,7 @@ const FloatingCommandNav = () => {
                 </div>
                 <div>
                   <div className="font-black text-lg leading-none">WEROSH</div>
-                  <div className="text-xs font-medium opacity-80">
-                    KRIYANJALA
-                  </div>
+                  <div className="text-xs font-medium opacity-80">.dev</div>
                 </div>
               </div>
             </div>
