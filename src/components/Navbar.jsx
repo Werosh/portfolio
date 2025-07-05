@@ -93,15 +93,6 @@ const FloatingCommandNav = () => {
             </div>
           )}
 
-          {/* Touch Me Hint for Mobile
-          {showHint && !isExpanded && (
-            <div className="absolute bottom-16 right-20 md:hidden animate-pulse">
-              <div className="bg-black text-white px-2 py-1 text-xs font-black border border-white shadow-xl transform -skew-x-6">
-                TAP
-              </div>
-            </div>
-          )} */}
-
           {/* Floating Navigation Items */}
           <div
             className={`absolute bottom-16 right-0 transition-all duration-700 ease-in-out ${
@@ -206,10 +197,10 @@ const FloatingCommandNav = () => {
       </div>
 
       {/* Floating Brand - Top Left */}
-      <div className="absolute top-8 left-8 pointer-events-auto">
+      <div className=" pointer-events-auto absolute top-5 right-8">
         <div className="relative group">
           <a href="/" className="block">
-            <div className="bg-black text-white px-6 py-3 transform -skew-x-12 border-2 border-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <div className="bg-black text-white px-5 py-3 transform -skew-x-12 border-2 border-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center">
                   <Code size={16} />
@@ -228,7 +219,7 @@ const FloatingCommandNav = () => {
       </div>
 
       {/* Quick Actions - Left Side */}
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 pointer-events-auto">
+      <div className="xl:absolute xl:left-8 xl:top-1/2 transform -translate-y-1/2 pointer-events-auto absolute bottom-0 left-5">
         <div className="flex flex-col gap-4">
           {/* Quick Contact */}
           <a
