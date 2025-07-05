@@ -219,7 +219,7 @@ const FloatingCommandNav = () => {
       </div>
 
       {/* Quick Actions - Left Side */}
-      <div className="xl:absolute xl:left-8 xl:top-1/2 transform -translate-y-1/2 pointer-events-auto absolute bottom-0 left-5">
+      <div className="xl:absolute xl:left-8  transform -translate-y-1/2 pointer-events-auto absolute bottom-0 left-5">
         <div className="flex flex-col gap-4">
           {/* Quick Contact */}
           <a
