@@ -9,6 +9,7 @@ import {
   Brain,
 } from "lucide-react";
 import { FaBus } from "react-icons/fa6";
+import { FaGraduationCap } from "react-icons/fa";
 import { IoCodeWorkingOutline } from "react-icons/io5";
 
 import LSMImg from "../assets/images/projects/lsm.png";
@@ -29,6 +30,7 @@ import SPCImg from "../assets/images/projects/spc.png";
 import AIWriteCheckerImg from "../assets/images/projects/aiwrite.png";
 import NextGImg from "../assets/images/projects/nextg.png";
 import GardImg from "../assets/images/projects/gardningtemp.png";
+import ExlImg from "../assets/images/projects/exl.jpg";
 
 const MainProjectSection = () => {
   const [activeSection, setActiveSection] = useState("clients");
@@ -37,6 +39,16 @@ const MainProjectSection = () => {
 
   // Sample project data with placeholder images since actual images aren't available
   const clients = [
+    {
+      title: "EXL EDUCATION",
+      description:
+        "An educational platform providing curated learning resources, tutorials, and academic support for students across Australia.",
+      icon: <FaGraduationCap />, 
+      tech: ["REACTJS", "TAILWIND CSS"], 
+      link: "https://exleducation.netlify.app/",
+      image: ExlImg, 
+    },
+
     {
       title: "BUSMATE LK",
       description:

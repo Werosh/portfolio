@@ -9,7 +9,6 @@ import {
   Users,
   Award,
   Eye,
-  Calendar,
 } from "lucide-react";
 
 const BlackWhiteProjects = () => {
@@ -18,6 +17,20 @@ const BlackWhiteProjects = () => {
   const projects = [
     {
       id: 1,
+      title: "EXL EDUCATION",
+      category: "WEB PLATFORM",
+      year: "2025",
+      description:
+        "A modern educational platform offering curated resources, tutorials, and tools to support student learning in Australia.",
+      tech: ["REACT", "TAILWIND"],
+      status: "LIVE",
+      link: "https://exleducation.netlify.app/",
+
+      stats: { views: "1.9K", users: "600", rating: "4.7" },
+    },
+
+    {
+      id: 2,
       title: "BUSMATE LK",
       category: "WEB APPLICATION",
       year: "2025",
@@ -30,7 +43,7 @@ const BlackWhiteProjects = () => {
       stats: { views: "2.5K", users: "850", rating: "4.8" },
     },
     {
-      id: 2,
+      id: 3,
       title: "SPARKLING CAR CARE",
       category: "BUSINESS WEBSITE",
       year: "2025",
@@ -41,19 +54,6 @@ const BlackWhiteProjects = () => {
       link: "https://www.sparklingcarcare.com.au/",
 
       stats: { views: "1.8K", users: "420", rating: "4.9" },
-    },
-    {
-      id: 3,
-      title: "JOB PORTAL",
-      category: "RECRUITMENT PLATFORM",
-      year: "2025",
-      description:
-        "Modern job portal with AI-powered matching and advanced filtering capabilities.",
-      tech: ["REACT", "NODE.JS", "MONGODB"],
-      status: "LIVE",
-      link: "https://jobportaltest.netlify.app/",
-
-      stats: { views: "3.2K", users: "1.2K", rating: "4.7" },
     },
   ];
 
