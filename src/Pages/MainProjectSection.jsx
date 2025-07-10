@@ -9,7 +9,7 @@ import {
   Brain,
 } from "lucide-react";
 import { FaBus } from "react-icons/fa6";
-import { FaGraduationCap } from "react-icons/fa";
+import { FaGraduationCap, FaClipboardList } from "react-icons/fa";
 import { IoCodeWorkingOutline } from "react-icons/io5";
 
 import LSMImg from "../assets/images/projects/lsm.png";
@@ -31,7 +31,7 @@ import AIWriteCheckerImg from "../assets/images/projects/aiwrite.png";
 import NextGImg from "../assets/images/projects/nextg.png";
 import GardImg from "../assets/images/projects/gardningtemp.png";
 import ExlImg from "../assets/images/projects/exl.jpg";
-
+import StudyMateImg from "../assets/images/projects/studymate.jpg";
 const MainProjectSection = () => {
   const [activeSection, setActiveSection] = useState("clients");
   const [showAllClients, setShowAllClients] = useState(false);
@@ -43,10 +43,19 @@ const MainProjectSection = () => {
       title: "EXL EDUCATION",
       description:
         "An educational platform providing curated learning resources, tutorials, and academic support for students across Australia.",
-      icon: <FaGraduationCap />, 
-      tech: ["REACTJS", "TAILWIND CSS"], 
+      icon: <FaGraduationCap />,
+      tech: ["REACTJS", "TAILWIND CSS"],
       link: "https://exleducation.netlify.app/",
-      image: ExlImg, 
+      image: ExlImg,
+    },
+    {
+      title: "STUDY MATE",
+      description:
+        "A smart task management platform built for students to organize assignments, lectures, and exams with real-time syncing via Firebase.",
+      icon: <FaClipboardList />,
+      tech: ["REACTJS", "TAILWIND CSS", "FIREBASE", "FRAMER MOTION"],
+      link: "https://smtaskmanager.netlify.app/",
+      image: StudyMateImg,
     },
 
     {

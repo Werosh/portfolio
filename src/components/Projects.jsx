@@ -30,17 +30,17 @@ const BlackWhiteProjects = () => {
     },
 
     {
-      id: 2,
-      title: "BUSMATE LK",
+      id: 3,
+      title: "STUDY MATE",
       category: "WEB APPLICATION",
       year: "2025",
       description:
-        "Real-time bus tracking system for Sri Lankan commuters with route optimization and live updates.",
+        "Task management app designed for students to organize and track assignments, lectures, and exams efficiently with real-time Firebase integration.",
       tech: ["REACT", "FIREBASE", "TAILWIND"],
       status: "LIVE",
-      link: "https://busmatelk.netlify.app/",
+      link: "https://smtaskmanager.netlify.app/",
 
-      stats: { views: "2.5K", users: "850", rating: "4.8" },
+      stats: { views: "1.7K", users: "500", rating: "4.6" },
     },
     {
       id: 3,
