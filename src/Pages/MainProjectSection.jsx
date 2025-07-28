@@ -4,11 +4,12 @@ import {
   Users,
   LayoutTemplate,
   ArrowRight,
+  ArrowDown,
   Code,
   Globe,
   Brain,
 } from "lucide-react";
-import { FaBus } from "react-icons/fa6";
+import { FaBus, FaRocket } from "react-icons/fa6";
 import { FaGraduationCap, FaClipboardList } from "react-icons/fa";
 import { IoCodeWorkingOutline } from "react-icons/io5";
 
@@ -32,6 +33,8 @@ import NextGImg from "../assets/images/projects/nextg.png";
 import GardImg from "../assets/images/projects/gardningtemp.png";
 import ExlImg from "../assets/images/projects/exl.jpg";
 import StudyMateImg from "../assets/images/projects/studymate.jpg";
+import NebulaImg from "../assets/images/projects/nebula.jpg";
+
 const MainProjectSection = () => {
   const [activeSection, setActiveSection] = useState("clients");
   const [showAllClients, setShowAllClients] = useState(false);
@@ -39,6 +42,34 @@ const MainProjectSection = () => {
 
   // Sample project data with placeholder images since actual images aren't available
   const clients = [
+    {
+      title: "NEBULA ARCS",
+      description:
+        "A creative digital agency website offering services in web development, SEO, digital marketing, AI video production, and more.",
+      icon: <FaRocket />,
+      tech: ["REACTJS", "NEXTJS", "TAILWIND CSS", "FRAMER MOTION"],
+      link: "https://nebulaarcs.com/",
+      image: NebulaImg,
+    },
+    {
+      title: "NEXTGEN WEBSITES",
+      description:
+        "Affordable and professional web development services for businesses worldwide",
+      icon: <Globe />,
+      tech: ["REACTJS", "TAILWIND"],
+      link: "https://www.nextgenwebsites.info/",
+      image: NextGImg,
+    },
+    {
+      title: "SPARKLING CAR CARE",
+      description:
+        "Professional car cleaning and detailing services in Artarmon, NSW",
+      icon: <Globe />,
+      tech: ["REACTJS", "TAILWIND"],
+      link: "https://www.sparklingcarcare.com.au/",
+      image: SPCImg,
+    },
+
     {
       title: "EXL EDUCATION",
       description:
@@ -76,24 +107,7 @@ const MainProjectSection = () => {
       link: "https://aiwritechecker.netlify.app/",
       image: AIWriteCheckerImg,
     },
-    {
-      title: "NEXTGEN WEBSITES",
-      description:
-        "Affordable and professional web development services for businesses worldwide",
-      icon: <Globe />,
-      tech: ["REACTJS", "TAILWIND"],
-      link: "https://www.nextgenwebsites.info/",
-      image: NextGImg,
-    },
-    {
-      title: "SPARKLING CAR CARE",
-      description:
-        "Professional car cleaning and detailing services in Artarmon, NSW",
-      icon: <Globe />,
-      tech: ["REACTJS", "TAILWIND"],
-      link: "https://www.sparklingcarcare.com.au/",
-      image: SPCImg,
-    },
+
     {
       title: "GARDENIN TEMPLATE",
       description:
@@ -290,9 +304,7 @@ const MainProjectSection = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-white font-black text-lg">
-                    VIEW PROJECT
-                  </div>
+                  <div className="text-white font-black text-lg">VIEW LIVE</div>
                 </div>
               </div>
 
@@ -328,7 +340,7 @@ const MainProjectSection = () => {
                   rel="noopener noreferrer"
                   className="group/link inline-flex items-center gap-2 px-6 py-3 text-sm font-black text-white bg-black border-2 border-black transition-all duration-300 hover:bg-white hover:text-black transform hover:scale-105"
                 >
-                  VIEW PROJECT
+                  VIEW LIVE
                   <ExternalLink
                     size={16}
                     className="group-hover/link:translate-x-1 transition-transform"
@@ -357,7 +369,7 @@ const MainProjectSection = () => {
             {(activeSection === "clients" ? showAllClients : showAllTemplates)
               ? "SHOW LESS"
               : "SHOW MORE"}
-            <ArrowRight
+            <ArrowDown
               size={20}
               className="group-hover:translate-x-1 transition-transform"
             />

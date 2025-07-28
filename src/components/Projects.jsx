@@ -17,6 +17,19 @@ const BlackWhiteProjects = () => {
   const projects = [
     {
       id: 1,
+      title: "NEBULA ARCS",
+      category: "DIGITAL AGENCY SITE",
+      year: "2025",
+      description:
+        "A sleek digital agency website showcasing services in web development, SEO, digital marketing, and AI video production for global clients.",
+      tech: ["REACTJS", "NEXTJS", "TAILWIND CSS", "FRAMER MOTION"],
+      status: "LIVE",
+      link: "https://nebulaarcs.com/",
+
+      stats: { views: "3.2K", users: "1.1K", rating: "4.9" },
+    },
+    {
+      id: 2,
       title: "EXL EDUCATION",
       category: "WEB PLATFORM",
       year: "2025",
@@ -29,19 +42,6 @@ const BlackWhiteProjects = () => {
       stats: { views: "1.9K", users: "600", rating: "4.7" },
     },
 
-    {
-      id: 3,
-      title: "STUDY MATE",
-      category: "WEB APPLICATION",
-      year: "2025",
-      description:
-        "Task management app designed for students to organize and track assignments, lectures, and exams efficiently with real-time Firebase integration.",
-      tech: ["REACT", "FIREBASE", "TAILWIND"],
-      status: "LIVE",
-      link: "https://smtaskmanager.netlify.app/",
-
-      stats: { views: "1.7K", users: "500", rating: "4.6" },
-    },
     {
       id: 3,
       title: "SPARKLING CAR CARE",
