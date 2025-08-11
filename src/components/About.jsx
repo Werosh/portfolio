@@ -8,6 +8,7 @@ import {
   Brain,
   Heart,
   Trophy,
+  Eye,
 } from "lucide-react";
 import myImg from "../assets/images/my/dp.jpg";
 
@@ -16,7 +17,7 @@ const BlackWhiteAbout = () => {
   const [isFlipping, setIsFlipping] = useState(false);
 
   const facts = [
-    { text: "3+ YEARS", subtitle: "EXPERIENCE", accent: true },
+    { text: "4+ YEARS", subtitle: "EXPERIENCE", accent: true },
     { text: "CREATIVE", subtitle: "PROBLEM SOLVER", accent: false },
     { text: "PASSIONATE", subtitle: "DEVELOPER", accent: true },
     { text: "INNOVATION", subtitle: "FOCUSED", accent: false },
@@ -190,7 +191,7 @@ const BlackWhiteAbout = () => {
                   title: "INNOVATION FOCUSED",
                   content: (
                     <>
-                      Head Web Developer at Australia’s{" "}
+                      Head Web Developer at Australia's{" "}
                       <a
                         href="https://www.nextgenwebsites.info/"
                         target="_blank"
@@ -266,6 +267,20 @@ const BlackWhiteAbout = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Experience Button - Added below the profile card */}
+            <div className="mt-6 text-center">
+              <a
+                href="/all-experience"
+                className="group inline-flex items-center gap-3 px-6 py-3 text-sm font-black text-white bg-black border-2 border-white transition-all duration-300 hover:bg-white hover:text-black transform hover:scale-105 active:scale-95 shadow-xl"
+              >
+                VIEW MY EXPERIENCE
+                <Eye
+                  size={16}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </a>
             </div>
 
             {/* Floating Elements around the main box */}

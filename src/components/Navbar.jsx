@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; // at top of file
+
 import {
   Code,
   Home,
@@ -16,6 +18,23 @@ const FloatingCommandNav = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showHint, setShowHint] = useState(true);
+  // Inside your component:
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const sectionId = href.replace("#", "");
+
+    if (location.pathname !== "/") {
+      navigate(`/#${sectionId}`);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   const navItems = [
     { icon: Home, label: "HOME", href: "#home", accent: "bg-white text-black" },
@@ -120,6 +139,7 @@ const FloatingCommandNav = () => {
                   {/* Navigation Button */}
                   <a
                     href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className={`
                       flex items-center justify-center w-12 h-12 
                       ${item.accent}

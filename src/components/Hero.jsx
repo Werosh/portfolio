@@ -199,7 +199,7 @@ const BlackWhiteHero = () => {
               {/* Stats positioned around the circle */}
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black px-4 py-2 rounded-lg font-black text-sm border-2 border-white shadow-xl">
                 <div className="text-center">
-                  <div className="text-xl">3+</div>
+                  <div className="text-xl">4+</div>
                   <div className="text-xs">YEARS</div>
                 </div>
               </div>
