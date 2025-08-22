@@ -10,6 +10,7 @@ import {
   Mail,
   Command,
   FolderKanban,
+  BookOpen,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
@@ -37,32 +38,42 @@ const FloatingCommandNav = () => {
   };
 
   const navItems = [
-    { icon: Home, label: "HOME", href: "#home", accent: "bg-white text-black" },
+    {
+      icon: Home,
+      label: "HOME",
+      href: "#home",
+      accent: "bg-black text-white border-2 border-white",
+    },
     {
       icon: User,
       label: "ABOUT",
       href: "#about",
+      accent: "bg-white text-black",
+    },
+    {
+      icon: BookOpen,
+      label: "BLOG",
+      href: "#blog",
       accent: "bg-black text-white border-2 border-white",
     },
     {
       icon: Briefcase,
       label: "WORK",
       href: "#projects",
-      accent: "bg-white text-black ",
+      accent: "bg-white text-black",
     },
     {
       icon: FolderKanban,
       label: "SERVICES",
       href: "#services",
-      accent: "bg-black text-white  border-2 border-white",
+      accent: "bg-black text-white border-2 border-white",
     },
     {
       icon: Box,
       label: "SKILLS",
       href: "#skills",
-      accent: "bg-white text-black ",
+      accent: "bg-white text-black",
     },
-
     {
       icon: Mail,
       label: "CONTACT",

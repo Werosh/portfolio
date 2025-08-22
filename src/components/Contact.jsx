@@ -6,7 +6,6 @@ import {
   Instagram,
   Youtube,
   MessageSquare,
-  Send,
   Mail,
   Phone,
   ExternalLink,
@@ -17,7 +16,6 @@ import {
   Star,
   Award,
   Users,
-  Code,
 } from "lucide-react";
 
 const BlackWhiteContact = () => {

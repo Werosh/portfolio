@@ -5,6 +5,7 @@ import App from "../App";
 import Service from "../Pages/MainProjectSection";
 import Navbar from "../components/Navbar";
 import ExperiencePage from "../Pages/ExperiencePage";
+import BlogPage from "../Pages/BlogPage";
 // import NotFoundPage from './components/NotFoundPage'; // You'll need to create this
 
 const Router = () => {
@@ -18,6 +19,7 @@ const Router = () => {
         {/* Standalone pages */}
         <Route path="/all-projects" element={<Service />} />
         <Route path="/all-experience" element={<ExperiencePage />} />
+        <Route path="/blog-page" element={<BlogPage />} />
 
         {/* 404 route */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
