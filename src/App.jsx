@@ -4,6 +4,7 @@ import { Link, Element } from "react-scroll";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Blog from "./components/Blog";
 import Projects from "./components/Projects";
 import Service from "./components/Service";
 import Skills from "./components/Skills";
@@ -45,6 +46,17 @@ const App = () => {
             variants={sectionVariants}
           >
             <About />
+          </motion.div>
+        </Element>
+
+        <Element name="blog">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={sectionVariants}
+          >
+            <Blog />
           </motion.div>
         </Element>
         <Element name="projects">
