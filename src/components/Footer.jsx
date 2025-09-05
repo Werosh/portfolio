@@ -65,7 +65,7 @@ const BlackWhiteFooter = () => {
                   Get my latest resume and portfolio details
                 </p>
                 <a
-                  href="/WEROSH_KRIYANJALA_CV.pdf"
+                  href="/WeroshK_CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-4 py-2 bg-black text-white border-2 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 font-black text-sm"
