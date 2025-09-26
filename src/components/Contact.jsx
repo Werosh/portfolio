@@ -18,6 +18,8 @@ import {
   Users,
 } from "lucide-react";
 
+import { TbBrandFiverr } from "react-icons/tb";
+
 const BlackWhiteContact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -46,6 +48,13 @@ const BlackWhiteContact = () => {
       label: "GITHUB",
       description: "CODE REPOSITORY",
     },
+    {
+      icon: TbBrandFiverr,
+      link: "https://www.fiverr.com/werosh_k",
+      label: "FIVERR",
+      description: "FREELANCE SERVICES",
+    },
+
     {
       icon: Linkedin,
       link: "https://www.linkedin.com/in/werosh-kriyanjala-0318b1292/",
@@ -88,7 +97,7 @@ const BlackWhiteContact = () => {
     {
       icon: MapPin,
       label: "LOCATION",
-      value: "KURUNEGALA, SRI LANKA",
+      value: "SRI LANKA",
     },
   ];
 
@@ -421,40 +430,6 @@ const BlackWhiteContact = () => {
                 </div>
               ))}
             </div>
-
-            {/* Social Links */}
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-6 tracking-tight">
-                SOCIAL PROFILES
-              </h2>
-
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 bg-white border-4 border-white shadow-xl p-6 transform hover:scale-105 transition-all duration-300"
-                >
-                  <div className="bg-black p-3 text-white group-hover:bg-gray-800 transition-colors">
-                    <social.icon size={20} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-black text-sm tracking-wider text-black">
-                      {social.label}
-                    </h3>
-                    <p className="font-medium text-black group-hover:underline">
-                      {social.description}
-                    </p>
-                  </div>
-                  <ExternalLink
-                    size={16}
-                    className="text-black group-hover:translate-x-1 transition-transform"
-                  />
-                </a>
-              ))}
-            </div>
-
             {/* Availability Status */}
             <div className="bg-white border-4 border-white shadow-xl p-6">
               <div className="flex items-center gap-4">
@@ -472,6 +447,41 @@ const BlackWhiteContact = () => {
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
               </div>
             </div>
+          </div>
+          {/* Next Section */}
+        </div>
+        {/* Social Links */}
+        <div className="w-full mt-10">
+          <h2 className="text-2xl md:text-3xl font-black text-white mb-6 tracking-tight">
+            SOCIAL PROFILES
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 bg-white border-4 border-white shadow-xl p-6 rounded-xl transform hover:scale-105 transition-all duration-300"
+              >
+                <div className="bg-black p-3 text-white group-hover:bg-gray-800 transition-colors rounded-lg">
+                  <social.icon size={20} />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-black text-sm tracking-wider text-black">
+                    {social.label}
+                  </h3>
+                  <p className="font-medium text-black group-hover:underline">
+                    {social.description}
+                  </p>
+                </div>
+                <ExternalLink
+                  size={16}
+                  className="text-black group-hover:translate-x-1 transition-transform"
+                />
+              </a>
+            ))}
           </div>
         </div>
 
