@@ -47,7 +47,7 @@ const MainProjectSection = () => {
     {
       title: "YUMMY YAKO",
       description:
-        "A modern restaurant website showcasing delicious menus, online ordering, and a visually engaging food experience.",
+        "A dessert food truck website highlighting delicious treats, menu browsing, and an engaging user experience with smooth animations.",
       icon: <IceCreamCone />, // adjust if you want another icon
       tech: ["REACTJS", "TAILWIND CSS", "FRAMER MOTION"],
       link: "https://yummyyako.netlify.app/",
