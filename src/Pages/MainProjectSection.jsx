@@ -8,6 +8,7 @@ import {
   Code,
   Globe,
   Brain,
+  IceCreamCone,
 } from "lucide-react";
 import { FaBus, FaRocket } from "react-icons/fa6";
 import { FaGraduationCap, FaClipboardList } from "react-icons/fa";
@@ -34,6 +35,7 @@ import GardImg from "../assets/images/projects/gardningtemp.png";
 import ExlImg from "../assets/images/projects/exl.jpg";
 import StudyMateImg from "../assets/images/projects/studymate.jpg";
 import NebulaImg from "../assets/images/projects/nebula.jpg";
+import YummyImg from "../assets/images/projects/yummy.png";
 
 const MainProjectSection = () => {
   const [activeSection, setActiveSection] = useState("clients");
@@ -42,6 +44,15 @@ const MainProjectSection = () => {
 
   // Sample project data with placeholder images since actual images aren't available
   const clients = [
+    {
+      title: "YUMMY YAKO",
+      description:
+        "A modern restaurant website showcasing delicious menus, online ordering, and a visually engaging food experience.",
+      icon: <IceCreamCone />, // adjust if you want another icon
+      tech: ["REACTJS", "TAILWIND CSS", "FRAMER MOTION"],
+      link: "https://yummyyako.netlify.app/",
+      image: YummyImg, // make sure you import this asset
+    },
     {
       title: "NEBULA ARCS",
       description:
