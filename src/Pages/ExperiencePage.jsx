@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronRight,
   GitBranch,
+  Linkedin,
   Plus,
   Minus,
 } from "lucide-react";
@@ -123,6 +124,33 @@ const ExperiencePage = () => {
             "Team of 5 Developers",
             "100% Client Satisfaction",
             "Performance Award 2024",
+          ],
+          level: "primary",
+        },
+
+        {
+          id: "work-3",
+          title: "SOFTWARE ENGINEER INTERN",
+          subtitle: "Ranga Technologies",
+          period: "Sep 2025 - Present · Frontend",
+          location: "Hybrid · Sri Lanka & Remote",
+          website: "https://www.rangatechnologies.com/",
+          linkedin:
+            "https://www.linkedin.com/company/rangatechnologies/posts/?feedView=all",
+          description:
+            "Delivering polished, high-performing frontend experiences for customer-facing platforms. Focused on accessible UI systems, rapid iteration with cross-functional squads, and infusing GenAI-enhanced workflows into production-ready codebases.",
+          skills: [
+            "React",
+            "TypeScript",
+            "Design Systems",
+            "Accessibility",
+            "Frontend Performance",
+            "AI-assisted Development",
+          ],
+          achievements: [
+            "Modernizing the shared component library to boost delivery velocity",
+            "Driving measurable gains in interaction latency and Lighthouse metrics",
+            "Championing UI polish standards through code reviews and paired sessions",
           ],
           level: "primary",
         },
@@ -410,17 +438,31 @@ const ExperiencePage = () => {
                 {item.description}
               </p>
 
-              {item.website && (
-                <p className="text-sm">
-                  <a
-                    href={item.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 underline hover:text-blue-300"
-                  >
-                    Visit Company Website
-                  </a>
-                </p>
+              {(item.website || item.linkedin) && (
+                <div className="flex flex-wrap gap-3 text-sm font-medium">
+                  {item.website && (
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 underline underline-offset-4"
+                    >
+                      <Rocket size={12} />
+                      Company Website
+                    </a>
+                  )}
+                  {item.linkedin && (
+                    <a
+                      href={item.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 underline underline-offset-4"
+                    >
+                      <Linkedin size={12} />
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
               )}
 
               {/* Skills */}

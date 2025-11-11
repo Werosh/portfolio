@@ -60,9 +60,9 @@ const BlackWhiteAbout = () => {
     company: "Ranga Technologies",
     role: "Software Engineer Intern",
     focus: "Frontend focus",
-    duration: "6 months · Starting Sep 2025",
+    duration: "Sep 2025 – Present · Frontend",
     description:
-      "Joining the product engineering team to deliver refined, accessible interfaces and elevate component systems for customer-facing applications.",
+      "Building production-ready frontend systems with GenAI-assisted workflows while collaborating with cross-functional squads to elevate accessibility and performance standards.",
   };
 
   const techStack = [
