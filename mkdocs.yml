@@ -1,0 +1,98 @@
+site_name: Werosh Kriyanjala - Portfolio
+site_description: Software Engineer | Full-Stack Developer | Content Creator
+site_author: Werosh Kriyanjala
+site_url: https://yourusername.github.io
+
+repo_name: Werosh/portfolio
+repo_url: https://github.com/Werosh/portfolio
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: grey
+      accent: grey
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - scheme: default
+      primary: grey
+      accent: grey
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.path
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.expand
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - Services: services.md
+  - Projects: projects.md
+  - Skills: skills.md
+  - Experience: experience.md
+  - Contact: contact.md
+
+plugins:
+  - search
+
+extra_css:
+  - overrides/assets/stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Werosh
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/werosh-kriyanjala-0318b1292/
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/werosh_k/
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/c/KiraGamingSL
+    - icon: fontawesome/solid/envelope
+      link: mailto:weroshprofy@gmail.com
+  generator: false
+  copyright: |
+    Copyright &copy; 2025 Werosh Kriyanjala – 
+    Built with <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a> 
+    and <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material</a> theme. 
+    Content written in <a href="https://www.markdownguide.org" target="_blank" rel="noopener">Markdown</a>.
