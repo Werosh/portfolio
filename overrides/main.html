@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block footer %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const footerMeta = document.querySelector('.md-footer-meta .md-footer-meta__inner');
+  if (footerMeta) {
+    const notice = document.createElement('div');
+    notice.style.cssText = 'text-align: center; padding: 0.75rem 0; margin-top: 0.5rem; font-size: 0.8125rem; opacity: 0.7; border-top: 1px solid rgba(255, 255, 255, 0.1);';
+    notice.innerHTML = '<small>Built with <strong>Markdown</strong> • Powered by <strong>MkDocs</strong> & Material Theme</small>';
+    
+    const updateColors = () => {
+      const isDark = document.documentElement.getAttribute('data-md-color-scheme') === 'slate';
+      notice.style.borderTopColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+      notice.querySelector('small').style.color = isDark ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.6)';
+      notice.querySelectorAll('strong').forEach(s => {
+        s.style.color = isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.85)';
+      });
+    };
+    
+    updateColors();
+    footerMeta.appendChild(notice);
+    
+    const observer = new MutationObserver(updateColors);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+  }
+  
+  // Style "Live Site:" labels in blue
+  function updateLiveSiteColors() {
+    const isDark = document.documentElement.getAttribute('data-md-color-scheme') === 'slate';
+    const liveSiteColor = isDark ? '#60a5fa' : '#2563eb';
+    const paragraphs = document.querySelectorAll('.md-typeset p');
+    paragraphs.forEach(function(p) {
+      const text = p.textContent || '';
+      if (text.includes('Live Site:')) {
+        const strongTags = p.querySelectorAll('strong');
+        strongTags.forEach(function(strong) {
+          if (strong.textContent.includes('Live Site')) {
+            strong.style.color = liveSiteColor;
+          }
+        });
+      }
+    });
+  }
+  
+  updateLiveSiteColors();
+  const themeObserver = new MutationObserver(updateLiveSiteColors);
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+});
+</script>
+{% endblock %}
