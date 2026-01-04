@@ -506,18 +506,25 @@ html {
     padding: 0.5rem 0.75rem !important;
     height: 3rem !important;
     min-height: 3rem !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
   /* Header title - Better sizing on mobile (more space since logo is hidden) */
   .md-header__title {
     font-size: 0.875rem !important;
     font-weight: 600 !important;
-    line-height: 1.5 !important;
+    line-height: 1.2 !important;
     max-width: calc(100vw - 8rem) !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     margin-left: 0.5rem !important;
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
   }
 
   .md-header__button {
@@ -603,11 +610,18 @@ html {
 @media screen and (max-width: 29.9375em) {
   .md-header__inner {
     padding: 0.5rem 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
   .md-header__title {
     font-size: 0.8125rem !important;
     max-width: calc(100vw - 8rem) !important;
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
   }
 
   .md-header__button {
