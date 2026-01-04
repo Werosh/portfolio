@@ -8,6 +8,8 @@ Crafting digital experiences that blend **innovation** with functionality. Each 
 
 ### Nebula Arcs {#nebula-arcs}
 
+![Nebula Arcs Project](images/projects/nebula-arcs.jpg){ .project-image }
+
 **Category**: Digital Agency Site | **Year**: 2025
 
 A sleek digital agency website showcasing services in web development, SEO, digital marketing, and AI video production for global clients.
@@ -23,6 +25,8 @@ A sleek digital agency website showcasing services in web development, SEO, digi
 ---
 
 ### Sparkling Car Care {#sparkling-car-care}
+
+![Sparkling Car Care Project](images/projects/sparkling-car-care.png){ .project-image }
 
 **Category**: Business Website | **Year**: 2025
 
@@ -40,6 +44,8 @@ Premium auto detailing service platform with booking system and payment integrat
 
 ### NextGen Websites
 
+![NextGen Websites Project](images/projects/nextgen-websites.png){ .project-image }
+
 **Category**: Business Website
 
 Affordable and professional web development services for businesses worldwide.
@@ -54,6 +60,8 @@ Affordable and professional web development services for businesses worldwide.
 
 ### EXL Education {#exl-education}
 
+![EXL Education Project](images/projects/exl-education.jpg){ .project-image }
+
 **Category**: Web Platform | **Year**: 2025
 
 A modern educational platform offering curated resources, tutorials, and tools to support student learning in Australia.
@@ -65,6 +73,22 @@ A modern educational platform offering curated resources, tutorials, and tools t
 **Live Site**: [exleducation.com.au](https://exleducation.com.au/){:target="\_blank"}
 
 **Stats**: 1.9K Views | 16.5K Users | 4.7 Rating
+
+---
+
+### Blue Heaven Rentals {#blue-heaven-rentals}
+
+![Blue Heaven Rentals Project](images/projects/blue-heaven-rentals.png){ .project-image }
+
+**Category**: Academic Project | **Year**: 2024
+
+Blue Heaven Rentals is a university 2nd year group project developed as part of our degree program, focused on simplifying and modernizing the property rental process. The web application is designed to help users easily browse, search, and explore rental properties, while enabling property owners or admins to manage listings efficiently. The project is built using React for a fast and interactive user interface, Tailwind CSS for a clean and responsive design, and Firebase for authentication and real-time data handling. As a collaborative academic project, Blue Heaven Rentals addresses real-world rental management challenges while demonstrating strong teamwork, practical problem-solving, and full-stack web development skills.
+
+**Technologies**: React, Tailwind CSS, Firebase
+
+**Status**: LIVE
+
+**Live Site**: [bluehavenrentals.netlify.app](https://bluehavenrentals.netlify.app/){:target="\_blank"}
 
 ---
 
@@ -102,6 +126,8 @@ A sleek digital agency website showcasing services in web development, SEO, digi
 
 ### Yummy Yako
 
+![Yummy Yako Project](images/projects/yummy-yako.png){ .project-image }
+
 A dessert food truck website highlighting delicious treats, menu browsing, and an engaging user experience with smooth animations.
 
 **Technologies**: ReactJS, Tailwind CSS, Framer Motion
@@ -111,6 +137,8 @@ A dessert food truck website highlighting delicious treats, menu browsing, and a
 ---
 
 ### Study Mate
+
+![Study Mate Project](images/projects/study-mate.jpg){ .project-image }
 
 A smart task management platform built for students to organize assignments, lectures, and exams with real-time syncing via Firebase.
 
@@ -122,6 +150,8 @@ A smart task management platform built for students to organize assignments, lec
 
 ### BusMate LK
 
+![BusMate LK Project](images/projects/busmate-lk.png){ .project-image }
+
 Real-time web application helping Sri Lankan commuters plan efficient bus routes and track availability.
 
 **Technologies**: ReactJS, Firebase, Framer Motion, Tailwind CSS
@@ -132,6 +162,8 @@ Real-time web application helping Sri Lankan commuters plan efficient bus routes
 
 ### AI Write Checker
 
+![AI Write Checker Project](images/projects/ai-write-checker.png){ .project-image }
+
 Free and reliable AI content detection tool to verify authenticity of written text.
 
 **Technologies**: ReactJS, Firebase, AI API
@@ -141,6 +173,8 @@ Free and reliable AI content detection tool to verify authenticity of written te
 ---
 
 ### Gardenin Template
+
+![Gardenin Template Project](images/projects/gardenin-template.png){ .project-image }
 
 A beautifully designed and responsive gardening website template for landscapers and garden service providers.
 
@@ -154,6 +188,8 @@ A beautifully designed and responsive gardening website template for landscapers
 
 ### Job Portal Design
 
+![Job Portal Design Project](images/projects/job-portal-design.png){ .project-image }
+
 Advanced job portal with sophisticated UI/UX implementations and modern design patterns.
 
 **Technologies**: React, Node.js, MongoDB, Express
@@ -163,6 +199,8 @@ Advanced job portal with sophisticated UI/UX implementations and modern design p
 ---
 
 ### Sandaru Aqua
+
+![Sandaru Aqua Project](images/projects/sandaru-aqua.png){ .project-image }
 
 Advanced water purification solutions with innovative design and maintenance services.
 
@@ -174,6 +212,8 @@ Advanced water purification solutions with innovative design and maintenance ser
 
 ### Lassana Moments
 
+![Lassana Moments Project](images/projects/lassana-moments.png){ .project-image }
+
 Full-Stack ongoing group project as Head Front-End Developer.
 
 **Technologies**: React, Node.js, Firebase
@@ -183,6 +223,8 @@ Full-Stack ongoing group project as Head Front-End Developer.
 ---
 
 ### Salon IMS
+
+![Salon IMS Project](images/projects/salon-ims.png){ .project-image }
 
 Salon Inventory Management System simplifies and optimizes inventory management for salon operations.
 
@@ -194,6 +236,8 @@ Salon Inventory Management System simplifies and optimizes inventory management 
 
 ### Alphawizards Portfolio
 
+![Alphawizards Portfolio Project](images/projects/alphawizards-portfolio.png){ .project-image }
+
 Personal portfolio platform with advanced UI/UX implementations.
 
 **Technologies**: React, Node.js, MongoDB
@@ -203,6 +247,8 @@ Personal portfolio platform with advanced UI/UX implementations.
 ---
 
 ### Serenity Hotel
+
+![Serenity Hotel Project](images/projects/serenity-hotel.png){ .project-image }
 
 Hotel booking platform offering seamless reservations and availability checking.
 
@@ -214,6 +260,8 @@ Hotel booking platform offering seamless reservations and availability checking.
 
 ### Buy Book Anywhere
 
+![Buy Book Anywhere Project](images/projects/buy-book-anywhere.png){ .project-image }
+
 Advanced library search engine with intelligent recommendations.
 
 **Technologies**: Python, TensorFlow, AWS
@@ -224,6 +272,8 @@ Advanced library search engine with intelligent recommendations.
 
 ### Group Portfolio
 
+![Group Portfolio Project](images/projects/group-portfolio.png){ .project-image }
+
 Collaborative portfolio platform with advanced UI/UX implementations.
 
 **Technologies**: React, Node.js, MongoDB
@@ -233,6 +283,8 @@ Collaborative portfolio platform with advanced UI/UX implementations.
 ---
 
 ### Herbal Haven
+
+![Herbal Haven Project](images/projects/herbal-haven.png){ .project-image }
 
 Premium herbal products and remedies designed to enhance well-being.
 

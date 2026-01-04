@@ -1,5 +1,7 @@
 # Werosh Kriyanjala
 
+![Profile Photo](images/profile.jpg){ .profile-image }
+
 Software Engineer | Full-Stack Developer | Content Creator
 
 Building sleek, modern web experiences with clean code and creative solutions.
@@ -62,6 +64,10 @@ Modern educational platform offering curated resources, tutorials, and tools to 
 ### [Sparkling Car Care →](projects.md#sparkling-car-care)
 
 Premium auto detailing service platform with booking system and payment integration.
+
+### [Blue Heaven Rentals →](projects.md#blue-heaven-rentals)
+
+University group project focused on simplifying and modernizing the property rental process with real-time data handling and efficient property management.
 
 ---
 
