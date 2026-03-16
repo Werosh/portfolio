@@ -8,7 +8,7 @@ const BlackWhiteAbout = () => {
 
   const highlights = [
     {
-      text: "4+ YEARS",
+      text: "5+ YEARS",
       subtitle: "Building Production Experiences",
       accent: true,
     },
@@ -56,13 +56,20 @@ const BlackWhiteAbout = () => {
     },
   ];
 
-  const internship = {
+  const currentRole = {
+    company: "Ranga Technologies",
+    role: "Associate Software Engineer",
+    focus: "Full-stack · Frontend focus",
+    duration: "Mar 2026 – Present",
+    description:
+      "Building production-ready frontend systems with GenAI-assisted workflows while collaborating with cross-functional squads to elevate accessibility and performance standards. Promoted from Software Engineer Intern.",
+  };
+
+  const previousRole = {
     company: "Ranga Technologies",
     role: "Software Engineer Intern",
-    focus: "Frontend focus",
-    duration: "Sep 2025 – Present · Frontend",
-    description:
-      "Building production-ready frontend systems with GenAI-assisted workflows while collaborating with cross-functional squads to elevate accessibility and performance standards.",
+    duration: "Sep 2025 – Mar 2026",
+    description: "Delivered polished frontend experiences and contributed to shared component libraries; supported cross-functional delivery and UI standards.",
   };
 
   const techStack = [
@@ -210,21 +217,24 @@ const BlackWhiteAbout = () => {
               </p>
             </div>
 
-            {/* Internship Spotlight */}
-            <div className="bg-white/10 border border-white/20 p-5 space-y-3">
+            {/* Current Role Spotlight */}
+            <div className="bg-white/15 border-2 border-white/30 p-5 space-y-3 shadow-xl">
               <div className="inline-flex items-center gap-2 bg-white text-black px-3 py-1 font-black text-[0.6rem] tracking-[0.35em] uppercase">
                 <Rocket size={16} />
-                Incoming Internship
+                Current Position
               </div>
               <h3 className="text-white text-xl font-black">
-                {internship.role}
+                {currentRole.role}
               </h3>
               <p className="text-gray-300 font-medium uppercase tracking-widest text-xs">
-                {internship.company} · {internship.focus}
+                {currentRole.company} · {currentRole.focus}
               </p>
-              <p className="text-gray-300 text-sm">{internship.duration}</p>
+              <p className="text-gray-300 text-sm">{currentRole.duration}</p>
               <p className="text-gray-400 text-sm leading-relaxed">
-                {internship.description}
+                {currentRole.description}
+              </p>
+              <p className="text-gray-500 text-xs border-t border-white/10 pt-3 mt-2">
+                Previously: <span className="text-gray-400">{previousRole.role}</span> · {previousRole.duration}
               </p>
             </div>
           </div>

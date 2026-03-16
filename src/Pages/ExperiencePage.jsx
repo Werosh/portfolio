@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   GraduationCap,
   Trophy,
@@ -78,6 +79,35 @@ const ExperiencePage = () => {
       icon: Briefcase,
       items: [
         {
+          id: "work-0",
+          title: "ASSOCIATE SOFTWARE ENGINEER",
+          subtitle: "Ranga Technologies",
+          period: "Mar 2026 - Present",
+          location: "Hybrid · Sri Lanka & Remote",
+          website: "https://www.rangatechnologies.com/",
+          linkedin:
+            "https://www.linkedin.com/company/rangatechnologies/posts/?feedView=all",
+          description:
+            "Building production-ready frontend systems and contributing to full-stack delivery. Promoted from Software Engineer Intern. Focused on accessible UI systems, cross-functional collaboration, and GenAI-enhanced workflows in production codebases.",
+          skills: [
+            "Next",
+            "React",
+            "TypeScript",
+            "Design Systems",
+            "Accessibility",
+            "Frontend Performance",
+            "AI-assisted Development",
+          ],
+          achievements: [
+            "Promoted from Software Engineer Intern",
+            "Modernizing shared component library for delivery velocity",
+            "Driving gains in interaction latency and Lighthouse metrics",
+            "Championing UI polish through code reviews and paired sessions",
+          ],
+          level: "primary",
+          isCurrent: true,
+        },
+        {
           id: "work-1",
           title: "SENIOR WEB DEVELOPER",
           subtitle: "Nebula Arcs",
@@ -132,13 +162,13 @@ const ExperiencePage = () => {
           id: "work-3",
           title: "SOFTWARE ENGINEER INTERN",
           subtitle: "Ranga Technologies",
-          period: "Sep 2025 - Present · Frontend",
+          period: "Sep 2025 - Mar 2026 · Frontend",
           location: "Hybrid · Sri Lanka & Remote",
           website: "https://www.rangatechnologies.com/",
           linkedin:
             "https://www.linkedin.com/company/rangatechnologies/posts/?feedView=all",
           description:
-            "Delivering polished, high-performing frontend experiences for customer-facing platforms. Focused on accessible UI systems, rapid iteration with cross-functional squads, and infusing GenAI-enhanced workflows into production-ready codebases.",
+            "Delivered polished, high-performing frontend experiences for customer-facing platforms. Focused on accessible UI systems, rapid iteration with cross-functional squads, and infusing GenAI-enhanced workflows into production-ready codebases. Promoted to Associate Software Engineer.",
           skills: [
             "React",
             "TypeScript",
@@ -151,6 +181,7 @@ const ExperiencePage = () => {
             "Modernizing the shared component library to boost delivery velocity",
             "Driving measurable gains in interaction latency and Lighthouse metrics",
             "Championing UI polish standards through code reviews and paired sessions",
+            "Promoted to Associate Software Engineer",
           ],
           level: "primary",
         },
@@ -253,10 +284,9 @@ const ExperiencePage = () => {
     }));
   };
 
-  const TreeSection = ({ sectionKey, section, index }) => {
+  const TreeSection = ({ sectionKey, section }) => {
     const isExpanded = expandedSections[sectionKey];
     const Icon = section.icon;
-    const branchSide = index % 2 === 0 ? "left" : "right";
 
     return (
       <div className={`relative mb-12`}>
@@ -378,22 +408,30 @@ const ExperiencePage = () => {
           {/* Title Card */}
           <button
             onClick={onToggle}
-            className={`group relative w-full bg-white text-black p-5 shadow-xl border-4 border-white transform hover:scale-105 transition-all duration-300 text-left ${
-              isExpanded ? "bg-gray-100" : ""
+            className={`group relative w-full p-5 shadow-xl border-4 transform hover:scale-105 transition-all duration-300 text-left ${
+              item.isCurrent
+                ? "bg-amber-50 text-black border-amber-400/80 shadow-amber-200/50"
+                : `bg-white text-black border-white ${isExpanded ? "bg-gray-100" : ""}`
             }`}
           >
             {/* Corner Fold */}
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-gray-200 transform rotate-45 border-2 border-white" />
 
-            {/* Level Badge */}
+            {/* Level / Current Badge */}
             <div
               className={`absolute -top-3 left-4 px-3 py-1 text-xs font-black ${
-                item.level === "primary"
-                  ? "bg-black text-white"
-                  : "bg-gray-600 text-white"
+                item.isCurrent
+                  ? "bg-amber-400 text-black border-2 border-amber-300 shadow-lg"
+                  : item.level === "primary"
+                    ? "bg-black text-white"
+                    : "bg-gray-600 text-white"
               }`}
             >
-              {item.level === "primary" ? "PRIMARY" : "SECONDARY"}
+              {item.isCurrent
+                ? "CURRENT"
+                : item.level === "primary"
+                  ? "PRIMARY"
+                  : "SECONDARY"}
             </div>
 
             {/* Expansion Indicator */}
@@ -506,6 +544,35 @@ const ExperiencePage = () => {
     );
   };
 
+  TreeSection.propTypes = {
+    sectionKey: PropTypes.string.isRequired,
+    section: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      icon: PropTypes.elementType.isRequired,
+      items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }).isRequired,
+  };
+
+  TreeItem.propTypes = {
+    item: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      subtitle: PropTypes.string.isRequired,
+      period: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      level: PropTypes.oneOf(["primary", "secondary"]).isRequired,
+      isCurrent: PropTypes.bool,
+      skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+      achievements: PropTypes.arrayOf(PropTypes.string).isRequired,
+      website: PropTypes.string,
+      linkedin: PropTypes.string,
+    }).isRequired,
+    itemIndex: PropTypes.number.isRequired,
+    isExpanded: PropTypes.bool.isRequired,
+    onToggle: PropTypes.func.isRequired,
+  };
+
   return (
     <section
       id="experience"
@@ -583,12 +650,11 @@ const ExperiencePage = () => {
 
           {/* Sections */}
           <div className="relative space-y-16">
-            {sections.map((sectionKey, index) => (
+            {sections.map((sectionKey) => (
               <TreeSection
                 key={sectionKey}
                 sectionKey={sectionKey}
                 section={experienceData[sectionKey]}
-                index={index}
               />
             ))}
           </div>
