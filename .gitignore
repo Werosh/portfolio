@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,37 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+# MkDocs build output
+site/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MkDocs
+.cache/
+
+# Environment variables
+.env
+.env.local
+
+>>>>>>> 26a8924b84d268286d3bc0c49cee08ee01100520
