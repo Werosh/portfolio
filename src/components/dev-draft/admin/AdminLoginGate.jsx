@@ -41,9 +41,11 @@ export default function AdminLoginGate({
           </p>
 
           <ul className="mt-4 space-y-1 border-l-2 border-[#325bae]/40 pl-3 text-[11px] text-[#5a7d6e]">
-            <li>— Biometric scanner: &quot;out of order (was a sticker)&quot;</li>
-            <li>— Retina scan: please do not lick the screen</li>
-            <li>— Self-destruct: budget cuts (disappointing, we agree)</li>
+            <li>
+              - Biometric scanner: &quot;out of order (was a sticker)&quot;
+            </li>
+            <li>- Retina scan: please do not lick the screen</li>
+            <li>- Self-destruct: budget cuts (disappointing, we agree)</li>
           </ul>
 
           <form className="mt-8 space-y-4" onSubmit={onLogin}>

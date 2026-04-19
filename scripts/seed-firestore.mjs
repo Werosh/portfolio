@@ -1,12 +1,12 @@
 /**
  * Upserts portfolio projects into Firestore.
  *
- * Option A — Rules + email login (default):
+ * Option A - Rules + email login (default):
  *   1. Publish `firestore.rules` (Console or `npm run deploy:firestore-rules` with Firebase CLI logged in).
  *   2. `.env`: VITE_FIREBASE_* + VITE_ADMIN_EMAIL + VITE_ADMIN_PASSWORD
  *   3. npm run seed:projects
  *
- * Option B — Service account (bypasses security rules; good for local seeding):
+ * Option B - Service account (bypasses security rules; good for local seeding):
  *   `.env`: FIREBASE_SERVICE_ACCOUNT_PATH=./serviceAccount.json
  *   Download JSON from Firebase Console → Project settings → Service accounts → Generate new private key.
  *   npm run seed:projects
@@ -74,9 +74,7 @@ if (
 
 const baseMs = Date.now();
 const saPathRaw =
-  env.FIREBASE_SERVICE_ACCOUNT_PATH ||
-  env.GOOGLE_APPLICATION_CREDENTIALS ||
-  "";
+  env.FIREBASE_SERVICE_ACCOUNT_PATH || env.GOOGLE_APPLICATION_CREDENTIALS || "";
 const saPath = saPathRaw
   ? isAbsolute(saPathRaw)
     ? saPathRaw
@@ -111,15 +109,16 @@ async function seedWithAdminSdk() {
           description,
           techStack,
           link: link || "",
+          sortOrder: i + 1,
           createdAt: Timestamp.fromMillis(baseMs - i * 120_000),
           updatedAt: Timestamp.fromMillis(baseMs),
         },
-        { merge: true }
+        { merge: true },
       );
     n += 1;
     console.log("Upserted (admin):", id);
   }
-  console.log(`Done. ${n} projects (Firebase Admin — rules bypassed).`);
+  console.log(`Done. ${n} projects (Firebase Admin - rules bypassed).`);
 }
 
 async function seedWithClientSdk() {
@@ -129,7 +128,7 @@ async function seedWithClientSdk() {
   if (!email || !password) {
     console.error(
       "Set VITE_ADMIN_EMAIL and VITE_ADMIN_PASSWORD in .env,\n" +
-        "or set FIREBASE_SERVICE_ACCOUNT_PATH to a service-account JSON file.\n"
+        "or set FIREBASE_SERVICE_ACCOUNT_PATH to a service-account JSON file.\n",
     );
     process.exit(1);
   }
@@ -159,10 +158,11 @@ async function seedWithClientSdk() {
           description,
           techStack,
           link: link || "",
+          sortOrder: i + 1,
           createdAt: ClientTimestamp.fromMillis(baseMs - i * 120_000),
           updatedAt: ClientTimestamp.fromMillis(baseMs),
         },
-        { merge: true }
+        { merge: true },
       );
       n += 1;
       console.log("Upserted:", id);
@@ -170,7 +170,7 @@ async function seedWithClientSdk() {
   } catch (e) {
     if (e?.code === "permission-denied") {
       console.error(
-        "\nFirestore PERMISSION_DENIED — your project rules are still blocking writes.\n\n" +
+        "\nFirestore PERMISSION_DENIED - your project rules are still blocking writes.\n\n" +
           "Fix (pick one):\n" +
           "  1) Firebase Console → Firestore Database → Rules → replace with repo `firestore.rules` → Publish\n" +
           "  2) Install Firebase CLI, run `firebase login`, then from this folder:\n" +
@@ -179,8 +179,8 @@ async function seedWithClientSdk() {
           "  3) Add a service account JSON path to .env:\n" +
           "       FIREBASE_SERVICE_ACCOUNT_PATH=./serviceAccount.json\n" +
           "     (download from Console → Project settings → Service accounts)\n" +
-          "     Then run npm run seed:projects again — no rules change needed.\n\n" +
-          "If you use App Check enforcement, add a debug token or disable enforcement for this test.\n"
+          "     Then run npm run seed:projects again - no rules change needed.\n\n" +
+          "If you use App Check enforcement, add a debug token or disable enforcement for this test.\n",
       );
     }
     console.error(e.message || e);

@@ -32,7 +32,7 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
             No projects yet. Commit a blueprint from the form.
           </p>
         )}
-        {projects.map((p, idx) => (
+        {projects.map((p) => (
           <div
             key={p.id}
             className="group relative flex items-center justify-between overflow-hidden bg-surface-container-low p-6 transition-all hover:translate-x-1 hover:bg-primary-container/20"
@@ -53,7 +53,9 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
                   />
                 </svg>
                 <span className="font-headline text-sm font-bold text-primary">
-                  {String(idx + 1).padStart(2, "0")}
+                  {typeof p.sortOrder === "number" && !Number.isNaN(p.sortOrder)
+                    ? String(p.sortOrder).padStart(2, "0")
+                    : "—"}
                 </span>
               </div>
               <div>
@@ -129,6 +131,7 @@ AdminProjectList.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       techStack: PropTypes.arrayOf(PropTypes.string),
+      sortOrder: PropTypes.number,
     })
   ).isRequired,
   onEdit: PropTypes.func.isRequired,

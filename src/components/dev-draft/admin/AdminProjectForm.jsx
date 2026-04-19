@@ -6,6 +6,7 @@ const empty = {
   description: "",
   techStack: "",
   link: "",
+  sortOrder: "",
 };
 
 export default function AdminProjectForm({
@@ -25,6 +26,10 @@ export default function AdminProjectForm({
           ? editing.techStack.join(", ")
           : "",
         link: editing.link || "",
+        sortOrder:
+          editing.sortOrder !== undefined && editing.sortOrder !== null
+            ? String(editing.sortOrder)
+            : "",
       });
     } else {
       setValues(empty);
@@ -43,6 +48,7 @@ export default function AdminProjectForm({
       description: values.description,
       techStack: values.techStack,
       link: values.link,
+      sortOrder: values.sortOrder,
     });
     if (!editing) {
       setValues(empty);
@@ -140,6 +146,25 @@ export default function AdminProjectForm({
               placeholder="https://example.com"
             />
           </div>
+          <div className="space-y-1">
+            <label className="font-label block text-xs font-bold uppercase tracking-tighter text-on-surface-variant">
+              Display order
+            </label>
+            <input
+              name="sortOrder"
+              type="number"
+              min={1}
+              step={1}
+              value={values.sortOrder}
+              onChange={handleChange}
+              className="font-body w-full border-0 border-b border-outline-variant bg-transparent py-2 text-lg transition-colors focus:border-primary focus:ring-0"
+              placeholder="1 = first on site; leave empty for auto (end)"
+            />
+            <p className="font-body text-xs text-on-surface-variant">
+              Lower numbers appear first on the landing page. When creating, leave
+              blank to append after the current last item.
+            </p>
+          </div>
           <div className="pt-4">
             <button
               disabled={busy}
@@ -168,6 +193,7 @@ AdminProjectForm.propTypes = {
     description: PropTypes.string,
     techStack: PropTypes.arrayOf(PropTypes.string),
     link: PropTypes.string,
+    sortOrder: PropTypes.number,
   }),
   onClearEdit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

@@ -162,7 +162,7 @@ const BlackWhiteHero = () => {
                 <span className="bg-white text-black px-2 py-1 font-black text-sm inline-block transform -skew-x-6">
                   FULL-STACK DEVELOPER
                 </span>{" "}
-                — blending creativity and code from Sri Lanka to the world.
+                - blending creativity and code from Sri Lanka to the world.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ const BlackWhiteHero = () => {
                 >
                   {tech}
                 </span>
-              )
+              ),
             )}
           </div>
         </div>

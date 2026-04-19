@@ -8,7 +8,7 @@ export default function LandingSidebar({ onOpenSettings }) {
           Sketch_Rail
         </h2>
         <p className="font-body text-xs uppercase tracking-widest text-on-surface-variant">
-          Visitor view — no backstage pass
+          Visitor view - no backstage pass
         </p>
       </div>
       <nav className="flex flex-col gap-2">

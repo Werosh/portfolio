@@ -15,12 +15,14 @@ export default function ContactSection() {
             Transmission
           </h2>
           <p className="font-body max-w-md text-2xl text-on-surface-variant">
-            Ready to start a new technical draft? Drop a note below or reach
-            out via direct channels.
+            Ready to start a new technical draft? Drop a note below or reach out
+            via direct channels.
           </p>
           <div className="space-y-4 pt-8">
             <div className="group flex cursor-pointer items-center gap-4">
-              <span className="material-symbols-outlined text-primary">mail</span>
+              <span className="material-symbols-outlined text-primary">
+                mail
+              </span>
               <a
                 href="mailto:hello@werosh.dev"
                 className="font-headline text-xl underline decoration-dotted transition-colors group-hover:text-primary"
@@ -47,7 +49,7 @@ export default function ContactSection() {
               &quot;The best way to predict the future is to draft it.&quot;
             </p>
             <p className="mt-2 text-xs font-bold opacity-60">
-              — Logbook_Note_2026
+              - Logbook_Note_2026
             </p>
           </div>
         </div>

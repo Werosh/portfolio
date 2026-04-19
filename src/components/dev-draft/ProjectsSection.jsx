@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { isFirebaseConfigured } from "../../firebase/app";
-import { subscribeProjects } from "../../services/projectsApi";
+import { subscribeProjects, sortProjectsList } from "../../services/projectsApi";
 
 /** Projects shown per page (fits 1 / 2 / 3-column layouts cleanly). */
 const PROJECTS_PER_PAGE = 6;
@@ -9,6 +9,7 @@ const PROJECTS_PER_PAGE = 6;
 const FALLBACK = [
   {
     id: "f1",
+    sortOrder: 1,
     title: "Vellum.js Framework",
     description:
       "A lightweight CSS-in-JS library designed for high-performance rendering of canvas-based UI elements.",
@@ -17,6 +18,7 @@ const FALLBACK = [
   },
   {
     id: "f2",
+    sortOrder: 2,
     title: "Graphite Analytics",
     description:
       "Real-time data visualization engine that renders complex datasets as architectural sketches.",
@@ -25,6 +27,7 @@ const FALLBACK = [
   },
   {
     id: "f3",
+    sortOrder: 3,
     title: "NeuroLink Core",
     description:
       "An experimental neural network interface focused on edge-computing efficiency and modular design.",
@@ -36,7 +39,10 @@ const FALLBACK = [
 function normalizeTech(raw) {
   if (Array.isArray(raw)) return raw.map(String).filter(Boolean);
   if (typeof raw === "string" && raw.trim()) {
-    return raw.split(/[,|]/g).map((s) => s.trim()).filter(Boolean);
+    return raw
+      .split(/[,|]/g)
+      .map((s) => s.trim())
+      .filter(Boolean);
   }
   return [];
 }
@@ -44,7 +50,13 @@ function normalizeTech(raw) {
 function ProjectCard({ project, entryIndex }) {
   const { title, description, techStack, link } = project;
   const tags = normalizeTech(techStack);
-  const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2", "rotate-3"];
+  const rotations = [
+    "rotate-1",
+    "-rotate-1",
+    "rotate-2",
+    "-rotate-2",
+    "rotate-3",
+  ];
   const figNo = String(entryIndex).padStart(2, "0");
   const href = typeof link === "string" && link.trim() ? link.trim() : null;
 
@@ -52,7 +64,7 @@ function ProjectCard({ project, entryIndex }) {
     <div className="hand-drawn-border group bg-surface p-6 transition-colors hover:bg-surface-container">
       <div className="hand-drawn-border relative mb-6 flex min-h-[10rem] flex-col justify-between border-dashed border-outline-variant/60 bg-surface-container-low p-5">
         <span className="font-sketch text-sm text-on-surface-variant">
-          Fig.{figNo} — spec sheet
+          Fig.{figNo} - spec sheet
         </span>
         <p className="font-headline text-4xl font-black leading-none tracking-tighter text-on-surface/90">
           {title.slice(0, 1)}
@@ -147,7 +159,9 @@ function ProjectsPagination({ page, totalPages, totalItems, onPageChange }) {
           {from}–{to}
         </span>{" "}
         of{" "}
-        <span className="font-headline font-bold text-on-surface">{totalItems}</span>{" "}
+        <span className="font-headline font-bold text-on-surface">
+          {totalItems}
+        </span>{" "}
         blueprints
       </p>
       <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-center">
@@ -182,7 +196,7 @@ function ProjectsPagination({ page, totalPages, totalItems, onPageChange }) {
               >
                 {item}
               </button>
-            )
+            ),
           )}
         </div>
         <button
@@ -227,16 +241,19 @@ export default function ProjectsSection() {
   }, []);
 
   const displayed = useMemo(() => {
-    if (!isFirebaseConfigured()) return FALLBACK;
+    if (!isFirebaseConfigured()) return sortProjectsList(FALLBACK);
     if (loading) return [];
-    if (!remote.length) return FALLBACK;
-    return remote.map((p) => ({
-      id: p.id,
-      title: p.title ?? "",
-      description: p.description ?? "",
-      techStack: p.techStack,
-      link: p.link ?? "",
-    }));
+    if (!remote.length) return sortProjectsList(FALLBACK);
+    return sortProjectsList(
+      remote.map((p) => ({
+        id: p.id,
+        sortOrder: p.sortOrder,
+        title: p.title ?? "",
+        description: p.description ?? "",
+        techStack: p.techStack,
+        link: p.link ?? "",
+      })),
+    );
   }, [remote, loading]);
 
   const totalItems = displayed.length;
@@ -294,15 +311,6 @@ export default function ProjectsSection() {
       {!isFirebaseConfigured() && (
         <p className="mt-8 text-center font-body text-sm text-on-surface-variant">
           Showing sample blueprints until the live archive is connected.
-        </p>
-      )}
-      {isFirebaseConfigured() && !loading && remote.length > 0 && (
-        <p className="mt-8 text-center font-body text-xs text-on-surface-variant opacity-80">
-          {remote.length} project{remote.length === 1 ? "" : "s"} synced from
-          Firestore
-          {showPagination
-            ? ` · ${PROJECTS_PER_PAGE} per sheet`
-            : ""}
         </p>
       )}
       <div className="mt-20 text-center">

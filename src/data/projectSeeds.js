@@ -23,7 +23,7 @@ export const PROJECT_SEEDS = [
     id: "sparkling-car-care",
     title: "Sparkling Car Care",
     description:
-      "Professional car cleaning and detailing services in Artarmon, NSW — premium auto detailing with booking and a polished marketing site.",
+      "Professional car cleaning and detailing services in Artarmon, NSW - premium auto detailing with booking and a polished marketing site.",
     techStack: ["React", "Tailwind CSS"],
     link: "https://www.sparklingcarcare.com.au/",
   },

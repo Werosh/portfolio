@@ -10,7 +10,7 @@ Building sleek, modern web experiences with clean code and creative solutions.
 
 ## About Me
 
-I'm currently crafting sleek, modern web experiences as an independent **Full-Stack Developer** — blending creativity and code from Sri Lanka to the world.
+I'm currently crafting sleek, modern web experiences as an independent **Full-Stack Developer** - blending creativity and code from Sri Lanka to the world.
 
 With 4+ years of experience, I specialize in creating performant, accessible, and scalable web applications. My approach combines clean code principles with thoughtful design to deliver exceptional user experiences.
 

@@ -22,7 +22,7 @@ export default function ExperienceSection() {
                 Lead Systems Engineer
               </h3>
               <p className="mb-4 font-sketch text-xl text-primary">
-                MetaStructures Inc. (2021—Present)
+                MetaStructures Inc. (2021-Present)
               </p>
               <p className="text-on-surface-variant">
                 Orchestrated the migration of legacy monolithic architectures to
@@ -39,7 +39,7 @@ export default function ExperienceSection() {
                   significantly under Werosh&apos;s oversight.&quot;
                 </p>
                 <p className="mt-2 text-right text-xs font-bold">
-                  — Chief Architect
+                  - Chief Architect
                 </p>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function ExperienceSection() {
                 Senior Backend Developer
               </h3>
               <p className="mb-4 font-sketch text-xl text-primary">
-                CloudDraft Solutions (2018—2021)
+                CloudDraft Solutions (2018-2021)
               </p>
               <p className="text-on-surface-variant">
                 Developed robust API ecosystems using Node.js and Go, handling
@@ -77,7 +77,7 @@ export default function ExperienceSection() {
                 Full Stack Engineer
               </h3>
               <p className="mb-4 font-sketch text-xl text-primary">
-                LogicSketch Studio (2015—2018)
+                LogicSketch Studio (2015-2018)
               </p>
               <p className="text-on-surface-variant">
                 Bridged the gap between UI design and technical feasibility for
