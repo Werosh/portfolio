@@ -1,28 +1,17 @@
-// Router.jsx
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "../App";
-import Service from "../Pages/MainProjectSection";
-import Navbar from "../components/Navbar";
-import ExperiencePage from "../Pages/ExperiencePage";
-import BlogPage from "../Pages/BlogPage";
-// import NotFoundPage from './components/NotFoundPage'; // You'll need to create this
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LandingPage from "../pages/LandingPage";
+import AdminPage from "../pages/AdminPage";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        {/* Main home page with all sections */}
-        <Route path="/" element={<App />} />
-
-        {/* Standalone pages */}
-        <Route path="/all-projects" element={<Service />} />
-        <Route path="/all-experience" element={<ExperiencePage />} />
-        <Route path="/blog-page" element={<BlogPage />} />
-
-        {/* 404 route */}
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/admin"
+          element={<Navigate to="/control-center" replace />}
+        />
+        <Route path="/control-center" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );

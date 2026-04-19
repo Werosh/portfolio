@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed:projects": "node scripts/seed-firestore.mjs",
+    "deploy:firestore-rules": "node scripts/deploy-firestore-rules.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.5",
     "emailjs-com": "^3.2.0",
+    "firebase": "^10.14.1",
     "lucide-react": "^0.473.0",
     "motion": "^11.18.2",
     "prop-types": "^15.8.1",
@@ -34,6 +37,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "firebase-admin": "^13.0.2",
+    "firebase-tools": "^13.0.0"
   }
 }
