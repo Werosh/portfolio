@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { isFirebaseConfigured } from "../../firebase/app";
 import { subscribeProjects, sortProjectsList } from "../../services/projectsApi";
+import { buildPageList } from "../../utils/pagination";
 
 /** Projects shown per page (fits 1 / 2 / 3-column layouts cleanly). */
 const PROJECTS_PER_PAGE = 6;
@@ -126,17 +127,6 @@ ProjectCard.propTypes = {
   }).isRequired,
   entryIndex: PropTypes.number.isRequired,
 };
-
-function buildPageList(current, total) {
-  if (total <= 9) {
-    return Array.from({ length: total }, (_, i) => i + 1);
-  }
-  const set = new Set([1, total, current, current - 1, current + 1]);
-  for (let d = -2; d <= 2; d += 1) {
-    set.add(current + d);
-  }
-  return [...set].filter((n) => n >= 1 && n <= total).sort((a, b) => a - b);
-}
 
 function ProjectsPagination({ page, totalPages, totalItems, onPageChange }) {
   const pages = buildPageList(page, totalPages);

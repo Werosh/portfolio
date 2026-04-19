@@ -1,9 +1,10 @@
 /**
- * Upserts portfolio projects into Firestore.
+ * Upserts portfolio `projects` and `experiences` into Firestore.
  *
  * Option A - Rules + email login (default):
  *   1. Publish `firestore.rules` (Console or `npm run deploy:firestore-rules` with Firebase CLI logged in).
- *   2. `.env`: VITE_FIREBASE_* + VITE_ADMIN_EMAIL + VITE_ADMIN_PASSWORD
+ *   2. `.env`: VITE_FIREBASE_* + SEED_ADMIN_EMAIL + SEED_ADMIN_PASSWORD
+ *      (legacy: VITE_ADMIN_EMAIL / VITE_ADMIN_PASSWORD still work for seed only)
  *   3. npm run seed:projects
  *
  * Option B - Service account (bypasses security rules; good for local seeding):
@@ -20,9 +21,11 @@ import {
   getFirestore as getClientFirestore,
   doc,
   setDoc,
+  writeBatch,
   Timestamp as ClientTimestamp,
 } from "firebase/firestore";
 import { PROJECT_SEEDS } from "../src/data/projectSeeds.js";
+import { EXPERIENCE_SEEDS } from "../src/data/experienceSeeds.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -53,6 +56,10 @@ function loadDotEnv() {
 }
 
 const env = loadDotEnv();
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
 
 const firebaseConfig = {
   apiKey: env.VITE_FIREBASE_API_KEY,
@@ -118,17 +125,64 @@ async function seedWithAdminSdk() {
     n += 1;
     console.log("Upserted (admin):", id);
   }
-  console.log(`Done. ${n} projects (Firebase Admin - rules bypassed).`);
+  let nx = 0;
+  const expBatch = db.batch();
+  for (let i = 0; i < EXPERIENCE_SEEDS.length; i += 1) {
+    const seed = EXPERIENCE_SEEDS[i];
+    const {
+      id,
+      role,
+      organization,
+      period,
+      location,
+      description,
+      asideKind,
+      asideText,
+      asideCaption,
+      asideIcon,
+      sortOrder,
+    } = seed;
+    const ref = db.collection("experiences").doc(id);
+    expBatch.set(
+      ref,
+      {
+        role,
+        organization,
+        period,
+        location: location || "",
+        description,
+        asideKind: asideKind === "sketch" ? "sketch" : "quote",
+        asideText: asideText || "",
+        asideCaption: asideCaption || "",
+        asideIcon: asideIcon || "",
+        sortOrder: sortOrder ?? i + 1,
+        createdAt: Timestamp.fromMillis(baseMs - (i + PROJECT_SEEDS.length) * 60_000),
+        updatedAt: Timestamp.fromMillis(baseMs),
+      },
+      { merge: true },
+    );
+    nx += 1;
+  }
+  await expBatch.commit();
+  for (const s of EXPERIENCE_SEEDS) {
+    console.log("Upserted experience (admin):", s.id);
+  }
+  console.log(
+    `Done. ${n} projects, ${nx} experiences (Firebase Admin - rules bypassed).`,
+  );
 }
 
 async function seedWithClientSdk() {
-  const email = env.VITE_ADMIN_EMAIL;
-  const password = env.VITE_ADMIN_PASSWORD;
+  const email =
+    env.SEED_ADMIN_EMAIL || env.VITE_ADMIN_EMAIL || "";
+  const password =
+    env.SEED_ADMIN_PASSWORD || env.VITE_ADMIN_PASSWORD || "";
 
   if (!email || !password) {
     console.error(
-      "Set VITE_ADMIN_EMAIL and VITE_ADMIN_PASSWORD in .env,\n" +
-        "or set FIREBASE_SERVICE_ACCOUNT_PATH to a service-account JSON file.\n",
+      "Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD in .env for client seeding,\n" +
+        "or set FIREBASE_SERVICE_ACCOUNT_PATH to a service-account JSON file.\n" +
+        "(Legacy VITE_ADMIN_EMAIL / VITE_ADMIN_PASSWORD are still read if set.)\n",
     );
     process.exit(1);
   }
@@ -187,7 +241,75 @@ async function seedWithClientSdk() {
     process.exit(1);
   }
 
-  console.log(`Done. ${n} projects in Firestore collection "projects".`);
+  let nx = 0;
+  try {
+    const user = auth.currentUser;
+    if (user) {
+      await user.getIdToken(true);
+    }
+    await sleep(500);
+
+    const batch = writeBatch(db);
+    for (let i = 0; i < EXPERIENCE_SEEDS.length; i += 1) {
+      const seed = EXPERIENCE_SEEDS[i];
+      const {
+        id,
+        role,
+        organization,
+        period,
+        location,
+        description,
+        asideKind,
+        asideText,
+        asideCaption,
+        asideIcon,
+        sortOrder,
+      } = seed;
+      const ref = doc(db, "experiences", id);
+      batch.set(
+        ref,
+        {
+          role,
+          organization,
+          period,
+          location: location || "",
+          description,
+          asideKind: asideKind === "sketch" ? "sketch" : "quote",
+          asideText: asideText || "",
+          asideCaption: asideCaption || "",
+          asideIcon: asideIcon || "",
+          sortOrder: sortOrder ?? i + 1,
+          createdAt: ClientTimestamp.fromMillis(
+            baseMs - (i + PROJECT_SEEDS.length) * 60_000,
+          ),
+          updatedAt: ClientTimestamp.fromMillis(baseMs),
+        },
+        { merge: true },
+      );
+      nx += 1;
+    }
+    await batch.commit();
+    for (const s of EXPERIENCE_SEEDS) {
+      console.log("Upserted experience:", s.id);
+    }
+  } catch (e) {
+    if (e?.code === "permission-denied") {
+      console.error(
+        "\nFirestore PERMISSION_DENIED while writing `experiences`.\n" +
+          "Projects wrote OK — confirm rules include BOTH `projects` and `experiences` (see repo `firestore.rules`), then:\n" +
+          "  npm run deploy:firestore-rules\n" +
+          "Wait ~1 minute, then run npm run seed:projects again.\n\n" +
+          "Or use FIREBASE_SERVICE_ACCOUNT_PATH (Admin SDK) to bypass rules for seeding.\n\n" +
+          "If App Check is enforced for Firestore, disable it for development or use a debug token.\n",
+      );
+    }
+    console.error(e.message || e);
+    process.exit(1);
+  }
+
+  console.log(
+    `Done. ${n} projects and ${nx} experiences in Firestore (collections "projects" and "experiences").`,
+  );
 }
 
 if (saPathRaw && existsSync(saPath)) {
