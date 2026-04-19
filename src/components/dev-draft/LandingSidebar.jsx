@@ -12,7 +12,7 @@ export default function LandingSidebar({ activeSection, onOpenSettings }) {
           On this page
         </h2>
         <p className="mt-1 font-body text-xs uppercase tracking-widest text-on-surface-variant">
-          Jump to a section
+          Scroll to a section
         </p>
       </div>
       <nav className="flex flex-col gap-1 px-4" aria-label="Page sections">

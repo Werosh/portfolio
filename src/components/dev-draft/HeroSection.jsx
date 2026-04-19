@@ -31,12 +31,6 @@ export default function HeroSection() {
           >
             Drafted Works
           </a>
-          <div className="flex flex-col">
-            <span className="font-sketch text-lg text-secondary">
-              View Repository
-            </span>
-            <div className="dashed-lead h-0.5 w-full bg-outline-variant/30" />
-          </div>
         </div>
       </div>
       <div className="absolute bottom-20 right-10 hidden h-96 w-96 md:block">
