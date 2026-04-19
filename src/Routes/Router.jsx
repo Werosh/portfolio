@@ -1,18 +1,28 @@
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LandingPage from "../pages/LandingPage";
-import AdminPage from "../pages/AdminPage";
+
+const LandingPage = lazy(() => import("../Pages/LandingPage"));
+const AdminPage = lazy(() => import("../Pages/AdminPage"));
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/admin"
-          element={<Navigate to="/control-center" replace />}
-        />
-        <Route path="/control-center" element={<AdminPage />} />
-      </Routes>
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen items-center justify-center font-body text-on-surface-variant">
+            Loading page...
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/admin"
+            element={<Navigate to="/control-center" replace />}
+          />
+          <Route path="/control-center" element={<AdminPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
