@@ -2,57 +2,44 @@ import { Link } from "react-router-dom";
 
 export default function AdminHeader() {
   return (
-    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-slate-900/10 bg-surface/90 px-8 py-4 backdrop-blur-sm dark:bg-slate-950/90">
-      <div className="flex items-center gap-8 pl-72">
+    <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b border-slate-900/10 bg-surface/95 px-4 backdrop-blur-sm dark:border-slate-700/40 dark:bg-slate-950/95 sm:px-8">
+      <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-8">
         <Link
           to="/"
-          className="font-headline text-xl font-bold italic text-slate-900 underline decoration-wavy decoration-primary dark:text-white"
+          className="shrink-0 font-headline text-lg font-bold italic text-slate-900 underline decoration-wavy decoration-primary dark:text-white sm:text-xl"
         >
           DevDraft_v1.0
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
+        <span className="hidden truncate font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant sm:inline sm:max-w-[12rem] md:max-w-xs lg:inline">
+          Control center
+        </span>
+        <nav className="hidden items-center gap-4 md:flex lg:gap-6" aria-label="Site preview">
           <Link
             to="/#portfolio"
-            className="font-headline border-b-2 border-primary pb-1 text-sm tracking-tight text-primary"
+            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900 dark:hover:text-slate-100"
           >
             Portfolio
           </Link>
           <Link
             to="/#blueprint"
-            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900"
+            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900 dark:hover:text-slate-100"
           >
-            Blueprint
+            Experience
           </Link>
           <Link
             to="/#journal"
-            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900"
+            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900 dark:hover:text-slate-100"
           >
-            Journal
-          </Link>
-          <Link
-            to="/#lab"
-            className="font-headline text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-900"
-          >
-            Lab
+            Contact
           </Link>
         </nav>
       </div>
-      <div className="flex items-center gap-4 pl-4">
-        <div className="relative hidden sm:block">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-sm text-outline" data-icon="search">
-            search
-          </span>
-          <input
-            className="font-body w-64 rounded-none border-none bg-surface-container-low py-1.5 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary"
-            placeholder="Search blueprints..."
-            type="text"
-          />
-        </div>
+      <div className="flex shrink-0 items-center">
         <Link
           to="/#journal"
-          className="font-headline border border-on-surface px-6 py-1.5 text-sm font-bold tracking-tight transition-colors hover:bg-surface-container-high"
+          className="font-headline border border-on-surface px-4 py-1.5 text-xs font-bold tracking-tight transition-colors hover:bg-surface-container-high dark:border-slate-500 sm:px-6 sm:text-sm"
         >
-          Connect
+          View site
         </Link>
       </div>
     </header>

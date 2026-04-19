@@ -4,7 +4,7 @@ const HERO_IMG =
 export default function HeroSection() {
   return (
     <section
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden px-8 md:px-20"
+      className="relative flex min-h-screen scroll-mt-24 flex-col justify-center overflow-hidden px-8 md:px-20"
       id="hero"
     >
       <div className="absolute right-0 top-1/4 -z-10 h-2/3 w-1/2 opacity-40 blur-3xl signature-smudge" />

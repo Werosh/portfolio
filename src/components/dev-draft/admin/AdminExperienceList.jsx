@@ -14,7 +14,7 @@ export default function AdminExperienceList({ experiences, onEdit, onDelete }) {
       <div className="space-y-4">
         {!experiences.length && (
           <p className="font-body text-on-surface-variant">
-            No experience rows yet.             Add one from the form, or run{" "}
+            No experience rows yet. Add one from the form, or run{" "}
             <code className="text-primary">npm run seed:projects</code> (seeds
             projects and this timeline).
           </p>
@@ -26,9 +26,10 @@ export default function AdminExperienceList({ experiences, onEdit, onDelete }) {
           >
             <div className="z-10 flex min-w-0 flex-1 items-center gap-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-outline-variant/40 font-headline text-xs font-bold text-primary">
-                {typeof row.sortOrder === "number" && !Number.isNaN(row.sortOrder)
+                {typeof row.sortOrder === "number" &&
+                !Number.isNaN(row.sortOrder)
                   ? String(row.sortOrder).padStart(2, "0")
-                  : "—"}
+                  : "-"}
               </div>
               <div className="min-w-0">
                 <h4 className="font-headline text-base font-bold text-on-surface">
@@ -72,7 +73,7 @@ AdminExperienceList.propTypes = {
       organization: PropTypes.string,
       period: PropTypes.string,
       sortOrder: PropTypes.number,
-    })
+    }),
   ).isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

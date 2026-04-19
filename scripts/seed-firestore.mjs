@@ -156,7 +156,9 @@ async function seedWithAdminSdk() {
         asideCaption: asideCaption || "",
         asideIcon: asideIcon || "",
         sortOrder: sortOrder ?? i + 1,
-        createdAt: Timestamp.fromMillis(baseMs - (i + PROJECT_SEEDS.length) * 60_000),
+        createdAt: Timestamp.fromMillis(
+          baseMs - (i + PROJECT_SEEDS.length) * 60_000,
+        ),
         updatedAt: Timestamp.fromMillis(baseMs),
       },
       { merge: true },
@@ -173,10 +175,8 @@ async function seedWithAdminSdk() {
 }
 
 async function seedWithClientSdk() {
-  const email =
-    env.SEED_ADMIN_EMAIL || env.VITE_ADMIN_EMAIL || "";
-  const password =
-    env.SEED_ADMIN_PASSWORD || env.VITE_ADMIN_PASSWORD || "";
+  const email = env.SEED_ADMIN_EMAIL || env.VITE_ADMIN_EMAIL || "";
+  const password = env.SEED_ADMIN_PASSWORD || env.VITE_ADMIN_PASSWORD || "";
 
   if (!email || !password) {
     console.error(
@@ -296,7 +296,7 @@ async function seedWithClientSdk() {
     if (e?.code === "permission-denied") {
       console.error(
         "\nFirestore PERMISSION_DENIED while writing `experiences`.\n" +
-          "Projects wrote OK — confirm rules include BOTH `projects` and `experiences` (see repo `firestore.rules`), then:\n" +
+          "Projects wrote OK - confirm rules include BOTH `projects` and `experiences` (see repo `firestore.rules`), then:\n" +
           "  npm run deploy:firestore-rules\n" +
           "Wait ~1 minute, then run npm run seed:projects again.\n\n" +
           "Or use FIREBASE_SERVICE_ACCOUNT_PATH (Admin SDK) to bypass rules for seeding.\n\n" +

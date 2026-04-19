@@ -11,9 +11,6 @@ export default function LandingFooter() {
         <a className="transition-colors hover:text-primary" href="#portfolio">
           Vellum_v1.0
         </a>
-        <a className="transition-colors hover:text-primary" href="#lab">
-          Open_Source
-        </a>
         <a className="transition-colors hover:text-primary" href="#journal">
           Private_Keys
         </a>

@@ -9,7 +9,7 @@ import { EXPERIENCE_SEEDS } from "../../data/experienceSeeds";
 import { buildPageList } from "../../utils/pagination";
 
 /* eslint-disable react/prop-types -- small presentational helpers below */
-/** Fewer rows per page than projects — each milestone is tall. */
+/** Fewer rows per page than projects - each milestone is tall. */
 const EXPERIENCE_PER_PAGE = 3;
 
 const FALLBACK_ENTRIES = EXPERIENCE_SEEDS.map((s) =>
@@ -42,7 +42,9 @@ function SidePanel({ side }) {
         <div className="hand-drawn-border max-w-xs rotate-1 bg-surface p-4 md:mx-0">
           <p className="font-sketch text-sm">&quot;{side.text}&quot;</p>
           {side.attribution ? (
-            <p className="mt-2 text-right text-xs font-bold">{side.attribution}</p>
+            <p className="mt-2 text-right text-xs font-bold">
+              {side.attribution}
+            </p>
           ) : null}
         </div>
       </div>
@@ -59,7 +61,9 @@ function SidePanel({ side }) {
           >
             {side.icon || "sticky_note_2"}
           </span>
-          <p className="mt-2 font-sketch text-xs leading-relaxed">{side.text}</p>
+          <p className="mt-2 font-sketch text-xs leading-relaxed">
+            {side.text}
+          </p>
         </div>
       </div>
     );
@@ -76,7 +80,9 @@ function SidePanelLeft({ side }) {
     return (
       <div className="order-2 hidden flex-1 md:order-1 md:block">
         <div className="ml-auto max-w-xs rotate-[-2deg] border border-dashed border-outline-variant bg-white/50 p-4">
-          <p className="font-sketch text-xs leading-relaxed">&quot;{side.text}&quot;</p>
+          <p className="font-sketch text-xs leading-relaxed">
+            &quot;{side.text}&quot;
+          </p>
           {side.attribution ? (
             <p className="mt-2 text-right text-[10px] font-bold uppercase tracking-wide text-on-surface-variant">
               {side.attribution}
@@ -89,7 +95,10 @@ function SidePanelLeft({ side }) {
   return (
     <div className="order-2 hidden flex-1 md:order-1 md:block">
       <div className="ml-auto max-w-xs rotate-[-2deg] border border-dashed border-outline-variant bg-white/50 p-4">
-        <span className="material-symbols-outlined text-secondary opacity-50" aria-hidden>
+        <span
+          className="material-symbols-outlined text-secondary opacity-50"
+          aria-hidden
+        >
           {side.icon || "sticky_note_2"}
         </span>
         <p className="mt-2 font-sketch text-xs leading-relaxed">{side.text}</p>
@@ -102,18 +111,20 @@ function MainBlock({ entry, textRight }) {
   return (
     <div
       className={`flex-1 ${
-        textRight
-          ? "order-2 text-right md:order-1"
-          : "order-3 md:order-3"
+        textRight ? "order-2 text-right md:order-1" : "order-3 md:order-3"
       }`}
     >
-      <h3 className="font-headline text-2xl font-bold md:text-3xl">{entry.role}</h3>
+      <h3 className="font-headline text-2xl font-bold md:text-3xl">
+        {entry.role}
+      </h3>
       <p className="mb-1 font-sketch text-lg text-primary md:text-xl">
-        {entry.organization}{" "}
-        <span className="text-on-surface-variant">·</span> {entry.period}
+        {entry.organization} <span className="text-on-surface-variant">·</span>{" "}
+        {entry.period}
       </p>
       {entry.location ? (
-        <p className="mb-3 font-body text-sm text-on-surface-variant">{entry.location}</p>
+        <p className="mb-3 font-body text-sm text-on-surface-variant">
+          {entry.location}
+        </p>
       ) : null}
       <p className="text-on-surface-variant">{entry.description}</p>
     </div>
@@ -146,7 +157,10 @@ function ExperiencePagination({ page, totalPages, totalItems, onPageChange }) {
           {totalItems}
         </span>{" "}
         milestones
-        <span className="sr-only"> — use pagination to avoid long scrolling</span>
+        <span className="sr-only">
+          {" "}
+          - use pagination to avoid long scrolling
+        </span>
       </p>
       <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-center">
         <button
@@ -239,7 +253,10 @@ export default function ExperienceSection() {
   }, [totalPages]);
 
   const sliceStart = (page - 1) * EXPERIENCE_PER_PAGE;
-  const pageEntries = entries.slice(sliceStart, sliceStart + EXPERIENCE_PER_PAGE);
+  const pageEntries = entries.slice(
+    sliceStart,
+    sliceStart + EXPERIENCE_PER_PAGE,
+  );
 
   const handlePageChange = (next) => {
     const clamped = Math.max(1, Math.min(next, totalPages));
@@ -257,15 +274,18 @@ export default function ExperienceSection() {
     >
       <div className="mx-auto max-w-5xl">
         <h2 className="mb-12 flex flex-wrap items-center gap-4 font-headline text-4xl font-bold md:text-5xl">
-          <span className="material-symbols-outlined text-4xl text-primary" aria-hidden>
+          <span
+            className="material-symbols-outlined text-4xl text-primary"
+            aria-hidden
+          >
             history_edu
           </span>
           Experience timeline
         </h2>
         {!isFirebaseConfigured() && (
           <p className="mb-10 max-w-2xl font-body text-sm text-on-surface-variant">
-            Connect Firebase to edit this timeline from the control center. Until
-            then, sample milestones are shown below.
+            Connect Firebase to edit this timeline from the control center.
+            Until then, sample milestones are shown below.
           </p>
         )}
         {loading ? (

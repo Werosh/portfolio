@@ -12,7 +12,10 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
             type="button"
             className="border border-outline-variant/30 p-2 transition-colors hover:border-primary"
           >
-            <span className="material-symbols-outlined text-sm" data-icon="filter_list">
+            <span
+              className="material-symbols-outlined text-sm"
+              data-icon="filter_list"
+            >
               filter_list
             </span>
           </button>
@@ -20,7 +23,10 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
             type="button"
             className="border border-outline-variant/30 p-2 transition-colors hover:border-primary"
           >
-            <span className="material-symbols-outlined text-sm" data-icon="sort">
+            <span
+              className="material-symbols-outlined text-sm"
+              data-icon="sort"
+            >
               sort
             </span>
           </button>
@@ -55,7 +61,7 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
                 <span className="font-headline text-sm font-bold text-primary">
                   {typeof p.sortOrder === "number" && !Number.isNaN(p.sortOrder)
                     ? String(p.sortOrder).padStart(2, "0")
-                    : "—"}
+                    : "-"}
                 </span>
               </div>
               <div>
@@ -90,7 +96,10 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
               </div>
             </div>
             <div className="pointer-events-none absolute bottom-0 right-0 translate-x-4 translate-y-4 opacity-10">
-              <span className="material-symbols-outlined text-8xl" data-icon="cloud">
+              <span
+                className="material-symbols-outlined text-8xl"
+                data-icon="cloud"
+              >
                 cloud
               </span>
             </div>
@@ -103,7 +112,9 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
             <span className="font-label block text-[10px] uppercase text-on-surface-variant opacity-60">
               Engine_Uptime
             </span>
-            <span className="font-headline font-bold text-on-surface">99.982%</span>
+            <span className="font-headline font-bold text-on-surface">
+              99.982%
+            </span>
           </div>
           <div>
             <span className="font-label block text-[10px] uppercase text-on-surface-variant opacity-60">
@@ -116,7 +127,10 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
         </div>
         <div className="flex items-center gap-2 text-on-surface-variant">
           <span className="font-sketch text-sm">System Normal</span>
-          <span className="material-symbols-outlined text-xs" data-icon="check_circle">
+          <span
+            className="material-symbols-outlined text-xs"
+            data-icon="check_circle"
+          >
             check_circle
           </span>
         </div>
@@ -132,7 +146,7 @@ AdminProjectList.propTypes = {
       title: PropTypes.string.isRequired,
       techStack: PropTypes.arrayOf(PropTypes.string),
       sortOrder: PropTypes.number,
-    })
+    }),
   ).isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

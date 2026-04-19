@@ -25,7 +25,7 @@ export const EXPERIENCE_SEEDS = [
     period: "Sep 2025 – Mar 2026",
     location: "Hybrid · Sri Lanka & Remote · Frontend",
     description:
-      "Iterated rapidly with cross-functional squads on customer-facing platforms—accessibility, design systems, Lighthouse-focused performance, and code review culture.",
+      "Iterated rapidly with cross-functional squads on customer-facing platforms-accessibility, design systems, Lighthouse-focused performance, and code review culture.",
     asideKind: "sketch",
     asideText:
       "Path to Associate: measurable gains in interaction latency and shared UI standards.",
@@ -40,7 +40,7 @@ export const EXPERIENCE_SEEDS = [
     period: "2024 – 2025",
     location: "Sri Lanka · Remote & on-site",
     description:
-      "End-to-end web delivery with designers and clients—Next.js and React builds, performance tuning, and maintainable UI architecture across many shipped products.",
+      "End-to-end web delivery with designers and clients-Next.js and React builds, performance tuning, and maintainable UI architecture across many shipped products.",
     asideKind: "quote",
     asideText:
       "15+ high-impact projects, stronger load times, and consistent client delivery at agency pace.",
@@ -55,7 +55,7 @@ export const EXPERIENCE_SEEDS = [
     period: "2023 – Present",
     location: "Australia · Remote",
     description:
-      "Leading builds and technical direction—scalable React/Node stacks, AWS deployments, mentoring, and ownership across the full project lifecycle.",
+      "Leading builds and technical direction-scalable React/Node stacks, AWS deployments, mentoring, and ownership across the full project lifecycle.",
     asideKind: "sketch",
     asideText:
       "30+ projects shipped · team leadership · remote-first collaboration.",
@@ -70,7 +70,7 @@ export const EXPERIENCE_SEEDS = [
     period: "2022 – Present",
     location: "Remote",
     description:
-      "Responsive apps for varied clients—React, TypeScript, and strong UI/UX execution with emphasis on clarity and repeat engagement.",
+      "Responsive apps for varied clients-React, TypeScript, and strong UI/UX execution with emphasis on clarity and repeat engagement.",
     asideKind: "sketch",
     asideText:
       "15+ successful engagements · strong client ratings · repeat work.",
@@ -88,7 +88,7 @@ export const EXPERIENCE_SEEDS = [
       "Formal foundations in algorithms, software architecture, databases, and modern full-stack practice alongside industry work.",
     asideKind: "sketch",
     asideText:
-      "Studies in parallel with professional delivery—Dean's List and competitive project recognition.",
+      "Studies in parallel with professional delivery-Dean's List and competitive project recognition.",
     asideCaption: "",
     asideIcon: "school",
     sortOrder: 6,

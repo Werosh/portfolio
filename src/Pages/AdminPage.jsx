@@ -5,7 +5,6 @@ import {
   signOut,
 } from "firebase/auth";
 import AdminLoginGate from "../components/dev-draft/admin/AdminLoginGate";
-import AdminSidebar from "../components/dev-draft/admin/AdminSidebar";
 import AdminHeader from "../components/dev-draft/admin/AdminHeader";
 import AdminProjectForm from "../components/dev-draft/admin/AdminProjectForm";
 import AdminProjectList from "../components/dev-draft/admin/AdminProjectList";
@@ -195,9 +194,8 @@ export default function AdminPage() {
 
   return (
     <div className="admin-root min-h-screen bg-surface font-body text-on-surface selection:bg-primary-container selection:text-primary">
-      <AdminSidebar />
       <AdminHeader />
-      <main className="signature-smudge-admin min-h-screen p-8 pl-72 pt-24">
+      <main className="signature-smudge-admin min-h-screen px-4 pb-10 pt-20 sm:px-8 sm:pt-24">
         <div className="mx-auto mb-6 flex max-w-6xl items-center justify-end gap-4">
           <span className="font-body text-sm text-on-surface-variant">
             {user.email}
