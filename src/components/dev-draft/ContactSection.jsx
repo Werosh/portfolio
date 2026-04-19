@@ -10,6 +10,8 @@ import {
 const publicEmail =
   import.meta.env.VITE_PUBLIC_CONTACT_EMAIL || "hello@werosh.dev";
 
+const cvPdfHref = `${import.meta.env.BASE_URL}WeroshK_CV.pdf`;
+
 export default function ContactSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -143,6 +145,20 @@ export default function ContactSection() {
                 className="font-headline text-xl underline decoration-dotted transition-colors group-hover:text-primary"
               >
                 github.com/werosh
+              </a>
+            </div>
+            <div className="group flex cursor-pointer items-center gap-4">
+              <span className="material-symbols-outlined text-primary">
+                picture_as_pdf
+              </span>
+              <a
+                className="font-headline text-xl underline decoration-dotted transition-colors group-hover:text-primary"
+                href={cvPdfHref}
+                rel="noopener noreferrer"
+                target="_blank"
+                type="application/pdf"
+              >
+                Open CV (PDF)
               </a>
             </div>
           </div>
