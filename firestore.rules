@@ -1,0 +1,28 @@
+// Publish to Firebase: Firebase Console → Firestore → Rules → paste → Publish
+// Or from repo root (after `firebase login`): npm run deploy:firestore-rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+    match /experiences/{experienceId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+    // Landing contact form: anyone may create; only signed-in admins read/delete.
+    match /contactMessages/{messageId} {
+      allow read, delete: if request.auth != null;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'message', 'submittedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 200
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 5 && request.resource.data.email.size() <= 320
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 1 && request.resource.data.message.size() <= 8000
+        && request.resource.data.submittedAt is timestamp;
+      allow update: if false;
+    }
+  }
+}
