@@ -25,7 +25,7 @@ export const EXPERIENCE_SEEDS = [
     period: "Sep 2025 – Mar 2026",
     location: "Hybrid · Sri Lanka & Remote · Frontend",
     description:
-      "Iterated rapidly with cross-functional squads on customer-facing platforms-accessibility, design systems, Lighthouse-focused performance, and code review culture.",
+      "Iterated rapidly with cross-functional squads on customer-facing platforms accessibility, design systems, Lighthouse-focused performance, and code review culture.",
     asideKind: "sketch",
     asideText:
       "Path to Associate: measurable gains in interaction latency and shared UI standards.",

@@ -12,18 +12,12 @@ import { useActiveNavSection } from "../hooks/useActiveNavSection";
 
 export default function LandingPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const activeSection = useActiveNavSection();
 
   return (
     <div className="dev-draft-root overflow-x-hidden bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
       <GrainOverlay />
-      <LandingNav
-        activeSection={activeSection}
-        mobileOpen={mobileNavOpen}
-        onMobileOpenChange={setMobileNavOpen}
-        onOpenSettings={() => setSettingsOpen(true)}
-      />
+      <LandingNav />
       <LandingSidebar
         activeSection={activeSection}
         onOpenSettings={() => setSettingsOpen(true)}
@@ -32,7 +26,7 @@ export default function LandingPage() {
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
       />
-      <main id="main" className="pt-16 lg:ml-72">
+      <main id="main" className="pt-16 max-w-[100vw] overflow-x-hidden lg:ml-72">
         <HeroSection />
         <ExperienceSection />
         <ProjectsSection />

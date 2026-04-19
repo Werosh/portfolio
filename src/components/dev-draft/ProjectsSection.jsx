@@ -1,11 +1,38 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { isFirebaseConfigured } from "../../firebase/app";
-import { subscribeProjects, sortProjectsList } from "../../services/projectsApi";
+import {
+  subscribeProjects,
+  sortProjectsList,
+} from "../../services/projectsApi";
 import { buildPageList } from "../../utils/pagination";
 
-/** Projects shown per page (fits 1 / 2 / 3-column layouts cleanly). */
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE_MOBILE = 3;
+const PROJECTS_PER_PAGE_DESKTOP = 6;
+
+/** lg matches Tailwind- fewer cards per view on small screens. */
+function useProjectsPerPage() {
+  const [perPage, setPerPage] = useState(() => {
+    if (typeof window === "undefined") return PROJECTS_PER_PAGE_MOBILE;
+    return window.matchMedia("(min-width: 1024px)").matches
+      ? PROJECTS_PER_PAGE_DESKTOP
+      : PROJECTS_PER_PAGE_MOBILE;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () =>
+      setPerPage(
+        mq.matches ? PROJECTS_PER_PAGE_DESKTOP : PROJECTS_PER_PAGE_MOBILE,
+      );
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  return perPage;
+}
 
 const FALLBACK = [
   {
@@ -73,7 +100,9 @@ function ProjectCard({ project, entryIndex }) {
         <div className="border-t border-dashed border-outline-variant/50" />
       </div>
       <div className="mb-4 flex items-start justify-between gap-3">
-        <h3 className="font-headline text-2xl font-bold">{title}</h3>
+        <h3 className="min-w-0 flex-1 font-headline text-xl font-bold break-words sm:text-2xl">
+          {title}
+        </h3>
         {href ? (
           <a
             href={href}
@@ -128,7 +157,13 @@ ProjectCard.propTypes = {
   entryIndex: PropTypes.number.isRequired,
 };
 
-function ProjectsPagination({ page, totalPages, totalItems, onPageChange }) {
+function ProjectsPagination({
+  page,
+  totalPages,
+  totalItems,
+  onPageChange,
+  itemsPerPage,
+}) {
   const pages = buildPageList(page, totalPages);
   const itemsWithEllipsis = [];
   let prev = 0;
@@ -138,8 +173,8 @@ function ProjectsPagination({ page, totalPages, totalItems, onPageChange }) {
     prev = p;
   }
 
-  const from = totalItems === 0 ? 0 : (page - 1) * PROJECTS_PER_PAGE + 1;
-  const to = Math.min(page * PROJECTS_PER_PAGE, totalItems);
+  const from = totalItems === 0 ? 0 : (page - 1) * itemsPerPage + 1;
+  const to = Math.min(page * itemsPerPage, totalItems);
 
   return (
     <div className="mx-auto mt-12 max-w-7xl border-t border-dashed border-outline-variant/40 pt-10">
@@ -210,6 +245,7 @@ ProjectsPagination.propTypes = {
   totalPages: PropTypes.number.isRequired,
   totalItems: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
 };
 
 export default function ProjectsSection() {
@@ -217,6 +253,7 @@ export default function ProjectsSection() {
   const [loading, setLoading] = useState(isFirebaseConfigured());
   const [page, setPage] = useState(1);
   const sectionRef = useRef(null);
+  const projectsPerPage = useProjectsPerPage();
 
   useEffect(() => {
     if (!isFirebaseConfigured()) {
@@ -247,14 +284,14 @@ export default function ProjectsSection() {
   }, [remote, loading]);
 
   const totalItems = displayed.length;
-  const totalPages = Math.max(1, Math.ceil(totalItems / PROJECTS_PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(totalItems / projectsPerPage));
 
   useEffect(() => {
     setPage((p) => Math.min(Math.max(1, p), totalPages));
   }, [totalPages]);
 
-  const sliceStart = (page - 1) * PROJECTS_PER_PAGE;
-  const pageItems = displayed.slice(sliceStart, sliceStart + PROJECTS_PER_PAGE);
+  const sliceStart = (page - 1) * projectsPerPage;
+  const pageItems = displayed.slice(sliceStart, sliceStart + projectsPerPage);
 
   const handlePageChange = (next) => {
     const clamped = Math.max(1, Math.min(next, totalPages));
@@ -262,15 +299,15 @@ export default function ProjectsSection() {
     sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const showPagination = !loading && totalItems > PROJECTS_PER_PAGE;
+  const showPagination = !loading && totalItems > projectsPerPage;
 
   return (
     <section
       ref={sectionRef}
       id="portfolio"
-      className="scroll-mt-24 px-8 py-24 md:px-20"
+      className="scroll-mt-24 px-4 py-20 sm:px-8 sm:py-24 md:px-20"
     >
-      <h2 className="mb-16 text-center font-headline text-5xl font-bold">
+      <h2 className="mb-10 text-center font-headline text-3xl font-bold tracking-tight sm:mb-12 sm:text-4xl md:mb-16 md:text-5xl">
         Blueprinted Projects
       </h2>
       {loading ? (
@@ -279,7 +316,7 @@ export default function ProjectsSection() {
         </p>
       ) : (
         <>
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 md:gap-12 xl:grid-cols-3">
             {pageItems.map((p, i) => (
               <ProjectCard
                 key={p.id}
@@ -294,6 +331,7 @@ export default function ProjectsSection() {
               totalPages={totalPages}
               totalItems={totalItems}
               onPageChange={handlePageChange}
+              itemsPerPage={projectsPerPage}
             />
           )}
         </>

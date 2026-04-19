@@ -10,6 +10,7 @@ import AdminProjectForm from "../components/dev-draft/admin/AdminProjectForm";
 import AdminProjectList from "../components/dev-draft/admin/AdminProjectList";
 import AdminExperienceForm from "../components/dev-draft/admin/AdminExperienceForm";
 import AdminExperienceList from "../components/dev-draft/admin/AdminExperienceList";
+import AdminContactInbox from "../components/dev-draft/admin/AdminContactInbox";
 import AdminBento from "../components/dev-draft/admin/AdminBento";
 import { auth, isFirebaseConfigured } from "../firebase/app";
 import {
@@ -24,6 +25,10 @@ import {
   subscribeExperiences,
   updateExperience,
 } from "../services/experienceApi";
+import {
+  deleteContactMessage,
+  subscribeContactMessages,
+} from "../services/contactMessagesApi";
 
 export default function AdminPage() {
   const [user, setUser] = useState(null);
@@ -34,6 +39,7 @@ export default function AdminPage() {
   const [adminTab, setAdminTab] = useState("projects");
   const [projects, setProjects] = useState([]);
   const [experiences, setExperiences] = useState([]);
+  const [contactMessages, setContactMessages] = useState([]);
   const [editingProject, setEditingProject] = useState(null);
   const [editingExperience, setEditingExperience] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -65,6 +71,14 @@ export default function AdminPage() {
       return undefined;
     }
     return subscribeExperiences(setExperiences);
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !isFirebaseConfigured()) {
+      setContactMessages([]);
+      return undefined;
+    }
+    return subscribeContactMessages(setContactMessages);
   }, [user]);
 
   const handleLogin = async (e) => {
@@ -144,6 +158,18 @@ export default function AdminPage() {
     try {
       await deleteExperience(row.id);
       if (editingExperience?.id === row.id) setEditingExperience(null);
+    } catch (err) {
+      alert(err.message || "Delete failed");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleDeleteContact = async (row) => {
+    if (!window.confirm(`Delete message from “${row.name || row.email}”?`)) return;
+    setBusy(true);
+    try {
+      await deleteContactMessage(row.id);
     } catch (err) {
       alert(err.message || "Delete failed");
     } finally {
@@ -244,6 +270,22 @@ export default function AdminPage() {
             >
               Experience timeline
             </button>
+            <button
+              type="button"
+              onClick={() => switchTab("inbox")}
+              className={`border px-5 py-2 font-headline text-xs font-bold uppercase tracking-widest transition-colors ${
+                adminTab === "inbox"
+                  ? "border-primary bg-primary text-on-primary"
+                  : "border-outline-variant text-on-surface-variant hover:border-primary"
+              }`}
+            >
+              Inbox
+              {contactMessages.length > 0 ? (
+                <span className="ml-2 inline-flex min-w-[1.25rem] justify-center rounded bg-on-primary/20 px-1 text-[10px] font-black text-on-primary">
+                  {contactMessages.length > 99 ? "99+" : contactMessages.length}
+                </span>
+              ) : null}
+            </button>
           </div>
 
           {adminTab === "projects" ? (
@@ -260,7 +302,8 @@ export default function AdminPage() {
                 onDelete={handleDeleteProject}
               />
             </>
-          ) : (
+          ) : null}
+          {adminTab === "experience" ? (
             <>
               <AdminExperienceForm
                 editing={editingExperience}
@@ -274,9 +317,16 @@ export default function AdminPage() {
                 onDelete={handleDeleteExperience}
               />
             </>
-          )}
+          ) : null}
+          {adminTab === "inbox" ? (
+            <AdminContactInbox
+              messages={contactMessages}
+              onDelete={handleDeleteContact}
+              busy={busy}
+            />
+          ) : null}
 
-          <AdminBento />
+          {adminTab !== "inbox" ? <AdminBento /> : null}
         </div>
       </main>
       <div className="pointer-events-none fixed bottom-10 right-10 -rotate-12 select-none opacity-5">

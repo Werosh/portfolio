@@ -270,17 +270,17 @@ export default function ExperienceSection() {
     <section
       ref={sectionRef}
       id="blueprint"
-      className="scroll-mt-24 bg-surface-container-low px-8 py-24 md:px-20"
+      className="scroll-mt-24 bg-surface-container-low px-4 py-20 sm:px-8 sm:py-24 md:px-20"
     >
       <div className="mx-auto max-w-5xl">
-        <h2 className="mb-12 flex flex-wrap items-center gap-4 font-headline text-4xl font-bold md:text-5xl">
+        <h2 className="mb-10 flex flex-wrap items-center gap-3 font-headline text-3xl font-bold sm:mb-12 sm:gap-4 sm:text-4xl md:text-5xl">
           <span
-            className="material-symbols-outlined text-4xl text-primary"
+            className="material-symbols-outlined shrink-0 text-3xl text-primary sm:text-4xl"
             aria-hidden
           >
             history_edu
           </span>
-          Experience timeline
+          <span className="min-w-0 leading-tight">Experience timeline</span>
         </h2>
         {!isFirebaseConfigured() && (
           <p className="mb-10 max-w-2xl font-body text-sm text-on-surface-variant">

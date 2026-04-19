@@ -1,46 +1,75 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { LANDING_NAV_SECTIONS } from "../components/dev-draft/landingNavConfig";
 
+/** Matches landing sections’ `scroll-mt-24` (6rem) so hash jumps and spy state align. */
+const ACTIVATION_LINE_PX = 96;
+
+function pickActiveId(ids) {
+  let active = ids[0];
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const { top } = el.getBoundingClientRect();
+    if (top <= ACTIVATION_LINE_PX) active = id;
+  }
+  return active;
+}
+
 /**
- * Tracks which landing section is most in view for nav / sidebar highlighting.
+ * Tracks which landing section is active for sidebar / nav highlighting.
+ * Scroll-position scrollspy (stable with tall sections; aligns with scroll-margin).
  */
 export function useActiveNavSection() {
-  const [activeId, setActiveId] = useState(LANDING_NAV_SECTIONS[0].id);
+  const [activeId, setActiveId] = useState(() => LANDING_NAV_SECTIONS[0].id);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ids = LANDING_NAV_SECTIONS.map((s) => s.id);
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-    if (!elements.length) return undefined;
+    let raf = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting && e.intersectionRatio > 0)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        const id = visible[0]?.target?.id;
-        if (id) setActiveId(id);
-      },
-      {
-        root: null,
-        rootMargin: "-64px 0px -42% 0px",
-        threshold: [0, 0.08, 0.2, 0.35, 0.5, 0.75, 1],
-      },
-    );
+    const update = () => {
+      raf = 0;
+      const elements = ids.map((id) => document.getElementById(id)).filter(Boolean);
+      if (!elements.length) return;
+      const next = pickActiveId(ids);
+      setActiveId((prev) => (prev === next ? prev : next));
+    };
 
-    elements.forEach((el) => observer.observe(el));
+    const schedule = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
 
     const syncFromHash = () => {
       const raw = window.location.hash.replace(/^#/, "");
-      if (raw && ids.includes(raw)) setActiveId(raw);
+      if (raw && ids.includes(raw)) {
+        setActiveId(raw);
+        requestAnimationFrame(update);
+        return;
+      }
+      schedule();
     };
+
+    update();
+    requestAnimationFrame(update);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     window.addEventListener("hashchange", syncFromHash);
-    syncFromHash();
+
+    const ro =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(schedule)
+        : null;
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el && ro) ro.observe(el);
+    });
 
     return () => {
-      observer.disconnect();
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
       window.removeEventListener("hashchange", syncFromHash);
+      ro?.disconnect();
     };
   }, []);
 
