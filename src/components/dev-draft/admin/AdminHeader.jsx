@@ -8,7 +8,7 @@ export default function AdminHeader() {
           to="/"
           className="shrink-0 font-headline text-lg font-bold italic text-slate-900 underline decoration-wavy decoration-primary dark:text-white sm:text-xl"
         >
-          DevDraft_v1.0
+          Portfolio
         </Link>
         <span className="hidden truncate font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant sm:inline sm:max-w-[12rem] md:max-w-xs lg:inline">
           Control center

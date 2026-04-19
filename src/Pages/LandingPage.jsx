@@ -4,6 +4,7 @@ import LandingNav from "../components/dev-draft/LandingNav";
 import LandingSidebar from "../components/dev-draft/LandingSidebar";
 import LandingSettingsModal from "../components/dev-draft/LandingSettingsModal";
 import HeroSection from "../components/dev-draft/HeroSection";
+import CoreTechSection from "../components/dev-draft/CoreTechSection";
 import ExperienceSection from "../components/dev-draft/ExperienceSection";
 import ProjectsSection from "../components/dev-draft/ProjectsSection";
 import ContactSection from "../components/dev-draft/ContactSection";
@@ -28,6 +29,7 @@ export default function LandingPage() {
       />
       <main id="main" className="pt-16 max-w-[100vw] overflow-x-hidden lg:ml-72">
         <HeroSection />
+        <CoreTechSection />
         <ExperienceSection />
         <ProjectsSection />
         <ContactSection />

@@ -15,7 +15,7 @@ export default function LandingNav() {
           href="#hero"
           className="shrink-0 font-headline text-lg font-bold italic text-slate-900 underline decoration-wavy decoration-[#325bae] dark:text-white sm:text-xl"
         >
-          DevDraft_v1.0
+          Portfolio
         </a>
 
         <div className="flex items-center">
