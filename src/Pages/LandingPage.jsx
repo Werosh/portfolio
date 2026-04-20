@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GrainOverlay from "../components/dev-draft/GrainOverlay";
 import LandingNav from "../components/dev-draft/LandingNav";
 import LandingSidebar from "../components/dev-draft/LandingSidebar";
@@ -10,10 +10,17 @@ import ProjectsSection from "../components/dev-draft/ProjectsSection";
 import ContactSection from "../components/dev-draft/ContactSection";
 import LandingFooter from "../components/dev-draft/LandingFooter";
 import { useActiveNavSection } from "../hooks/useActiveNavSection";
+import { trackVisitorFromClient } from "../services/visitorTrackingApi";
 
 export default function LandingPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const activeSection = useActiveNavSection();
+
+  useEffect(() => {
+    trackVisitorFromClient().catch((err) => {
+      console.error("Visitor tracking failed:", err);
+    });
+  }, []);
 
   return (
     <div className="dev-draft-root overflow-x-hidden bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">

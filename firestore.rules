@@ -24,5 +24,61 @@ service cloud.firestore {
         && request.resource.data.submittedAt is timestamp;
       allow update: if false;
     }
+
+    // Visitor tracking: public create/update by IP doc id, admin read/delete.
+    match /visitorLogs/{visitorId} {
+      allow read, delete: if request.auth != null;
+      allow create, update: if request.resource.data.keys().hasOnly([
+          'ip',
+          'city',
+          'region',
+          'country',
+          'countryCode',
+          'latitude',
+          'longitude',
+          'timezone',
+          'isp',
+          'org',
+          'asn',
+          'userAgent',
+          'language',
+          'source',
+          'updatedAt',
+          'lastSeenAt',
+          'createdAt',
+          'visitCount'
+        ])
+        && request.resource.data.ip is string
+        && request.resource.data.ip.size() >= 1 && request.resource.data.ip.size() <= 120
+        && request.resource.data.city is string
+        && request.resource.data.city.size() <= 120
+        && request.resource.data.region is string
+        && request.resource.data.region.size() <= 120
+        && request.resource.data.country is string
+        && request.resource.data.country.size() <= 120
+        && request.resource.data.countryCode is string
+        && request.resource.data.countryCode.size() <= 5
+        && (request.resource.data.latitude is number || request.resource.data.latitude == null)
+        && (request.resource.data.longitude is number || request.resource.data.longitude == null)
+        && request.resource.data.timezone is string
+        && request.resource.data.timezone.size() <= 120
+        && request.resource.data.isp is string
+        && request.resource.data.isp.size() <= 300
+        && request.resource.data.org is string
+        && request.resource.data.org.size() <= 300
+        && request.resource.data.asn is string
+        && request.resource.data.asn.size() <= 30
+        && request.resource.data.userAgent is string
+        && request.resource.data.userAgent.size() <= 1000
+        && request.resource.data.language is string
+        && request.resource.data.language.size() <= 30
+        && request.resource.data.source is string
+        && request.resource.data.source.size() <= 50
+        && request.resource.data.updatedAt is timestamp
+        && request.resource.data.lastSeenAt is timestamp
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.visitCount is int
+        && request.resource.data.visitCount >= 1;
+    }
   }
 }

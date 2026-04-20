@@ -12,6 +12,7 @@ import AdminExperienceForm from "../components/dev-draft/admin/AdminExperienceFo
 import AdminExperienceList from "../components/dev-draft/admin/AdminExperienceList";
 import AdminContactInbox from "../components/dev-draft/admin/AdminContactInbox";
 import AdminBento from "../components/dev-draft/admin/AdminBento";
+import AdminVisitorLogs from "../components/dev-draft/admin/AdminVisitorLogs";
 import { auth, isFirebaseConfigured } from "../firebase/app";
 import {
   createProject,
@@ -29,6 +30,7 @@ import {
   deleteContactMessage,
   subscribeContactMessages,
 } from "../services/contactMessagesApi";
+import { subscribeVisitorLogs } from "../services/visitorTrackingApi";
 
 export default function AdminPage() {
   const [user, setUser] = useState(null);
@@ -40,6 +42,7 @@ export default function AdminPage() {
   const [projects, setProjects] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [contactMessages, setContactMessages] = useState([]);
+  const [visitors, setVisitors] = useState([]);
   const [editingProject, setEditingProject] = useState(null);
   const [editingExperience, setEditingExperience] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -79,6 +82,14 @@ export default function AdminPage() {
       return undefined;
     }
     return subscribeContactMessages(setContactMessages);
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !isFirebaseConfigured()) {
+      setVisitors([]);
+      return undefined;
+    }
+    return subscribeVisitorLogs(setVisitors);
   }, [user]);
 
   const handleLogin = async (e) => {
@@ -286,6 +297,22 @@ export default function AdminPage() {
                 </span>
               ) : null}
             </button>
+            <button
+              type="button"
+              onClick={() => switchTab("visitors")}
+              className={`border px-5 py-2 font-headline text-xs font-bold uppercase tracking-widest transition-colors ${
+                adminTab === "visitors"
+                  ? "border-primary bg-primary text-on-primary"
+                  : "border-outline-variant text-on-surface-variant hover:border-primary"
+              }`}
+            >
+              Visitors
+              {visitors.length > 0 ? (
+                <span className="ml-2 inline-flex min-w-[1.25rem] justify-center rounded bg-on-primary/20 px-1 text-[10px] font-black text-on-primary">
+                  {visitors.length > 99 ? "99+" : visitors.length}
+                </span>
+              ) : null}
+            </button>
           </div>
 
           {adminTab === "projects" ? (
@@ -325,8 +352,11 @@ export default function AdminPage() {
               busy={busy}
             />
           ) : null}
+          {adminTab === "visitors" ? (
+            <AdminVisitorLogs visitors={visitors} />
+          ) : null}
 
-          {adminTab !== "inbox" ? <AdminBento /> : null}
+          {adminTab !== "inbox" && adminTab !== "visitors" ? <AdminBento /> : null}
         </div>
       </main>
       <div className="pointer-events-none fixed bottom-10 right-10 -rotate-12 select-none opacity-5">
