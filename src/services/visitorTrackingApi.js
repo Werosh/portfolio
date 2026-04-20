@@ -13,7 +13,8 @@ import {
 import { db, isFirebaseConfigured } from "../firebase/app";
 
 const COLLECTION = "visitorLogs";
-const SESSION_KEY = "portfolio_visitor_logged";
+let hasTrackedThisPageLifetime = false;
+let trackingInFlight = null;
 
 function toSafeString(value, max = 300) {
   return String(value ?? "").trim().slice(0, max);
@@ -40,54 +41,66 @@ export async function trackVisitorFromClient() {
   if (!isFirebaseConfigured() || !db || typeof window === "undefined") {
     return;
   }
-  if (window.sessionStorage.getItem(SESSION_KEY) === "1") {
+  if (hasTrackedThisPageLifetime) {
     return;
   }
+  if (trackingInFlight) {
+    return trackingInFlight;
+  }
+  trackingInFlight = (async () => {
+    const metadata = await fetchVisitorMeta();
+    const now = Timestamp.now();
+    const docId = toDocIdFromIp(metadata.ip);
+    const docRef = doc(db, COLLECTION, docId);
+    const userAgent = toSafeString(window.navigator.userAgent, 1000);
+    const language = toSafeString(window.navigator.language, 30);
+    const timezone = toSafeString(
+      Intl.DateTimeFormat().resolvedOptions().timeZone || metadata.timezone?.id,
+      120,
+    );
 
-  const metadata = await fetchVisitorMeta();
-  const now = Timestamp.now();
-  const docId = toDocIdFromIp(metadata.ip);
-  const docRef = doc(db, COLLECTION, docId);
-  const userAgent = toSafeString(window.navigator.userAgent, 1000);
-  const language = toSafeString(window.navigator.language, 30);
-  const timezone = toSafeString(
-    Intl.DateTimeFormat().resolvedOptions().timeZone || metadata.timezone?.id,
-    120,
-  );
+    const sharedPayload = {
+      ip: toSafeString(metadata.ip, 120),
+      city: toSafeString(metadata.city, 120),
+      region: toSafeString(metadata.region, 120),
+      country: toSafeString(metadata.country, 120),
+      countryCode: toSafeString(metadata.country_code, 5),
+      latitude:
+        typeof metadata.latitude === "number" ? metadata.latitude : null,
+      longitude:
+        typeof metadata.longitude === "number" ? metadata.longitude : null,
+      timezone,
+      isp: toSafeString(metadata.connection?.isp, 300),
+      org: toSafeString(metadata.connection?.org, 300),
+      asn: toSafeString(metadata.connection?.asn, 30),
+      userAgent,
+      language,
+      source: "ipwho.is",
+      updatedAt: now,
+      lastSeenAt: now,
+    };
 
-  const sharedPayload = {
-    ip: toSafeString(metadata.ip, 120),
-    city: toSafeString(metadata.city, 120),
-    region: toSafeString(metadata.region, 120),
-    country: toSafeString(metadata.country, 120),
-    countryCode: toSafeString(metadata.country_code, 5),
-    latitude: typeof metadata.latitude === "number" ? metadata.latitude : null,
-    longitude: typeof metadata.longitude === "number" ? metadata.longitude : null,
-    timezone,
-    isp: toSafeString(metadata.connection?.isp, 300),
-    org: toSafeString(metadata.connection?.org, 300),
-    asn: toSafeString(metadata.connection?.asn, 30),
-    userAgent,
-    language,
-    source: "ipwho.is",
-    updatedAt: now,
-    lastSeenAt: now,
-  };
+    try {
+      await updateDoc(docRef, {
+        ...sharedPayload,
+        visitCount: increment(1),
+      });
+    } catch {
+      await setDoc(docRef, {
+        ...sharedPayload,
+        createdAt: now,
+        visitCount: 1,
+      });
+    }
+  })();
 
   try {
-    await updateDoc(docRef, {
-      ...sharedPayload,
-      visitCount: increment(1),
-    });
-  } catch {
-    await setDoc(docRef, {
-      ...sharedPayload,
-      createdAt: now,
-      visitCount: 1,
-    });
+    await trackingInFlight;
+    hasTrackedThisPageLifetime = true;
+  } finally {
+    trackingInFlight = null;
   }
 
-  window.sessionStorage.setItem(SESSION_KEY, "1");
 }
 
 export function subscribeVisitorLogs(callback, onError) {
