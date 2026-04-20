@@ -10,7 +10,7 @@ const empty = {
 };
 
 export default function AdminProjectForm({
-  editing,
+  editing = null,
   onClearEdit,
   onSubmit,
   busy,
@@ -198,8 +198,4 @@ AdminProjectForm.propTypes = {
   onClearEdit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   busy: PropTypes.bool.isRequired,
-};
-
-AdminProjectForm.defaultProps = {
-  editing: null,
 };

@@ -43,6 +43,8 @@ export default function AdminPage() {
   const [experiences, setExperiences] = useState([]);
   const [contactMessages, setContactMessages] = useState([]);
   const [visitors, setVisitors] = useState([]);
+  const [visitorsRefreshing, setVisitorsRefreshing] = useState(false);
+  const [visitorRefreshKey, setVisitorRefreshKey] = useState(0);
   const [editingProject, setEditingProject] = useState(null);
   const [editingExperience, setEditingExperience] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -89,8 +91,22 @@ export default function AdminPage() {
       setVisitors([]);
       return undefined;
     }
-    return subscribeVisitorLogs(setVisitors);
-  }, [user]);
+    const unsubscribe = subscribeVisitorLogs(
+      (rows) => {
+        setVisitors(rows);
+        setVisitorsRefreshing(false);
+      },
+      () => {
+        setVisitorsRefreshing(false);
+      },
+    );
+    return unsubscribe;
+  }, [user, visitorRefreshKey]);
+
+  const handleRefreshVisitors = () => {
+    setVisitorsRefreshing(true);
+    setVisitorRefreshKey((value) => value + 1);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -233,7 +249,7 @@ export default function AdminPage() {
     <div className="admin-root min-h-screen bg-surface font-body text-on-surface selection:bg-primary-container selection:text-primary">
       <AdminHeader />
       <main className="signature-smudge-admin min-h-screen px-4 pb-10 pt-20 sm:px-8 sm:pt-24">
-        <div className="mx-auto mb-6 flex max-w-6xl items-center justify-end gap-4">
+        <div className="mb-6 flex w-full items-center justify-end gap-4">
           <span className="font-body text-sm text-on-surface-variant">
             {user.email}
           </span>
@@ -245,7 +261,7 @@ export default function AdminPage() {
             Sign out
           </button>
         </div>
-        <div className="mx-auto grid max-w-6xl grid-cols-12 gap-8">
+        <div className="grid w-full grid-cols-12 gap-8">
           <div className="col-span-12 mb-4">
             <div className="flex flex-wrap items-baseline gap-4">
               <h2 className="font-headline text-6xl font-bold tracking-tighter text-on-surface">
@@ -353,7 +369,11 @@ export default function AdminPage() {
             />
           ) : null}
           {adminTab === "visitors" ? (
-            <AdminVisitorLogs visitors={visitors} />
+            <AdminVisitorLogs
+              visitors={visitors}
+              onRefresh={handleRefreshVisitors}
+              refreshing={visitorsRefreshing}
+            />
           ) : null}
 
           {adminTab !== "inbox" && adminTab !== "visitors" ? <AdminBento /> : null}

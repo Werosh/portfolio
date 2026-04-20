@@ -15,6 +15,7 @@ import { db, isFirebaseConfigured } from "../firebase/app";
 const COLLECTION = "visitorLogs";
 let hasTrackedThisPageLifetime = false;
 let trackingInFlight = null;
+const DEBUG_KEY = "portfolio_visitor_tracking_debug";
 
 function toSafeString(value, max = 300) {
   return String(value ?? "").trim().slice(0, max);
@@ -25,16 +26,99 @@ function toDocIdFromIp(ip) {
 }
 
 async function fetchVisitorMeta() {
-  // ipwho.is has a free no-key endpoint suitable for lightweight tracking.
-  const response = await fetch("https://ipwho.is/");
-  if (!response.ok) {
-    throw new Error("Could not fetch visitor IP metadata.");
+  async function fetchPreferredIpv4() {
+    try {
+      const response = await fetch("https://api4.ipify.org?format=json");
+      if (!response.ok) return null;
+      const payload = await response.json();
+      return payload?.ip ? String(payload.ip) : null;
+    } catch {
+      return null;
+    }
   }
-  const payload = await response.json();
-  if (!payload?.success || !payload?.ip) {
-    throw new Error("Invalid visitor IP response.");
+
+  const preferredIpv4 = await fetchPreferredIpv4();
+
+  const providers = [
+    {
+      name: "ipwho.is",
+      url: preferredIpv4
+        ? `https://ipwho.is/${encodeURIComponent(preferredIpv4)}`
+        : "https://ipwho.is/",
+      map: (payload) => {
+        if (!payload?.success || !payload?.ip) return null;
+        return payload;
+      },
+    },
+    {
+      name: "ipapi.co",
+      url: preferredIpv4
+        ? `https://ipapi.co/${encodeURIComponent(preferredIpv4)}/json/`
+        : "https://ipapi.co/json/",
+      map: (payload) => {
+        if (!payload?.ip) return null;
+        return {
+          ip: payload.ip,
+          city: payload.city,
+          region: payload.region,
+          country: payload.country_name,
+          country_code: payload.country_code,
+          latitude: payload.latitude,
+          longitude: payload.longitude,
+          connection: {
+            asn: payload.asn,
+            org: payload.org,
+            isp: payload.org,
+          },
+          timezone: { id: payload.timezone },
+        };
+      },
+    },
+  ];
+
+  const errors = [];
+  for (const provider of providers) {
+    try {
+      const response = await fetch(provider.url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const payload = await response.json();
+      const normalized = provider.map(payload);
+      if (!normalized?.ip) {
+        throw new Error("Missing IP in response");
+      }
+      return { ...normalized, provider: provider.name };
+    } catch (err) {
+      errors.push(`${provider.name}: ${err.message || "unknown error"}`);
+    }
   }
-  return payload;
+
+  throw new Error(`All IP providers failed. ${errors.join(" | ")}`);
+}
+
+function saveTrackingDebugStatus(status, message = "") {
+  if (typeof window === "undefined") return;
+  const payload = {
+    status,
+    message: toSafeString(message, 600),
+    at: new Date().toISOString(),
+  };
+  try {
+    window.localStorage.setItem(DEBUG_KEY, JSON.stringify(payload));
+  } catch {
+    // ignore localStorage failures
+  }
+}
+
+export function getVisitorTrackingDebugStatus() {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(DEBUG_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function trackVisitorFromClient() {
@@ -75,7 +159,7 @@ export async function trackVisitorFromClient() {
       asn: toSafeString(metadata.connection?.asn, 30),
       userAgent,
       language,
-      source: "ipwho.is",
+      source: toSafeString(metadata.provider || "unknown", 50),
       updatedAt: now,
       lastSeenAt: now,
     };
@@ -92,11 +176,15 @@ export async function trackVisitorFromClient() {
         visitCount: 1,
       });
     }
+    saveTrackingDebugStatus("success", `Tracked via ${metadata.provider}`);
   })();
 
   try {
     await trackingInFlight;
     hasTrackedThisPageLifetime = true;
+  } catch (err) {
+    saveTrackingDebugStatus("error", err.message || "Tracking failed");
+    throw err;
   } finally {
     trackingInFlight = null;
   }

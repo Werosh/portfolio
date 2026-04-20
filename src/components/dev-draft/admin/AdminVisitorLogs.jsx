@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { getVisitorTrackingDebugStatus } from "../../../services/visitorTrackingApi";
 
 function formatDate(ts) {
   if (!ts) return "—";
@@ -12,21 +13,39 @@ function formatLocation(row) {
   return parts.length ? parts.join(", ") : "Unknown";
 }
 
-export default function AdminVisitorLogs({ visitors }) {
+export default function AdminVisitorLogs({ visitors, onRefresh, refreshing }) {
+  const debugStatus = getVisitorTrackingDebugStatus();
+
   return (
     <section className="col-span-12 border border-outline-variant/30 bg-surface-container-low">
-      <div className="flex items-center justify-between border-b border-outline-variant/30 px-4 py-3 sm:px-6">
+      <div className="flex items-center justify-between gap-3 border-b border-outline-variant/30 px-4 py-3 sm:px-6">
         <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-on-surface">
           Visitor tracking log
         </h3>
-        <span className="font-label text-xs uppercase tracking-wider text-on-surface-variant">
-          {visitors.length} records
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="font-label text-xs uppercase tracking-wider text-on-surface-variant">
+            {visitors.length} records
+          </span>
+          <button
+            type="button"
+            onClick={onRefresh}
+            disabled={refreshing}
+            className="border border-outline-variant px-3 py-1 font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {refreshing ? "Refreshing..." : "Refresh"}
+          </button>
+        </div>
       </div>
 
       {visitors.length === 0 ? (
         <div className="px-4 py-8 text-sm text-on-surface-variant sm:px-6">
           No visitor data yet.
+          {debugStatus ? (
+            <p className="mt-3 text-xs text-on-surface-variant">
+              Tracker status: {debugStatus.status} at {debugStatus.at}
+              {debugStatus.message ? ` (${debugStatus.message})` : ""}
+            </p>
+          ) : null}
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -95,4 +114,11 @@ AdminVisitorLogs.propTypes = {
       visitCount: PropTypes.number,
     }),
   ).isRequired,
+  onRefresh: PropTypes.func,
+  refreshing: PropTypes.bool,
+};
+
+AdminVisitorLogs.defaultProps = {
+  onRefresh: () => {},
+  refreshing: false,
 };
