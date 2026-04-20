@@ -1,5 +1,21 @@
 import PropTypes from "prop-types";
+import {
+  Blocks,
+  FolderOpen,
+  History,
+  Home,
+  Mail,
+  Settings,
+} from "lucide-react";
 import { LANDING_NAV_SECTIONS } from "./landingNavConfig";
+
+const NAV_ICONS = {
+  home: Home,
+  blocks: Blocks,
+  history: History,
+  folderOpen: FolderOpen,
+  mail: Mail,
+};
 
 export default function LandingSidebar({ activeSection, onOpenSettings }) {
   return (
@@ -18,6 +34,7 @@ export default function LandingSidebar({ activeSection, onOpenSettings }) {
       <nav className="flex flex-col gap-1 px-4" aria-label="Page sections">
         {LANDING_NAV_SECTIONS.map(({ id, label, icon }) => {
           const active = activeSection === id;
+          const Icon = NAV_ICONS[icon] || Home;
           return (
             <a
               key={id}
@@ -28,13 +45,11 @@ export default function LandingSidebar({ activeSection, onOpenSettings }) {
                   : "text-slate-600 hover:translate-x-0.5 hover:bg-slate-200/60 dark:text-slate-400 dark:hover:bg-slate-800/80"
               }`}
             >
-              <span
-                className="material-symbols-outlined text-xl"
-                style={active ? { fontVariationSettings: "'FILL' 1" } : undefined}
+              <Icon
+                className="h-5 w-5 shrink-0"
+                strokeWidth={active ? 2.4 : 2}
                 aria-hidden
-              >
-                {icon}
-              </span>
+              />
               {label}
             </a>
           );
@@ -46,7 +61,7 @@ export default function LandingSidebar({ activeSection, onOpenSettings }) {
           onClick={onOpenSettings}
           className="flex w-full items-center gap-3 border-2 border-on-surface py-3 pl-4 text-left text-sm font-bold transition-colors hover:bg-surface-container-highest dark:border-slate-500"
         >
-          <span className="material-symbols-outlined text-base">settings</span>
+          <Settings className="h-4 w-4 shrink-0" aria-hidden />
           Settings
         </button>
       </div>

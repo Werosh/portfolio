@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FileText, Mail, Terminal } from "lucide-react";
 import { isFirebaseConfigured } from "../../firebase/app";
 import { createContactMessage } from "../../services/contactMessagesApi";
 import {
@@ -124,9 +125,7 @@ export default function ContactSection() {
           </p>
           <div className="space-y-4 pt-8">
             <div className="group flex cursor-pointer items-center gap-4">
-              <span className="material-symbols-outlined text-primary">
-                mail
-              </span>
+              <Mail className="h-5 w-5 text-primary" aria-hidden />
               <a
                 href={`mailto:${encodeURIComponent(publicEmail)}`}
                 className="font-headline text-xl underline decoration-dotted transition-colors group-hover:text-primary"
@@ -135,9 +134,7 @@ export default function ContactSection() {
               </a>
             </div>
             <div className="group flex cursor-pointer items-center gap-4">
-              <span className="material-symbols-outlined text-primary">
-                terminal
-              </span>
+              <Terminal className="h-5 w-5 text-primary" aria-hidden />
               <a
                 href="https://github.com/Werosh"
                 target="_blank"
@@ -148,9 +145,7 @@ export default function ContactSection() {
               </a>
             </div>
             <div className="group flex cursor-pointer items-center gap-4">
-              <span className="material-symbols-outlined text-primary">
-                picture_as_pdf
-              </span>
+              <FileText className="h-5 w-5 text-primary" aria-hidden />
               <a
                 className="font-headline text-xl underline decoration-dotted transition-colors group-hover:text-primary"
                 href={cvPdfHref}

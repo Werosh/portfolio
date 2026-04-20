@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { ExternalLink } from "lucide-react";
 import { isFirebaseConfigured } from "../../firebase/app";
 import {
   subscribeProjects,
@@ -108,14 +109,14 @@ function ProjectCard({ project, entryIndex }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="material-symbols-outlined shrink-0 text-primary transition-transform hover:rotate-45"
+            className="shrink-0 text-primary transition-transform hover:rotate-45"
             aria-label={`Open ${title} in a new tab`}
           >
-            north_east
+            <ExternalLink className="h-5 w-5" aria-hidden />
           </a>
         ) : (
-          <span className="material-symbols-outlined shrink-0 text-on-surface-variant/40">
-            north_east
+          <span className="shrink-0 text-on-surface-variant/40">
+            <ExternalLink className="h-5 w-5" aria-hidden />
           </span>
         )}
       </div>

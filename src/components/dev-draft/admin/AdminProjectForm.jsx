@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { ArrowRight, Blocks } from "lucide-react";
 
 const empty = {
   title: "",
@@ -80,9 +81,7 @@ export default function AdminProjectForm({
                 : "Initiate project architecture"}
             </p>
           </div>
-          <span className="material-symbols-outlined text-4xl opacity-20" data-icon="architecture">
-            architecture
-          </span>
+          <Blocks className="h-9 w-9 opacity-20" aria-hidden />
         </div>
         {editing && (
           <button
@@ -175,9 +174,7 @@ export default function AdminProjectForm({
                 {busy ? "Saving…" : editing ? "Update_Blueprint" : "Commit_Blueprint"}
               </span>
               <div className="h-[2px] w-12 bg-on-surface transition-all group-hover:w-20 group-hover:bg-primary" />
-              <span className="material-symbols-outlined" data-icon="arrow_forward">
-                arrow_forward
-              </span>
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </button>
           </div>
         </form>

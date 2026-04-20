@@ -46,7 +46,7 @@ export function mapExperienceToEntry(id, data) {
       side = {
         kind: "sketch",
         text: asideText,
-        icon: String(data.asideIcon ?? "").trim() || "sticky_note_2",
+        icon: String(data.asideIcon ?? "").trim() || "stickyNote",
       };
     } else {
       side = {

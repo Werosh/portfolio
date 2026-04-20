@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Edit3, Trash2 } from "lucide-react";
 
 export default function AdminExperienceList({ experiences, onEdit, onDelete }) {
   return (
@@ -45,17 +46,17 @@ export default function AdminExperienceList({ experiences, onEdit, onDelete }) {
                 type="button"
                 aria-label="Delete"
                 onClick={() => onDelete(row)}
-                className="material-symbols-outlined cursor-pointer text-on-surface-variant transition-colors hover:text-error"
+                className="cursor-pointer text-on-surface-variant transition-colors hover:text-error"
               >
-                delete
+                <Trash2 className="h-4 w-4" aria-hidden />
               </button>
               <button
                 type="button"
                 aria-label="Edit"
                 onClick={() => onEdit(row)}
-                className="material-symbols-outlined cursor-pointer text-on-surface-variant transition-colors hover:text-primary"
+                className="cursor-pointer text-on-surface-variant transition-colors hover:text-primary"
               >
-                edit
+                <Edit3 className="h-4 w-4" aria-hidden />
               </button>
             </div>
           </div>

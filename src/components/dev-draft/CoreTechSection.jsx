@@ -1,4 +1,6 @@
 
+import { Blocks } from "lucide-react";
+
 const SIGNATURE_STACK = [
   "React",
   "Next.js",
@@ -87,12 +89,7 @@ export default function CoreTechSection() {
           id="stack-heading"
           className="mb-3 flex flex-wrap items-center gap-3 font-headline text-3xl font-bold sm:gap-4 sm:text-4xl md:text-5xl"
         >
-          <span
-            className="material-symbols-outlined shrink-0 text-3xl text-primary sm:text-4xl"
-            aria-hidden
-          >
-            architecture
-          </span>
+          <Blocks className="h-8 w-8 shrink-0 text-primary sm:h-9 sm:w-9" aria-hidden />
           <span className="min-w-0 leading-tight">Tech stack</span>
         </h2>
         <p className="mb-10 max-w-2xl font-body text-base text-on-surface-variant sm:text-lg">

@@ -1,3 +1,5 @@
+import { AlertTriangle, Bug } from "lucide-react";
+
 export default function AdminBento() {
   return (
     <section className="col-span-12 mt-8 grid grid-cols-1 gap-6 md:grid-cols-4">
@@ -18,9 +20,7 @@ export default function AdminBento() {
         </h5>
         <div className="flex items-end justify-between">
           <span className="font-headline text-4xl font-black text-error">0</span>
-          <span className="material-symbols-outlined text-error opacity-30" data-icon="bug_report">
-            bug_report
-          </span>
+          <Bug className="h-6 w-6 text-error opacity-30" aria-hidden />
         </div>
       </div>
       <div className="col-span-1 bg-surface-container-high p-6">
@@ -41,9 +41,10 @@ export default function AdminBento() {
         <p className="font-body text-xs italic">
           Review the latency spikes in the Frankfurt cluster immediately.
         </p>
-        <span className="material-symbols-outlined absolute -bottom-2 -right-2 text-4xl text-surface/30" data-icon="priority_high">
-          priority_high
-        </span>
+        <AlertTriangle
+          className="absolute -bottom-2 -right-2 h-10 w-10 text-surface/30"
+          aria-hidden
+        />
       </div>
     </section>
   );

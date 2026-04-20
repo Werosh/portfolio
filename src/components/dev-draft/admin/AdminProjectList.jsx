@@ -1,4 +1,12 @@
 import PropTypes from "prop-types";
+import {
+  CheckCircle2,
+  Cloud,
+  Edit3,
+  Filter,
+  Trash2,
+  ArrowUpDown,
+} from "lucide-react";
 
 export default function AdminProjectList({ projects, onEdit, onDelete }) {
   return (
@@ -12,23 +20,13 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
             type="button"
             className="border border-outline-variant/30 p-2 transition-colors hover:border-primary"
           >
-            <span
-              className="material-symbols-outlined text-sm"
-              data-icon="filter_list"
-            >
-              filter_list
-            </span>
+            <Filter className="h-4 w-4" aria-hidden />
           </button>
           <button
             type="button"
             className="border border-outline-variant/30 p-2 transition-colors hover:border-primary"
           >
-            <span
-              className="material-symbols-outlined text-sm"
-              data-icon="sort"
-            >
-              sort
-            </span>
+            <ArrowUpDown className="h-4 w-4" aria-hidden />
           </button>
         </div>
       </div>
@@ -81,27 +79,22 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
                   type="button"
                   aria-label="Delete"
                   onClick={() => onDelete(p)}
-                  className="material-symbols-outlined cursor-pointer text-on-surface-variant transition-colors hover:text-error"
+                  className="cursor-pointer text-on-surface-variant transition-colors hover:text-error"
                 >
-                  delete
+                  <Trash2 className="h-4 w-4" aria-hidden />
                 </button>
                 <button
                   type="button"
                   aria-label="Edit"
                   onClick={() => onEdit(p)}
-                  className="material-symbols-outlined cursor-pointer text-on-surface-variant transition-colors hover:text-primary"
+                  className="cursor-pointer text-on-surface-variant transition-colors hover:text-primary"
                 >
-                  edit
+                  <Edit3 className="h-4 w-4" aria-hidden />
                 </button>
               </div>
             </div>
             <div className="pointer-events-none absolute bottom-0 right-0 translate-x-4 translate-y-4 opacity-10">
-              <span
-                className="material-symbols-outlined text-8xl"
-                data-icon="cloud"
-              >
-                cloud
-              </span>
+              <Cloud className="h-24 w-24" aria-hidden />
             </div>
           </div>
         ))}
@@ -127,12 +120,7 @@ export default function AdminProjectList({ projects, onEdit, onDelete }) {
         </div>
         <div className="flex items-center gap-2 text-on-surface-variant">
           <span className="font-sketch text-sm">System Normal</span>
-          <span
-            className="material-symbols-outlined text-xs"
-            data-icon="check_circle"
-          >
-            check_circle
-          </span>
+          <CheckCircle2 className="h-4 w-4" aria-hidden />
         </div>
       </div>
     </section>

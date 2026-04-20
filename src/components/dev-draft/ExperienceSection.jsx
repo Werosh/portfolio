@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import {
+  BookOpenText,
+  GraduationCap,
+  History,
+  StickyNote,
+  Terminal,
+  Users,
+} from "lucide-react";
 import { isFirebaseConfigured } from "../../firebase/app";
 import {
   mapExperienceToEntry,
@@ -15,6 +23,22 @@ const EXPERIENCE_PER_PAGE = 3;
 const FALLBACK_ENTRIES = EXPERIENCE_SEEDS.map((s) =>
   mapExperienceToEntry(s.id, s),
 );
+
+const SKETCH_ICON_COMPONENTS = {
+  stickyNote: StickyNote,
+  terminal: Terminal,
+  school: GraduationCap,
+  groups: Users,
+  history: History,
+  book: BookOpenText,
+};
+
+function resolveSketchIcon(iconKey) {
+  const normalized = String(iconKey ?? "")
+    .trim()
+    .replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+  return SKETCH_ICON_COMPONENTS[normalized] || StickyNote;
+}
 
 function TimelineDot({ variant }) {
   const isPrimary = variant === "primary";
@@ -52,15 +76,11 @@ function SidePanel({ side }) {
   }
 
   if (side.kind === "sketch") {
+    const SketchIcon = resolveSketchIcon(side.icon);
     return (
       <div className="order-3 flex-1 md:order-3">
         <div className="hand-drawn-border max-w-xs rotate-1 border border-dashed border-outline-variant bg-surface p-4 md:mx-0">
-          <span
-            className="material-symbols-outlined text-secondary opacity-70"
-            aria-hidden
-          >
-            {side.icon || "sticky_note_2"}
-          </span>
+          <SketchIcon className="h-5 w-5 text-secondary opacity-70" aria-hidden />
           <p className="mt-2 font-sketch text-xs leading-relaxed">
             {side.text}
           </p>
@@ -92,15 +112,11 @@ function SidePanelLeft({ side }) {
       </div>
     );
   }
+  const SketchIcon = resolveSketchIcon(side.icon);
   return (
     <div className="order-2 hidden flex-1 md:order-1 md:block">
       <div className="ml-auto max-w-xs rotate-[-2deg] border border-dashed border-outline-variant bg-white/50 p-4">
-        <span
-          className="material-symbols-outlined text-secondary opacity-50"
-          aria-hidden
-        >
-          {side.icon || "sticky_note_2"}
-        </span>
+        <SketchIcon className="h-5 w-5 text-secondary opacity-50" aria-hidden />
         <p className="mt-2 font-sketch text-xs leading-relaxed">{side.text}</p>
       </div>
     </div>
@@ -274,12 +290,7 @@ export default function ExperienceSection() {
     >
       <div className="mx-auto max-w-5xl">
         <h2 className="mb-10 flex flex-wrap items-center gap-3 font-headline text-3xl font-bold sm:mb-12 sm:gap-4 sm:text-4xl md:text-5xl">
-          <span
-            className="material-symbols-outlined shrink-0 text-3xl text-primary sm:text-4xl"
-            aria-hidden
-          >
-            history_edu
-          </span>
+          <History className="h-8 w-8 shrink-0 text-primary sm:h-9 sm:w-9" aria-hidden />
           <span className="min-w-0 leading-tight">Experience timeline</span>
         </h2>
         {!isFirebaseConfigured() && (

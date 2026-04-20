@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { ArrowRight, History } from "lucide-react";
 
 const empty = {
   role: "",
@@ -94,12 +95,7 @@ export default function AdminExperienceForm({
                 : "Add a role to the public timeline"}
             </p>
           </div>
-          <span
-            className="material-symbols-outlined text-4xl opacity-20"
-            data-icon="timeline"
-          >
-            timeline
-          </span>
+          <History className="h-9 w-9 opacity-20" aria-hidden />
         </div>
         {editing && (
           <button
@@ -186,7 +182,7 @@ export default function AdminExperienceForm({
               className="font-body w-full border border-outline-variant bg-surface px-3 py-2 text-sm focus:border-primary focus:outline-none"
             >
               <option value="quote">Quote (with optional caption)</option>
-              <option value="sketch">Sketch note (optional Material icon name)</option>
+              <option value="sketch">Sketch note (optional Lucide icon key)</option>
             </select>
           </div>
           <div className="space-y-1">
@@ -217,14 +213,14 @@ export default function AdminExperienceForm({
           ) : (
             <div className="space-y-1">
               <label className="font-label block text-xs font-bold uppercase tracking-tighter text-on-surface-variant">
-                Material icon name (optional)
+                Icon key (optional)
               </label>
               <input
                 name="asideIcon"
                 value={values.asideIcon}
                 onChange={handleChange}
                 className="font-body w-full border-0 border-b border-outline-variant bg-transparent py-2 text-lg transition-colors focus:border-primary focus:ring-0"
-                placeholder="e.g. terminal, school, groups"
+                placeholder="e.g. stickyNote, terminal, school, groups"
               />
             </div>
           )}
@@ -253,9 +249,7 @@ export default function AdminExperienceForm({
                 {busy ? "Saving…" : editing ? "Update_Entry" : "Commit_Entry"}
               </span>
               <div className="h-[2px] w-12 bg-on-surface transition-all group-hover:w-20 group-hover:bg-primary" />
-              <span className="material-symbols-outlined" data-icon="arrow_forward">
-                arrow_forward
-              </span>
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </button>
           </div>
         </form>
