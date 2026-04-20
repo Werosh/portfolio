@@ -13,6 +13,7 @@ import AdminExperienceList from "../components/dev-draft/admin/AdminExperienceLi
 import AdminContactInbox from "../components/dev-draft/admin/AdminContactInbox";
 import AdminBento from "../components/dev-draft/admin/AdminBento";
 import AdminVisitorLogs from "../components/dev-draft/admin/AdminVisitorLogs";
+import AdminVisitorAnalytics from "../components/dev-draft/admin/AdminVisitorAnalytics";
 import { auth, isFirebaseConfigured } from "../firebase/app";
 import {
   createProject,
@@ -267,9 +268,6 @@ export default function AdminPage() {
               <h2 className="font-headline text-6xl font-bold tracking-tighter text-on-surface">
                 Main_Canvas
               </h2>
-              <span className="font-sketch -rotate-2 text-2xl text-primary">
-                v2.4 Draft
-              </span>
             </div>
             <div className="mt-2 h-1 w-32 bg-primary" />
           </div>
@@ -329,6 +327,17 @@ export default function AdminPage() {
                 </span>
               ) : null}
             </button>
+            <button
+              type="button"
+              onClick={() => switchTab("visitorAnalytics")}
+              className={`border px-5 py-2 font-headline text-xs font-bold uppercase tracking-widest transition-colors ${
+                adminTab === "visitorAnalytics"
+                  ? "border-primary bg-primary text-on-primary"
+                  : "border-outline-variant text-on-surface-variant hover:border-primary"
+              }`}
+            >
+              Visitor analytics
+            </button>
           </div>
 
           {adminTab === "projects" ? (
@@ -375,15 +384,21 @@ export default function AdminPage() {
               refreshing={visitorsRefreshing}
             />
           ) : null}
+          {adminTab === "visitorAnalytics" ? (
+            <AdminVisitorAnalytics
+              visitors={visitors}
+              onRefresh={handleRefreshVisitors}
+              refreshing={visitorsRefreshing}
+            />
+          ) : null}
 
-          {adminTab !== "inbox" && adminTab !== "visitors" ? <AdminBento /> : null}
+          {adminTab !== "inbox" &&
+          adminTab !== "visitors" &&
+          adminTab !== "visitorAnalytics" ? (
+            <AdminBento />
+          ) : null}
         </div>
       </main>
-      <div className="pointer-events-none fixed bottom-10 right-10 -rotate-12 select-none opacity-5">
-        <span className="font-headline text-9xl font-black uppercase">
-          Technical_DRAFT
-        </span>
-      </div>
     </div>
   );
 }

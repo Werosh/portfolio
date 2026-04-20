@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { getVisitorTrackingDebugStatus } from "../../../services/visitorTrackingApi";
 
@@ -13,8 +14,29 @@ function formatLocation(row) {
   return parts.length ? parts.join(", ") : "Unknown";
 }
 
-export default function AdminVisitorLogs({ visitors, onRefresh, refreshing }) {
+const noop = () => {};
+const PAGE_SIZE = 10;
+
+export default function AdminVisitorLogs({
+  visitors,
+  onRefresh = noop,
+  refreshing = false,
+}) {
+  const [page, setPage] = useState(1);
   const debugStatus = getVisitorTrackingDebugStatus();
+  const totalPages = Math.max(1, Math.ceil(visitors.length / PAGE_SIZE));
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, totalPages));
+  }, [totalPages]);
+
+  const pageRows = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return visitors.slice(start, start + PAGE_SIZE);
+  }, [page, visitors]);
+
+  const startItem = visitors.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const endItem = Math.min(page * PAGE_SIZE, visitors.length);
 
   return (
     <section className="col-span-12 border border-outline-variant/30 bg-surface-container-low">
@@ -64,7 +86,7 @@ export default function AdminVisitorLogs({ visitors, onRefresh, refreshing }) {
               </tr>
             </thead>
             <tbody>
-              {visitors.map((row) => (
+              {pageRows.map((row) => (
                 <tr
                   key={row.id}
                   className="border-t border-outline-variant/20 align-top"
@@ -93,6 +115,34 @@ export default function AdminVisitorLogs({ visitors, onRefresh, refreshing }) {
           </table>
         </div>
       )}
+      {visitors.length > 0 ? (
+        <div className="flex flex-col gap-3 border-t border-outline-variant/30 px-4 py-3 text-xs text-on-surface-variant sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <p>
+            Showing {startItem}-{endItem} of {visitors.length}
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((value) => Math.max(1, value - 1))}
+              disabled={page <= 1}
+              className="border border-outline-variant px-3 py-1 font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="min-w-[5rem] text-center font-label uppercase tracking-wider text-on-surface">
+              Page {page}/{totalPages}
+            </span>
+            <button
+              type="button"
+              onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+              disabled={page >= totalPages}
+              className="border border-outline-variant px-3 py-1 font-headline text-[10px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -118,7 +168,3 @@ AdminVisitorLogs.propTypes = {
   refreshing: PropTypes.bool,
 };
 
-AdminVisitorLogs.defaultProps = {
-  onRefresh: () => {},
-  refreshing: false,
-};
